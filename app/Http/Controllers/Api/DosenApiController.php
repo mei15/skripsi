@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 use App\User;
 use App\Dosen;
-
 
 class DosenApiController extends Controller
 {
@@ -41,20 +42,29 @@ class DosenApiController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        // validationnya pake ini, bukan $request->validate
+        $validation = Validator::make($request->toArray(), [ 
             'nama' => 'required',
             'nip' => 'required',
             'prodi' => 'required',
             'user' => 'required'
         ]);
 
-        $dosen = new Dosen;
-        $dosen->nama = $request->nama;
-        $dosen->nip = $request->nip;
-        $dosen->prodi = $request->prodi;
-        $dosen->id_user = $request->user;
+        // kalo error, ikutan ini aja
+        if ($validation->fails()){
+            return response()->json($validation->messages(), 400);
+        }
+        else {
+            // kalo berhasil baru insert
+            $dosen = new Dosen;
+            $dosen->nama = $request->nama;
+            $dosen->nip = $request->nip;
+            $dosen->prodi = $request->prodi;
+            $dosen->id_user = $request->user;
+            $dosen->save();
 
-        return response()->json('success', 201);
+            return response()->json('success', 201);
+        }
     }
 
     /**
