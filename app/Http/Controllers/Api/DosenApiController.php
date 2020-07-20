@@ -20,7 +20,7 @@ class DosenApiController extends Controller
     {
         $search = $request->get('search');
         $dosens = Dosen::with(['user'])->where('nama', 'LIKE', "%$search%")->orderBy('id', 'asc')->paginate(10);
-        
+
         return response()->json($dosens, 200);
     }
 
@@ -31,7 +31,6 @@ class DosenApiController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -42,7 +41,20 @@ class DosenApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'nip' => 'required',
+            'prodi' => 'required',
+            'user' => 'required'
+        ]);
+
+        $dosen = new Dosen;
+        $dosen->nama = $request->nama;
+        $dosen->nip = $request->nip;
+        $dosen->prodi = $request->prodi;
+        $dosen->id_user = $request->user;
+
+        return response()->json('success', 201);
     }
 
     /**
@@ -63,7 +75,6 @@ class DosenApiController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -75,7 +86,21 @@ class DosenApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'nip' => 'required',
+            'prodi' => 'required',
+            'user' => 'required'
+        ]);
+
+        $dosen = Dosen::findOrFail($id);
+        $dosen->nama = $request->nama;
+        $dosen->nip = $request->nip;
+        $dosen->prodi = $request->prodi;
+        $dosen->id_user = $request->user;
+
+        $dosen->update($request->all());
+        return response()->json('update success', 201);
     }
 
     /**
@@ -86,6 +111,8 @@ class DosenApiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dosen = Dosen::find($id);
+        $dosen->delete();
+        return response()->json('delete success');
     }
 }
