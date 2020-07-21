@@ -34,14 +34,24 @@ class UserSeeder extends Seeder
                 "level_id" => 2
             ],
             [
-                'name' => "Dosen",
-                "username" => "dosen",
+                'name' => "Teguh Cahyono",
+                "username" => "teguh",
                 "id_num" => "12345678",
                 "tlp" => "085775307621",
-                "email" => "dosen@gmail.com",
-                "password" => Hash::make('dosen'),
+                "email" => "teguh@gmail.com",
+                "password" => Hash::make('teguh'),
                 "level_id" => 3
             ],
+            [
+                'name' => "Nofiyanti",
+                "username" => "nofi",
+                "id_num" => "12345678",
+                "tlp" => "085775307621",
+                "email" => "nofi@gmail.com",
+                "password" => Hash::make('nofi'),
+                "level_id" => 3
+            ],
+
         ]);
     }
 }

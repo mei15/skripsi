@@ -54,7 +54,7 @@
                             @foreach($konsultasis as $konsultasi)
                             <tr>
                                 <td>{{ $konsultasi->id }}</td>
-                                <td>{{ $konsultasi->user->nama }}</td>
+                                <td>{{ $konsultasi->user->name }}</td>
                                 <td>{{ $konsultasi->judul }}</td>
                                 <td>{{ $konsultasi->tgl }}</td>
                                 <td>{{ $konsultasi->ket }}</td>
