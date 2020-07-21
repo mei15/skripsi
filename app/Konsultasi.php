@@ -20,4 +20,9 @@ class Konsultasi extends Model
     {
         return $this->belongsTo('App\Dosen', 'id_dsn');
     }
+
+    public function scopeUser($query, $userId)
+    {
+        return $query->where('id_user', $userId);
+    }
 }

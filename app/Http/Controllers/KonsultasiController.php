@@ -16,8 +16,12 @@ class KonsultasiController extends Controller
      */
     public function index(Request $request)
     {
+        // dapetin siapa user yg loginnya dulu, make authnya laravel
+        $user = auth()->user();
+        // dd($user);
+
         $search = $request->get('search');
-        $konsultasis = Konsultasi::with(['user', 'dosen'])->where('judul', 'LIKE', "%$search%")->orderBy('id', 'asc')->paginate(10);
+        $konsultasis = Konsultasi::with(['user', 'dosen'])->where('judul', 'LIKE', "%$search%")->orderBy('id', 'asc')->user($user->id)->paginate(10);
 
         //dd($konsultasis);
 
