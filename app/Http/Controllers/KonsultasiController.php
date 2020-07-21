@@ -17,7 +17,10 @@ class KonsultasiController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $konsultasis = Konsultasi::with(['dosen'])->where('judul', 'LIKE', "%$search%")->orderBy('id', 'asc')->paginate(10);
+        $konsultasis = Konsultasi::with(['user', 'dosen'])->where('judul', 'LIKE', "%$search%")->orderBy('id', 'asc')->paginate(10);
+
+        //dd($konsultasis);
+
         return view('konsultasi.index', compact('konsultasis'));
     }
 
@@ -29,7 +32,8 @@ class KonsultasiController extends Controller
     public function create()
     {
         $dosens = Dosen::all();
-        return view('konsultasi.add', compact('dosens'));
+        $users = User::where('level_id == 2');
+        return view('konsultasi.add', compact('dosens', 'users'));
     }
 
     /**
@@ -44,7 +48,8 @@ class KonsultasiController extends Controller
             'judul' => 'required',
             'tgl' => 'required',
             'ket' => 'required',
-            'dosen' => 'required'
+            'dosen' => 'required',
+            'user' => 'required'
         ]);
 
         $konsultasi = new Konsultasi;
@@ -52,6 +57,7 @@ class KonsultasiController extends Controller
         $konsultasi->tgl = $request->tgl;
         $konsultasi->ket = $request->ket;
         $konsultasi->id_dsn = $request->dosen;
+        $konsultasi->id_user = $request->user;
         $konsultasi->save();
 
         session()->flash('success', 'Sukses Tambah Data Konsultasi ' . $konsultasi->judul);
@@ -94,7 +100,8 @@ class KonsultasiController extends Controller
             'judul' => 'required',
             'tgl' => 'required',
             'ket' => 'required',
-            'dosen' => 'required'
+            'dosen' => 'required',
+            'user' => 'required'
         ]);
 
         $konsultasi = new Konsultasi;
@@ -102,6 +109,7 @@ class KonsultasiController extends Controller
         $konsultasi->tgl = $request->tgl;
         $konsultasi->ket = $request->ket;
         $konsultasi->id_dsn = $request->dosen;
+        $konsultasi->id_user = $request->user;
         $konsultasi->save();
 
         session()->flash('success', 'Sukses Ubah Data Konsultasi ' . $konsultasi->judul);

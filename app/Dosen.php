@@ -17,6 +17,11 @@ class Dosen extends Model
 
     public function dosen()
     {
+        return $this->hasMany('App\Konsultasi', 'id_dsn', 'id');
+    }
+
+    public function konsultasi()
+    {
         return $this->hasOne('App\Konsultasi', 'id_dsn', 'id');
     }
 }

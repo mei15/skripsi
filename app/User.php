@@ -51,6 +51,6 @@ class User extends Authenticatable
 
     public function konsultasi()
     {
-        return $this->hasMany('App\Konsultasi');
+        return $this->hasMany('App\Konsultasi', 'id_user', 'id');
     }
 }

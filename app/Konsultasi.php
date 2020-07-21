@@ -8,10 +8,15 @@ class Konsultasi extends Model
 {
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'id_user');
     }
 
     public function dosen()
+    {
+        return $this->belongsTo('App\Dosen', 'id_dsn');
+    }
+
+    public function Konsultasi()
     {
         return $this->belongsTo('App\Dosen', 'id_dsn');
     }

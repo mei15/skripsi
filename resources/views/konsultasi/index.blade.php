@@ -44,6 +44,7 @@
                         <table class="table table-striped">
                             <tr>
                                 <th>ID</th>
+                                <th>Nama Mahasiswa</th>
                                 <th>Judul</th>
                                 <th>Tanggal</th>
                                 <th>Keterangan</th>
@@ -53,6 +54,7 @@
                             @foreach($konsultasis as $konsultasi)
                             <tr>
                                 <td>{{ $konsultasi->id }}</td>
+                                <td>{{ $konsultasi->user->nama }}</td>
                                 <td>{{ $konsultasi->judul }}</td>
                                 <td>{{ $konsultasi->tgl }}</td>
                                 <td>{{ $konsultasi->ket }}</td>

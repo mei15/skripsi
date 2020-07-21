@@ -30,6 +30,16 @@
                     <form action="{{ route('konsultasi.store') }}" method="post">
                         @csrf
                         <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Mahasiswa</label>
+                            <div class="col-sm-10">
+                                <select name="user" id="user" class="form-control">
+                                    @foreach($users as $user)
+                                    <option value="{{$user->id}}">{{ $user->name }} || {{ $user->id_num }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Judul</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" placeholder="Judul" name='judul' id="example-text-input">

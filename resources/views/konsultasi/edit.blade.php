@@ -26,10 +26,20 @@
             <div class="card m-b-20">
                 <div class="card-body">
 
-                    <h4 class="mt-0 mb-4 header-title">Ubah Pengguna</h4>
+                    <h4 class="mt-0 mb-4 header-title">Ubah Konsultasi</h4>
                     <form action="{{ route('konsultasi.update', ['pengguna' => $user->id]) }}" method="post">
                         @csrf
                         @method('PUT')
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Mahasiswa</label>
+                            <div class="col-sm-10">
+                                <select name="dosen" id="dosen" class="form-control">
+                                    @foreach($users as $user)
+                                    <option value="{{ $user->id }}" {{$konsultasi->id_user == $user->id ? 'selected' : ''}}>{{ $user->nama}} || {{ $user->id_num }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Judul</label>
                             <div class="col-sm-10">
