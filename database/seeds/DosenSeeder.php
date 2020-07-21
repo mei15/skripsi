@@ -20,13 +20,13 @@ class DosenSeeder extends Seeder
                 'nama' => "Teguh Cahyono",
                 "nip" => "12345678",
                 "prodi" => "TIF",
-                "id_user" => 6
+                "id_user" => 3
             ],
             [
                 'nama' => "Nofiyanti",
                 "nip" => "12345678",
                 "prodi" => "TIF",
-                "id_user" => 3
+                "id_user" => 4
             ]
         ]);
     }
