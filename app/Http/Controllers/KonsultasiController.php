@@ -6,6 +6,8 @@ use App\Dosen;
 use Illuminate\Http\Request;
 use App\Konsultasi;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\Do_;
 
 class KonsultasiController extends Controller
 {
@@ -36,8 +38,8 @@ class KonsultasiController extends Controller
     public function create()
     {
         $dosens = Dosen::all();
-        $users = User::where('level_id == 2');
-        return view('konsultasi.add', compact('dosens', 'users'));
+        $users = User::all();
+        return view('konsultasi.add', compact('users', 'dosens'));
     }
 
     /**
@@ -48,12 +50,13 @@ class KonsultasiController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'judul' => 'required',
             'tgl' => 'required',
             'ket' => 'required',
             'dosen' => 'required',
-            'user' => 'required'
+            'user' => 'required',
         ]);
 
         $konsultasi = new Konsultasi;

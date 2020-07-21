@@ -35,7 +35,7 @@
                             <div class="col-sm-10">
                                 <select name="dosen" id="dosen" class="form-control">
                                     @foreach($users as $user)
-                                    <option value="{{ $user->id }}" {{$konsultasi->id_user == $user->id ? 'selected' : ''}}>{{ $user->nama}} || {{ $user->id_num }}</option>
+                                    <option value="{{ $user->id }}" {{$konsultasi->id_user == $user->id ? 'selected' : ''}}>{{ $user->name}} || {{ $user->id_num }}</option>
                                     @endforeach
                                 </select>
                             </div>

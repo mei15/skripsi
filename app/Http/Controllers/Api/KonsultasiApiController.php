@@ -13,8 +13,12 @@ class KonsultasiApiController extends Controller
 {
     public function index(Request $request)
     {
+        // dapetin siapa user yg loginnya dulu, make authnya laravel
+        $user = auth()->user();
+        // dd($user);
+
         $search = $request->get('search');
-        $konsultasis = Konsultasi::with(['dosen'])->where('judul', 'LIKE', "%$search%")->orderBy('id', 'asc')->paginate(10);
+        $konsultasis = Konsultasi::with(['user', 'dosen'])->where('judul', 'LIKE', "%$search%")->orderBy('id', 'asc')->user($user->id)->paginate(10);
 
         return response()->json($konsultasis, 200);
     }
@@ -25,7 +29,8 @@ class KonsultasiApiController extends Controller
             'judul' => 'required',
             'tgl' => 'required',
             'ket' => 'required',
-            'dosen' => 'required'
+            'dosen' => 'required',
+            'user' => 'required'
         ]);
 
         // kalo error, ikutan ini aja
@@ -38,6 +43,7 @@ class KonsultasiApiController extends Controller
             $konsultasi->tgl = $request->tgl;
             $konsultasi->ket = $request->ket;
             $konsultasi->id_dsn = $request->dosen;
+            $konsultasi->id_user = $request->user;
             $konsultasi->save();
 
             return response()->json('success', 201);
@@ -50,7 +56,8 @@ class KonsultasiApiController extends Controller
             'judul' => 'required',
             'tgl' => 'required',
             'ket' => 'required',
-            'dosen' => 'required'
+            'dosen' => 'required',
+            'user' => 'required'
         ]);
 
         // kalo error, ikutan ini aja
@@ -64,6 +71,7 @@ class KonsultasiApiController extends Controller
             $konsultasi->tgl = $request->tgl;
             $konsultasi->ket = $request->ket;
             $konsultasi->id_dsn = $request->dosen;
+            $konsultasi->id_user = $request->user;
             $konsultasi->save();
 
             return response()->json('success', 201);
