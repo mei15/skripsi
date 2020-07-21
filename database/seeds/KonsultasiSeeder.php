@@ -16,14 +16,14 @@ class KonsultasiSeeder extends Seeder
         DB::table('konsultasis')->insert([
             [
                 'judul' => "Sistem Pakar",
-                "id_user" => 3,
+                "id_user" => 5,
                 "id_dsn" => 1,
                 "tgl" => now(),
                 "ket" => "revisi bab 1",
             ],
             [
                 'judul' => "Sistem Informasi Pegawai",
-                "id_user" => 4,
+                "id_user" => 6,
                 "id_dsn" => 2,
                 "tgl" => now(),
                 "ket" => "revisi bab 2",

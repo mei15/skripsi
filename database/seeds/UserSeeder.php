@@ -34,33 +34,6 @@ class UserSeeder extends Seeder
                 "level_id" => 2
             ],
             [
-                'name' => "Nur Aulia",
-                "username" => "mahasiswa1",
-                "id_num" => "12345678",
-                "tlp" => "085775307621",
-                "email" => "mahasiswa@gmail.com",
-                "password" => Hash::make('mahasiswa'),
-                "level_id" => 2
-            ],
-            [
-                'name' => "Noveny Dwi",
-                "username" => "mahasiswa2",
-                "id_num" => "12345678",
-                "tlp" => "085775307621",
-                "email" => "mahasiswa@gmail.com",
-                "password" => Hash::make('mahasiswa'),
-                "level_id" => 2
-            ],
-            [
-                'name' => "Amalia Husna",
-                "username" => "mahasiswa3",
-                "id_num" => "12345678",
-                "tlp" => "085775307621",
-                "email" => "mahasiswa@gmail.com",
-                "password" => Hash::make('mahasiswa'),
-                "level_id" => 2
-            ],
-            [
                 'name' => "Teguh Cahyono",
                 "username" => "teguh",
                 "id_num" => "12345678",
