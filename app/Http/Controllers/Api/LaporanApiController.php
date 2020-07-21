@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\User;
+
 use App\Dosen;
+use App\User;
 use App\Konsultasi;
 
-class LaporanController extends Controller
+class LaporanApiController extends Controller
 {
     public function index(Request $request)
     {
@@ -19,6 +20,7 @@ class LaporanController extends Controller
         $data['totalDosen'] = Dosen::count();
         $data['totalKonsultasi'] = Konsultasi::count();
         $data['totalKonsultasiToday'] = Konsultasi::where('created_at', 'LIKE', '%' . date('Y-m-d') . '%')->count();
-        return view('laporan.index', compact('data'));
+
+        return response()->json($data, 200);
     }
 }

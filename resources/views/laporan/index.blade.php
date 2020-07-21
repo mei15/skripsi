@@ -66,7 +66,7 @@
                             <tr>
                                 <td>Total Dosen</td>
                                 <td>{{ $data['totalDosen'] }} Dosen</td>
-                                <td><a href='#'><i class='ti ti-eye'></i> Lihat</a></td>
+                                <td><a href='{{ route("dosen.index") }}'><i class='ti ti-eye'></i> Lihat</a></td>
                             </tr>
                             <tr>
                                 <td>Total Konsultasi Hari Ini</td>

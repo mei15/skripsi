@@ -18,11 +18,9 @@ class CreateKonsultasisTable extends Migration
             $table->string('judul');
             $table->string('ket');
             $table->date('tgl');
-            $table->bigInteger('id_user')->unsigned();
             $table->bigInteger('id_dsn')->unsigned();
             $table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_dsn')->references('id')->on('dosens');
         });
     }

@@ -43,7 +43,7 @@ class DosenApiController extends Controller
     public function store(Request $request)
     {
         // validationnya pake ini, bukan $request->validate
-        $validation = Validator::make($request->toArray(), [ 
+        $validation = Validator::make($request->toArray(), [
             'nama' => 'required',
             'nip' => 'required',
             'prodi' => 'required',
@@ -51,10 +51,9 @@ class DosenApiController extends Controller
         ]);
 
         // kalo error, ikutan ini aja
-        if ($validation->fails()){
+        if ($validation->fails()) {
             return response()->json($validation->messages(), 400);
-        }
-        else {
+        } else {
             // kalo berhasil baru insert
             $dosen = new Dosen;
             $dosen->nama = $request->nama;
@@ -96,21 +95,27 @@ class DosenApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validation = Validator::make($request->toArray(), [
             'nama' => 'required',
             'nip' => 'required',
             'prodi' => 'required',
             'user' => 'required'
         ]);
 
-        $dosen = Dosen::findOrFail($id);
-        $dosen->nama = $request->nama;
-        $dosen->nip = $request->nip;
-        $dosen->prodi = $request->prodi;
-        $dosen->id_user = $request->user;
+        if ($validation->fails()) {
+            return response()->json($validation->messages(), 400);
+        } else {
+            // kalo berhasil baru insert
+            $dosen = Dosen::findOrFail($id);
+            $dosen = new Dosen;
+            $dosen->nama = $request->nama;
+            $dosen->nip = $request->nip;
+            $dosen->prodi = $request->prodi;
+            $dosen->id_user = $request->user;
+            $dosen->save();
 
-        $dosen->update($request->all());
-        return response()->json('update success', 201);
+            return response()->json('success', 201);
+        }
     }
 
     /**

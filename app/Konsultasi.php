@@ -10,4 +10,9 @@ class Konsultasi extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function dosen()
+    {
+        return $this->belongsTo('App\Dosen', 'id_dsn');
+    }
 }

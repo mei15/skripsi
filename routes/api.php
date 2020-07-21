@@ -21,3 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::resource('/dosen', 'Api\DosenApiController');
 
 Route::resource('/user', 'Api\UserApiController');
+
+Route::resource('/konsultasi', 'Api\KonsultasiApiController');
+
+Route::get('/laporan', 'Api\LaporanApiController');

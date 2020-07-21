@@ -17,7 +17,7 @@ class KonsultasiController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $konsultasis = Konsultasi::with(['dosen', 'user'])->where('judul', 'LIKE', "%$search%")->orderBy('id', 'asc')->paginate(10);
+        $konsultasis = Konsultasi::with(['dosen'])->where('judul', 'LIKE', "%$search%")->orderBy('id', 'asc')->paginate(10);
         return view('konsultasi.index', compact('konsultasis'));
     }
 
@@ -55,7 +55,7 @@ class KonsultasiController extends Controller
         $konsultasi->save();
 
         session()->flash('success', 'Sukses Tambah Data Konsultasi ' . $konsultasi->judul);
-        return redirect()->route('dosen.index');
+        return redirect()->route('konsultasi.index');
     }
 
     /**

@@ -14,4 +14,9 @@ class Dosen extends Model
     {
         return $this->belongsTo('App\User', 'id_user');
     }
+
+    public function dosen()
+    {
+        return $this->hasOne('App\Konsultasi', 'id_dsn', 'id');
+    }
 }

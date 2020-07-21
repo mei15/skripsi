@@ -30,8 +30,6 @@ class UserApiController extends Controller
      */
     public function create()
     {
-        $roles = Level::all();
-        return response()->json('roles');
     }
 
     /**
@@ -42,7 +40,8 @@ class UserApiController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        // validationnya pake ini, bukan $request->validate
+        $validation = Validator::make($request->toArray(), [
             'name' => 'required',
             'id_num' => 'required',
             'tlp' => 'required',
@@ -52,19 +51,25 @@ class UserApiController extends Controller
             'role' => 'required'
         ]);
 
-        $user = new User;
-        $user->name = $request->name;
-        $user->id_num = $request->id_num;
-        $user->tlp = $request->tlp;
-        $user->email = $request->email;
-        $user->username = $request->username;
-        $user->level_id = $request->role;
-        if (!empty($request->password)) {
-            $user->password = Hash::make($request->password);
-        }
-        $user->save();
+        // kalo error, ikutan ini aja
+        if ($validation->fails()) {
+            return response()->json($validation->messages(), 400);
+        } else {
+            // kalo berhasil baru insert
+            $user = new User;
+            $user->name = $request->name;
+            $user->id_num = $request->id_num;
+            $user->tlp = $request->tlp;
+            $user->email = $request->email;
+            $user->username = $request->username;
+            $user->level_id = $request->role;
+            if (!empty($request->password)) {
+                $user->password = Hash::make($request->password);
+            }
+            $user->save();
 
-        return response()->json('success', 201);
+            return response()->json('success', 201);
+        }
     }
 
     /**
@@ -85,10 +90,6 @@ class UserApiController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        $roles = Level::all();
-
-        return response()->json($user, $roles);
     }
 
     /**
@@ -100,30 +101,37 @@ class UserApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        // validationnya pake ini, bukan $request->validate
+        $validation = Validator::make($request->toArray(), [
             'name' => 'required',
             'id_num' => 'required',
             'tlp' => 'required',
             'email' => 'required',
-            'username' => 'required',
+            'password' => 'required',
+            'username' => 'required|unique:users',
             'role' => 'required'
         ]);
 
-        $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->id_num = $request->id_num;
-        $user->tlp = $request->tlp;
-        $user->email = $request->email;
-        $user->username = $request->username;
-        $user->level_id = $request->role;
+        // kalo error, ikutan ini aja
+        if ($validation->fails()) {
+            return response()->json($validation->messages(), 400);
+        } else {
+            // kalo berhasil baru insert
+            $user = User::findOrFail($id);
+            $user = new User;
+            $user->name = $request->name;
+            $user->id_num = $request->id_num;
+            $user->tlp = $request->tlp;
+            $user->email = $request->email;
+            $user->username = $request->username;
+            $user->level_id = $request->role;
+            if (!empty($request->password)) {
+                $user->password = Hash::make($request->password);
+            }
+            $user->save();
 
-        if (!empty($request->password)) {
-            $user->password = Hash::make($request->password);
+            return response()->json('update success', 201);
         }
-        $user->save();
-
-        $user->update($request->all());
-        return response()->json('update success', 201);
     }
 
     /**
