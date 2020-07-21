@@ -24,4 +24,4 @@ Route::resource('/user', 'Api\UserApiController');
 
 Route::resource('/konsultasi', 'Api\KonsultasiApiController');
 
-Route::get('/laporan', 'Api\LaporanApiController');
+Route::get('/laporan', 'Api\LaporanApiController@index'); // ditambah nama methodnya
