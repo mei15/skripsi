@@ -18,15 +18,18 @@ class KonsultasiController extends Controller
      */
     public function index(Request $request)
     {
-        // dapetin siapa user yg loginnya dulu, make authnya laravel
-        $user = auth()->user();
+        if (auth()->user()->level_id == 1) {
+            $konsultasis = \App\Konsultasi::all();
+        } elseif (auth()->user()->level_id == 3) {
+            $konsultasis = \App\Konsultasi::where('id_user', auth()->user()->dosen->id_dsn)->get();
+        } else {
+            //dd(auth()->user()->mahasiswa->id_mhs);
+            $konsultasis = \App\Konsultasi::where('id_user', auth()->user()->mahasiswa->id_mhs)->get();
+        }
 
-        $search = $request->get('search');
-        $konsultasis = Konsultasi::with(['user', 'dosen'])->where('judul', 'LIKE', "%$search%")->orderBy('id', 'asc')->user($user->id)->paginate(10);
+        $dosen = \App\Dosen::all();
 
-        //dd($konsultasis);
-
-        return view('konsultasi.index', compact('konsultasis'));
+        return view('konsultasi.index', ['konsultasis' => $konsultasis, 'dosen' => $dosen]);
     }
 
     /**

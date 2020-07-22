@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Mahasiswa;
 use App\User;
-use App\Dosen;
+use Illuminate\Http\Request;
 
-
-class DosenController extends Controller
+class MahasiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,9 @@ class DosenController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $dosens = Dosen::with(['user'])->where('nama', 'LIKE', "%$search%")->orderBy('id', 'asc')->paginate(10);
+        $mahasiswas = Mahasiswa::with(['user'])->where('nama', 'LIKE', "%$search%")->orderBy('id', 'asc')->paginate(10);
         // dd($dosens);
-        return view('dosen.index', compact('dosens'));
+        return view('mahasiswa.index', compact('mahasiswas'));
     }
 
     /**
@@ -30,7 +29,7 @@ class DosenController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('dosen.add', compact('users'));
+        return view('mahasiswa.add', compact('users'));
     }
 
     /**
@@ -43,20 +42,20 @@ class DosenController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'nip' => 'required',
+            'nim' => 'required',
             'prodi' => 'required',
             'user' => 'required'
         ]);
 
-        $dosen = new Dosen;
-        $dosen->nama = $request->nama;
-        $dosen->nip = $request->nip;
-        $dosen->prodi = $request->prodi;
-        $dosen->id_user = $request->user;
-        $dosen->save();
+        $mahasiswa = new Mahasiswa;
+        $mahasiswa->nama = $request->nama;
+        $mahasiswa->nip = $request->nip;
+        $mahasiswa->prodi = $request->prodi;
+        $mahasiswa->id_user = $request->user;
+        $mahasiswa->save();
 
-        session()->flash('success', 'Sukses Tambah Data Dosen ' . $dosen->nama);
-        return redirect()->route('dosen.index');
+        session()->flash('success', 'Sukses Tambah Data Mahasiswa ' . $mahasiswa->nama);
+        return redirect()->route('mahasiswa.index');
     }
 
     /**
@@ -77,9 +76,9 @@ class DosenController extends Controller
      */
     public function edit($id)
     {
-        $dosen = Dosen::findOrFail($id);
+        $mahasiswa = Mahasiswa::findOrFail($id);
         $users = User::all();
-        return view('dosen.edit', compact('dosen', 'users'));
+        return view('mahasiswa.edit', compact('mahasiswa', 'users'));
     }
 
     /**
@@ -93,20 +92,20 @@ class DosenController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'nip' => 'required',
+            'nim' => 'required',
             'prodi' => 'required',
             'user' => 'required'
         ]);
 
-        $dosen = Dosen::findOrFail($id);
-        $dosen->nama = $request->nama;
-        $dosen->nip = $request->nip;
-        $dosen->prodi = $request->prodi;
-        $dosen->id_user = $request->user;
-        $dosen->save();
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $mahasiswa->nama = $request->nama;
+        $mahasiswa->nip = $request->nip;
+        $mahasiswa->prodi = $request->prodi;
+        $mahasiswa->id_user = $request->user;
+        $mahasiswa->save();
 
-        session()->flash('success', 'Sukses Ubah Data Dosen ' . $dosen->nama);
-        return redirect()->route('dosen.index');
+        session()->flash('success', 'Sukses Ubah Data Mahasiswa ' . $mahasiswa->nama);
+        return redirect()->route('mahasiswa.index');
     }
 
     /**
@@ -117,10 +116,10 @@ class DosenController extends Controller
      */
     public function destroy($id)
     {
-        $dosen = Dosen::findOrFail($id);
-        $dosen->delete();
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $mahasiswa->delete();
 
         session()->flash('success', 'Sukses Hapus Pengguna!');
-        return redirect()->route('dosen.index');
+        return redirect()->route('mahasiswa.index');
     }
 }

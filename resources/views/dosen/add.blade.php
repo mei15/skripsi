@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Pilih nama</label>
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Pilih username</label>
                             <div class="col-sm-10">
                                 <select name="user" id="user" class="form-control">
                                     @foreach($users as $user)

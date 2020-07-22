@@ -27,7 +27,7 @@
                 <div class="card-body">
 
                     <h4 class="mt-0 header-title">Home</h4>
-                    <p>Selamat datang</p>
+                    <p>Selamat datang </p>
                 </div>
             </div>
         </div> <!-- end col -->
