@@ -13,7 +13,6 @@
                         Menampilkan seluruh data konsultasi
                     </li>
                 </ol>
-
             </div>
         </div>
     </div>
@@ -27,6 +26,15 @@
                 <div class="card-body">
 
                     <h4 class="mt-0 mb-4 header-title">Tambah Konsultasi</h4>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{ route('konsultasi.store') }}" method="post">
                         @csrf
                         <div class="form-group row">
