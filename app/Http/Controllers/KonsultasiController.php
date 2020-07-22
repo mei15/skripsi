@@ -20,7 +20,6 @@ class KonsultasiController extends Controller
     {
         // dapetin siapa user yg loginnya dulu, make authnya laravel
         $user = auth()->user();
-        // dd($user);
 
         $search = $request->get('search');
         $konsultasis = Konsultasi::with(['user', 'dosen'])->where('judul', 'LIKE', "%$search%")->orderBy('id', 'asc')->user($user->id)->paginate(10);
@@ -37,9 +36,10 @@ class KonsultasiController extends Controller
      */
     public function create()
     {
+        $user = auth()->user();
         $dosens = Dosen::all();
-        $users = User::all();
-        return view('konsultasi.add', compact('users', 'dosens'));
+
+        return view('konsultasi.add', compact('user', 'dosens'));
     }
 
     /**
@@ -50,13 +50,13 @@ class KonsultasiController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user();
 
         $request->validate([
             'judul' => 'required',
             'tgl' => 'required',
             'ket' => 'required',
             'dosen' => 'required',
-            'user' => 'required',
         ]);
 
         $konsultasi = new Konsultasi;
@@ -64,7 +64,7 @@ class KonsultasiController extends Controller
         $konsultasi->tgl = $request->tgl;
         $konsultasi->ket = $request->ket;
         $konsultasi->id_dsn = $request->dosen;
-        $konsultasi->id_user = $request->user;
+        $konsultasi->id_user = $user->id;
         $konsultasi->save();
 
         session()->flash('success', 'Sukses Tambah Data Konsultasi ' . $konsultasi->judul);
@@ -91,6 +91,7 @@ class KonsultasiController extends Controller
     {
         $konsultasi = Konsultasi::findOrFail($id);
         $dosens = Dosen::all();
+
         return view('konsultasi.edit', compact('konsultasi', 'dosens'));
     }
 

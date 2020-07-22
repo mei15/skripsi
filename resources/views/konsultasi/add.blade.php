@@ -27,16 +27,12 @@
                 <div class="card-body">
 
                     <h4 class="mt-0 mb-4 header-title">Tambah Konsultasi</h4>
-                    <form action="{{ route('konsultasi.store', [Auth::user()->id]) }}" method="post">
+                    <form action="{{ route('konsultasi.store') }}" method="post">
                         @csrf
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Mahasiswa</label>
                             <div class="col-sm-10">
-                                <select name="user" id="user" class="form-control">
-                                    @foreach($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name}} || {{ $user->id_num }}</option>
-                                    @endforeach
-                                </select>
+                                <input class="form-control" type="text" name='user' id="user" value="{{ $user->name}} || {{ $user->id_num }}" disabled>
                             </div>
                         </div>
                         <div class="form-group row">
