@@ -35,7 +35,7 @@ class DosenController extends Controller
             'nip'           => 'required',
             'prodi'         => 'required',
         ]);
-
+        $dosen = Dosen::find($id);
         $dosen = new Dosen;
         $dosen->first_name = $request->first_name;
         $dosen->last_name = $request->last_name;

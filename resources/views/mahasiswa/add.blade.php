@@ -10,7 +10,7 @@
                 <h4 class="page-title">Mahasiswa</h4>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        Menampilkan seluruh data mahasiswa
+                        Menampilkan seluruh data mahasisw
                     </li>
                 </ol>
 
@@ -32,37 +32,19 @@
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Depan</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Masukkan nama depan" name='first_name' id="example-text-input">
+                                <input class="form-control" type="text" placeholder="Masukkan nama" name='first_name' id="example-text-input">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Belakang</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Masukkan nama belakang" name='last_name' id="example-text-input">
+                                <input class="form-control" type="text" placeholder="Masukkan nama" name='last_name' id="example-text-input">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">NIM</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="NIM" name='nim' id="example-text-input">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Username</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Username" name='username' id="example-text-input">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Masukkan email" name='nim' id="example-text-input">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Password</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="password" placeholder="Password" name='password' id="example-text-input">
+                                <input class="form-control" type="text" placeholder="NIP" name='nim' id="example-text-input">
                             </div>
                         </div>
                         <div class="form-group row">

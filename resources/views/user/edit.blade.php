@@ -30,28 +30,10 @@
                     <form action="{{ route('pengguna.update', ['pengguna' => $user->id]) }}" method="post">
                         @csrf
                         @method('PUT')
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Pengguna</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Masukkan nama" name='name' id="example-text-input" value="{{ $user->name }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Nomor Identitas</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="NIP/NIM" name='id_num' id="example-text-input" value="{{ $user->id_num }}">
-                            </div>
-                        </div>
                         <div class=" form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" placeholder="user@gmail.com" name='email' id="example-text-input" value="{{ $user->email }}">
-                            </div>
-                        </div>
-                        <div class=" form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Nomor Telepon</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="08xxxxxx" name='tlp' id="example-text-input" value="{{ $user->tlp }}">
                             </div>
                         </div>
                         <div class=" form-group row">
@@ -64,16 +46,6 @@
                             <label for="example-text-input" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="password" name='password' name='password' placeholder="Isi jika ingin diubah" id="example-text-input">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Role</label>
-                            <div class="col-sm-10">
-                                <select name="role" id="role" class="form-control">
-                                    @foreach($roles as $role)
-                                    <option value="{{ $role->id }}" {{$user->level_id == $role->id ? 'selected' : ''}}>{{ $role->name }}</option>
-                                    @endforeach
-                                </select>
                             </div>
                         </div>
                         <button type="submit" class='btn btn-primary float-right'>Submit</button>

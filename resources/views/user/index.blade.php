@@ -45,16 +45,14 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Email</th>
-                                <th>Role</th>
-                                <th>Nama</th>
+                                <th>Username</th>
                                 <th>Aksi</th>
                             </tr>
                             @foreach($user as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->role }}</td>
-                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->username }}</td>
                                 <td>
                                     <div class="d-inline-flex">
                                         <a href="{{ route('pengguna.edit', ['pengguna' => $user->id]) }}" class='btn btn-warning mr-2'>Edit</a>
@@ -75,7 +73,6 @@
                             @endforelse
                         </table>
                     </div>
-                    {{$user->links()}}
                 </div>
             </div>
         </div> <!-- end col -->
