@@ -101,18 +101,16 @@ class KonsultasiController extends Controller
     {
         $request->validate([
             'judul' => 'required',
-            'tgl' => 'required',
-            'ket' => 'required',
+            'tanggal' => 'required',
+            'keterangan' => 'required',
             'dosen' => 'required',
-            'user' => 'required'
         ]);
 
-        $konsultasi = new Konsultasi;
+        $konsultasi = Konsultasi::findOrFail($id);
         $konsultasi->judul = $request->judul;
-        $konsultasi->tgl = $request->tgl;
-        $konsultasi->ket = $request->ket;
-        $konsultasi->id_dsn = $request->dosen;
-        $konsultasi->id_user = $request->user;
+        $konsultasi->tanggal = $request->tanggal;
+        $konsultasi->keterangan = $request->keterangan;
+        $konsultasi->dosen_id = $request->dosen;
         $konsultasi->save();
 
         session()->flash('success', 'Sukses Ubah Data Konsultasi ' . $konsultasi->judul);
