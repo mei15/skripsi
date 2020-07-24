@@ -22,5 +22,13 @@ class MahasiswaSeeder extends Seeder
             'last_name'     => 'Pertama',
             'created_at'    => Carbon::now(),
         ]);
+
+        DB::table('mahasiswa')->insert([
+            'prodi'         => 'TIF',
+            'nim'           => 'H1D001002',
+            'first_name'    => 'Mahasiswa',
+            'last_name'     => 'Kedua',
+            'created_at'    => Carbon::now(),
+        ]);
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Dosen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use App\Dosen;
 use App\Konsultasi;
 use App\User;
-use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\Do_;
 
 class KonsultasiController extends Controller
 {
@@ -18,18 +18,10 @@ class KonsultasiController extends Controller
      */
     public function index(Request $request)
     {
-        if (auth()->user()->level_id == 1) {
-            $konsultasis = \App\Konsultasi::all();
-        } elseif (auth()->user()->level_id == 3) {
-            $konsultasis = \App\Konsultasi::where('id_user', auth()->user()->dosen->id_dsn)->get();
-        } else {
-            //dd(auth()->user()->mahasiswa->id_mhs);
-            $konsultasis = \App\Konsultasi::where('id_user', auth()->user()->mahasiswa->id_mhs)->get();
-        }
+        $user = Auth::user();
+        $konsultasis = Konsultasi::user($user)->paginate(10);
 
-        $dosen = \App\Dosen::all();
-
-        return view('konsultasi.index', ['konsultasis' => $konsultasis, 'dosen' => $dosen]);
+        return view('konsultasi.index', compact('konsultasis'));
     }
 
     /**
@@ -39,7 +31,7 @@ class KonsultasiController extends Controller
      */
     public function create()
     {
-        $user = auth()->user();
+        $user = Auth::user();
         $dosens = Dosen::all();
 
         return view('konsultasi.add', compact('user', 'dosens'));
@@ -53,21 +45,21 @@ class KonsultasiController extends Controller
      */
     public function store(Request $request)
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         $request->validate([
-            'judul' => 'required',
-            'tgl' => 'required',
-            'ket' => 'required',
-            'dosen' => 'required',
+            'judul'         => 'required',
+            'keterangan'    => 'required',
+            'tanggal'       => 'required',
+            'dosen'         => 'required',
         ]);
 
         $konsultasi = new Konsultasi;
         $konsultasi->judul = $request->judul;
-        $konsultasi->tgl = $request->tgl;
-        $konsultasi->ket = $request->ket;
-        $konsultasi->id_dsn = $request->dosen;
-        $konsultasi->id_user = $user->id;
+        $konsultasi->keterangan = $request->keterangan;
+        $konsultasi->tanggal = $request->tanggal;
+        $konsultasi->mahasiswa_id = $user->userable->id;
+        $konsultasi->dosen_id = $request->dosen;
         $konsultasi->save();
 
         session()->flash('success', 'Sukses Tambah Data Konsultasi ' . $konsultasi->judul);
@@ -109,18 +101,16 @@ class KonsultasiController extends Controller
     {
         $request->validate([
             'judul' => 'required',
-            'tgl' => 'required',
-            'ket' => 'required',
+            'tanggal' => 'required',
+            'keterangan' => 'required',
             'dosen' => 'required',
-            'user' => 'required'
         ]);
 
-        $konsultasi = new Konsultasi;
+        $konsultasi = Konsultasi::findOrFail($id);
         $konsultasi->judul = $request->judul;
-        $konsultasi->tgl = $request->tgl;
-        $konsultasi->ket = $request->ket;
-        $konsultasi->id_dsn = $request->dosen;
-        $konsultasi->id_user = $request->user;
+        $konsultasi->tanggal = $request->tanggal;
+        $konsultasi->keterangan = $request->keterangan;
+        $konsultasi->dosen_id = $request->dosen;
         $konsultasi->save();
 
         session()->flash('success', 'Sukses Ubah Data Konsultasi ' . $konsultasi->judul);
