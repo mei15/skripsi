@@ -13,6 +13,6 @@ class UserController extends Controller
     {
         $user = \App\User::all();
 
-        return view('users.index', ['user' => $user]);
+        return view('user.index', ['user' => $user]);
     }
 }

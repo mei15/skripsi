@@ -28,13 +28,15 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('dosen', 'DosenController');
 
-    Route::middleware(['role.dosen', 'role.admin', 'role.mahasiswa'])->group(function () {
+    Route::resource('mahasiswa', 'MahasiswaController');
+
+    Route::middleware(['user.dosen', 'user.admin', 'user.mahasiswa'])->group(function () {
         Route::prefix('laporan')->group(function () {
             Route::get('/', 'LaporanController@index')->name('laporan.index');
         });
     });
 
-    Route::middleware(['role.mahasiswa', 'role.dosen'])->group(function () {
+    Route::middleware(['user.mahasiswa', 'user.dosen'])->group(function () {
         Route::prefix('konsultasi')->group(function () {
             Route::resource('konsultasi', 'KonsultasiController');
         });

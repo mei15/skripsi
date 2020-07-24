@@ -44,23 +44,17 @@
                         <table class="table table-striped">
                             <tr>
                                 <th>ID</th>
-                                <th>Username</th>
-                                <th>Nomor ID</th>
                                 <th>Email</th>
-                                <th>Nomor Telepon</th>
+                                <th>Role</th>
                                 <th>Nama</th>
-                                <th>Level</th>
                                 <th>Aksi</th>
                             </tr>
-                            @foreach($users as $user)
+                            @foreach($user as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td>{{ $user->username }}</td>
-                                <td>{{ $user->id_num }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->tlp }}</td>
+                                <td>{{ $user->role }}</td>
                                 <td>{{ $user->name }}</td>
-                                <td>{{ $user->level->name }}</td>
                                 <td>
                                     <div class="d-inline-flex">
                                         <a href="{{ route('pengguna.edit', ['pengguna' => $user->id]) }}" class='btn btn-warning mr-2'>Edit</a>
@@ -73,7 +67,7 @@
                                 </td>
                             </tr>
                             @endforeach
-                            @forelse($users as $user)
+                            @forelse($user as $user)
                             @empty
                             <tr>
                                 <td colspan="6">Tidak ada data</td>
@@ -81,7 +75,7 @@
                             @endforelse
                         </table>
                     </div>
-                    {{$users->links()}}
+                    {{$user->links()}}
                 </div>
             </div>
         </div> <!-- end col -->
