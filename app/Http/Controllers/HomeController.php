@@ -27,12 +27,14 @@ class HomeController extends Controller
 
     public function index()
     {
-        if (Auth::User()->level_id == 1) {
+        if (Auth::User()->userable_type == 'App\Admin') {
             return $this->adminDashboard();
-        } elseif (Auth::user()->level_id == 2) {
-            return $this->mahasiswaDashboard();
-        } else {
+        }
+        else if (Auth::user()->userable_type == 'App\Dosen') {
             return $this->dosenDashboard();
+        }
+        else {
+            return $this->mahasiswaDashboard();
         }
     }
 
@@ -41,13 +43,13 @@ class HomeController extends Controller
         return view('dashboard.admin');
     }
 
-    protected function mahasiswaDashboard()
-    {
-        return view('dashboard.mahasiswa');
-    }
-
     protected function dosenDashboard()
     {
         return view('dashboard.dosen');
+    }
+
+    protected function mahasiswaDashboard()
+    {
+        return view('dashboard.mahasiswa');
     }
 }
