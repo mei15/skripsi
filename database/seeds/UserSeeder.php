@@ -25,6 +25,8 @@ class UserSeeder extends Seeder
             'userable_type'     => 'App\Admin'
         ]);
 
+        // --
+
         DB::table('users')->insert([
             'username'          => 'dosen',
             'email'             => 'dosen@email.com',
@@ -36,12 +38,34 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
+            'username'          => 'dosen2',
+            'email'             => 'dosen2@email.com',
+            'email_verified_at' => Carbon::now(),
+            'password'          => Hash::make('dosen2'),
+            'created_at'        => Carbon::now(),
+            'userable_id'       => 2,
+            'userable_type'     => 'App\Dosen'
+        ]);
+
+        // --
+
+        DB::table('users')->insert([
             'username'          => 'mahasiswa',
             'email'             => 'mahasiswa@email.com',
             'email_verified_at' => Carbon::now(),
             'password'          => Hash::make('mahasiswa'),
             'created_at'        => Carbon::now(),
             'userable_id'       => 1,
+            'userable_type'     => 'App\Mahasiswa'
+        ]);
+
+        DB::table('users')->insert([
+            'username'          => 'mahasiswa2',
+            'email'             => 'mahasiswa2@email.com',
+            'email_verified_at' => Carbon::now(),
+            'password'          => Hash::make('mahasiswa2'),
+            'created_at'        => Carbon::now(),
+            'userable_id'       => 2,
             'userable_type'     => 'App\Mahasiswa'
         ]);
     }

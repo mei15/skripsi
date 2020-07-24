@@ -22,5 +22,13 @@ class DosenSeeder extends Seeder
             'last_name'     => 'Pertama',
             'created_at'    => Carbon::now(),
         ]);
+
+        DB::table('dosen')->insert([
+            'prodi'         => 'TIF',
+            'nip'           => '234567890',
+            'first_name'    => 'Dosen',
+            'last_name'     => 'Kedua',
+            'created_at'    => Carbon::now(),
+        ]);
     }
 }

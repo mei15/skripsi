@@ -17,7 +17,7 @@ class KonsultasiSeeder extends Seeder
     {
         DB::table('konsultasi')->insert([
             'judul'         => 'Konsultasi BAB I',
-            'keterangan'    => 'Pendahuluan, latar belakang dan apapun yg ada di BAB I',
+            'keterangan'    => 'Apapun yg ada di BAB I',
             'tanggal'       => Carbon::now()->addDays(1),
             'mahasiswa_id'  => 1,
             'dosen_id'      => 1,
@@ -36,7 +36,23 @@ class KonsultasiSeeder extends Seeder
             'keterangan'    => 'Apapun yg ada di BAB III dan IV',
             'tanggal'       => Carbon::now()->addDays(3),
             'mahasiswa_id'  => 1,
+            'dosen_id'      => 2,
+        ]);
+
+        DB::table('konsultasi')->insert([
+            'judul'         => 'Konsultasi BAB I dan II',
+            'keterangan'    => 'Apapun yg ada di BAB I dan II',
+            'tanggal'       => Carbon::now()->addDays(2),
+            'mahasiswa_id'  => 2,
             'dosen_id'      => 1,
+        ]);
+
+        DB::table('konsultasi')->insert([
+            'judul'         => 'Konsultasi BAB III',
+            'keterangan'    => 'Apapun yg ada di BAB III',
+            'tanggal'       => Carbon::now()->addDays(4),
+            'mahasiswa_id'  => 2,
+            'dosen_id'      => 2,
         ]);
     }
 }
