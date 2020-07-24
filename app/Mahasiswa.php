@@ -12,4 +12,9 @@ class Mahasiswa extends Model
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
+    public function konsultasi()
+    {
+        return $this->hasMany('App\Konsultasi');
+    }
 }
