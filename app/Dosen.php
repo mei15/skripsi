@@ -7,21 +7,12 @@ use App\User;
 
 class Dosen extends Model
 {
-    protected $table = 'dosens';
-
+    protected $table = "dosen";
+    protected $primaryKey = "id_dosen";
+    protected $fillable = ['user_id', 'email', 'nama', 'nip', 'password'];
 
     public function user()
     {
-        return $this->belongsTo('App\User', 'id_user');
-    }
-
-    public function dosen()
-    {
-        return $this->hasMany('App\Konsultasi', 'id_dsn', 'id');
-    }
-
-    public function konsultasi()
-    {
-        return $this->hasOne('App\Konsultasi', 'id_dsn', 'id');
+        return $this->belongsTo(User::class);
     }
 }

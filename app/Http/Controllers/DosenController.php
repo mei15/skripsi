@@ -9,118 +9,58 @@ use App\Dosen;
 
 class DosenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request->get('search');
-        $dosens = Dosen::with(['user'])->where('nama', 'LIKE', "%$search%")->orderBy('id', 'asc')->paginate(10);
-        // dd($dosens);
-        return view('dosen.index', compact('dosens'));
+
+        $dosen = \App\Dosen::all();
+        return view('dosen.index', ['dosen' => $dosen]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function edit($id_dosen)
     {
-        $users = User::all();
-        return view('dosen.add', compact('users'));
+        $dosen = \App\Dosen::find($id_dosen);
+        return view('Dosen.edit', ['dosen' => $id_dosen]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function update(Request $request, $id_dosen)
     {
-        $request->validate([
-            'nama' => 'required',
-            'nip' => 'required',
-            'prodi' => 'required',
-            'user' => 'required'
-        ]);
+        $dosen = \App\Dosen::find($id_dosen);
+        $usr = \App\User::find($dosen->user_id);
+        $usr->name = $request->nama;
+        $usr->email = $request->email;
+        if ($request->password != $dosen->password) {
+            $usr->password = bcrypt($request->password);
+            $request->merge(['password' => $usr->password]);
+        }
+        $usr->save();
+        $dosen->update($request->all());
 
-        $dosen = new Dosen;
-        $dosen->nama = $request->nama;
-        $dosen->nip = $request->nip;
-        $dosen->prodi = $request->prodi;
-        $dosen->id_user = $request->user;
-        $dosen->save();
-
-        session()->flash('success', 'Sukses Tambah Data Dosen ' . $dosen->nama);
-        return redirect()->route('dosen.index');
+        return redirect('/dosen')->with('sukses', 'Data Dosen Berhasil Diupdated');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function create(Request $request)
     {
+
+        $user = new \App\User();
+        $user->role = 'Dosen';
+        $user->name = $request->nama;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->remember_token = str_random(60);
+        $user->save();
+
+        $request->request->add(['user_id' => $user->id]);
+        $request->merge(['password' => $user->password]);
+        \App\Dosen::create($request->all());
+        return redirect('/dosen')->with('sukses', 'Data Dosen Berhasil Diinput');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function delete($id_dosen)
     {
-        $dosen = Dosen::findOrFail($id);
-        $users = User::all();
-        return view('dosen.edit', compact('dosen', 'users'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'nip' => 'required',
-            'prodi' => 'required',
-            'user' => 'required'
-        ]);
-
-        $dosen = Dosen::findOrFail($id);
-        $dosen->nama = $request->nama;
-        $dosen->nip = $request->nip;
-        $dosen->prodi = $request->prodi;
-        $dosen->id_user = $request->user;
-        $dosen->save();
-
-        session()->flash('success', 'Sukses Ubah Data Dosen ' . $dosen->nama);
-        return redirect()->route('dosen.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $dosen = Dosen::findOrFail($id);
+        $dosen = \App\Dosen::find($id_dosen);
+        $usr = \App\User::find($dosen->user_id);
         $dosen->delete();
-
-        session()->flash('success', 'Sukses Hapus Pengguna!');
-        return redirect()->route('dosen.index');
+        $usr->delete();
+        return redirect('/dosen')->with('sukses', 'Data Dosen Berhasil Dihapus !');
     }
 }

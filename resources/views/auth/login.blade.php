@@ -15,9 +15,9 @@
             <form class="form-horizontal m-t-30" action="" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control @error('username') is-invalid @enderror" name='username' id="username" placeholder="Enter username">
-                    @error('username')
+                    <label for="username">Email</label>
+                    <input type="text" class="form-control @error('email') is-invalid @enderror" name='email' id="email" placeholder="Masukkan Email">
+                    @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

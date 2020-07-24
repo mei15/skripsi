@@ -40,18 +40,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function level()
+    public function mahasiswa()
     {
-        return $this->belongsTo('App\Level');
+        return $this->hasOne(Mahasiswa::class, 'user_id');
     }
 
-    public function user()
+    public function dosen()
     {
-        return $this->hasOne('App\Dosen', 'id_user', 'id');
-    }
-
-    public function konsultasi()
-    {
-        return $this->hasMany('App\Konsultasi', 'id_user', 'id');
+        return $this->hasOne(Dosen::class, 'user_id');
     }
 }
