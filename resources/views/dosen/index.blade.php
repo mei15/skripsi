@@ -47,16 +47,14 @@
                                 <th>Nama</th>
                                 <th>NIP</th>
                                 <th>Prodi</th>
-                                <th>Username</th>
                                 <th>Aksi</th>
                             </tr>
                             @foreach($dosens as $dosen)
                             <tr>
                                 <td>{{ $dosen->id }}</td>
-                                <td>{{ $dosen->nama }}</td>
+                                <td>{{ $dosen->first_name }} {{ $dosen->last_name }}</td>
                                 <td>{{ $dosen->nip }}</td>
                                 <td>{{ $dosen->prodi }}</td>
-                                <td>{{ $dosen->user->username }}</td>
                                 <td>
                                     <div class="d-inline-flex">
                                         <a href="{{ route('dosen.edit', ['dosen' => $dosen->id]) }}" class='btn btn-warning mr-2'>Edit</a>
@@ -77,7 +75,7 @@
                             @endforelse
                         </table>
                     </div>
-                    {{$dosens->links()}}
+
                 </div>
             </div>
         </div> <!-- end col -->

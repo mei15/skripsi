@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->userable->full_name;
     }
+
+    public function dosen()
+    {
+        return $this->belongsTo('App\Dosen');
+    }
 }

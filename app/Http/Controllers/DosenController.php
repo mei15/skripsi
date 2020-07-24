@@ -9,58 +9,68 @@ use App\Dosen;
 
 class DosenController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-
-        $dosen = \App\Dosen::all();
-        return view('dosen.index', ['dosen' => $dosen]);
+        $dosens = Dosen::all();
+        return view('dosen.index', compact('dosens'));
     }
 
-    public function edit($id_dosen)
+    public function create()
     {
-        $dosen = \App\Dosen::find($id_dosen);
-        return view('Dosen.edit', ['dosen' => $id_dosen]);
+        return view('dosen.add');
     }
 
-    public function update(Request $request, $id_dosen)
+    public function edit($id)
     {
-        $dosen = \App\Dosen::find($id_dosen);
-        $usr = \App\User::find($dosen->user_id);
-        $usr->name = $request->nama;
-        $usr->email = $request->email;
-        if ($request->password != $dosen->password) {
-            $usr->password = bcrypt($request->password);
-            $request->merge(['password' => $usr->password]);
-        }
-        $usr->save();
-        $dosen->update($request->all());
+        $dosen = Dosen::findOrFail($id);
 
-        return redirect('/dosen')->with('sukses', 'Data Dosen Berhasil Diupdated');
+        return view('dosen.edit', compact('dosen'));
     }
 
-    public function create(Request $request)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'nip'           => 'required',
+            'prodi'         => 'required',
+        ]);
 
-        $user = new \App\User();
-        $user->role = 'Dosen';
-        $user->name = $request->nama;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->remember_token = str_random(60);
-        $user->save();
+        $dosen = new Dosen;
+        $dosen->first_name = $request->first_name;
+        $dosen->last_name = $request->last_name;
+        $dosen->nip = $request->nip;
+        $dosen->prodi = $request->prodi;
+        $dosen->save();
 
-        $request->request->add(['user_id' => $user->id]);
-        $request->merge(['password' => $user->password]);
-        \App\Dosen::create($request->all());
-        return redirect('/dosen')->with('sukses', 'Data Dosen Berhasil Diinput');
+        session()->flash('success', 'Sukses Ubah Data Dosen ' . $dosen->first_name);
+        return redirect()->route('dosen.index');
     }
 
-    public function delete($id_dosen)
+    public function store(Request $request)
     {
-        $dosen = \App\Dosen::find($id_dosen);
-        $usr = \App\User::find($dosen->user_id);
+        $request->validate([
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'nip'           => 'required',
+            'prodi'         => 'required',
+        ]);
+
+        $dosen = new Dosen;
+        $dosen->first_name = $request->first_name;
+        $dosen->last_name = $request->last_name;
+        $dosen->nip = $request->nip;
+        $dosen->prodi = $request->prodi;
+        $dosen->save();
+
+        session()->flash('success', 'Sukses Tambah Data Dosen ' . $dosen->first_name);
+        return redirect()->route('dosen.index');
+    }
+
+    public function destroy($id)
+    {
+        $dosen = \App\Dosen::find($id);
         $dosen->delete();
-        $usr->delete();
         return redirect('/dosen')->with('sukses', 'Data Dosen Berhasil Dihapus !');
     }
 }

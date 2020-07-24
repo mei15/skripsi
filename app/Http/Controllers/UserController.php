@@ -11,8 +11,28 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = \App\User::all();
+        $user = User::all();
 
         return view('user.index', ['user' => $user]);
+    }
+
+    public function create()
+    {
+    }
+
+    public function store(Request $request)
+    {
+    }
+
+    public function edit()
+    {
+    }
+
+    public function update()
+    {
+    }
+
+    public function destroy()
+    {
     }
 }

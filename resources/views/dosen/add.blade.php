@@ -30,9 +30,15 @@
                     <form action="{{ route('dosen.store') }}" method="post">
                         @csrf
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Dosen</label>
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Depan</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Masukkan nama" name='nama' id="example-text-input">
+                                <input class="form-control" type="text" placeholder="Masukkan nama" name='first_name' id="example-text-input">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Belakang</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" placeholder="Masukkan nama" name='last_name' id="example-text-input">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -51,16 +57,6 @@
                                     <option value="TS">Teknik Sipil</option>
                                     <option value="TE">Teknik Elektro</option>
                                     <option value="TG">Teknik Geologi</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Pilih username</label>
-                            <div class="col-sm-10">
-                                <select name="user" id="user" class="form-control">
-                                    @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{ $user->username }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>

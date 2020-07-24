@@ -43,41 +43,25 @@
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <tr>
-                                <th>ID</th>
-                                <th>Nama</th>
                                 <th>NIM</th>
-                                <th>Prodi</th>
-                                <th>Username</th>
-                                <th>Aksi</th>
+                                <th>Nama</th>
+                                <th>Program Studi</th>
+                                <th>Action</th>
                             </tr>
-                            @foreach($mahasiswas as $mhs)
+                            @foreach($mhs as $data)
                             <tr>
-                                <td>{{ $mhs->id }}</td>
-                                <td>{{ $mhs->nama }}</td>
-                                <td>{{ $mhs->nip }}</td>
-                                <td>{{ $mhs->prodi }}</td>
-                                <td>{{ $mhs->user->username }}</td>
+                                <td>{{$data->nim}}</td>
+                                <td>{{$data->first_name}} {{ $data->last_name }}</td>
+                                <td>{{$data->prodi}}</td>
                                 <td>
-                                    <div class="d-inline-flex">
-                                        <a href="{{ route('mahasiswa.edit', ['mahasiswa' => $mahasiswa->id]) }}" class='btn btn-warning mr-2'>Edit</a>
-                                        <form action="{{ route('mahasiswa.destroy', ['mahasiswa' => $mahasiswa->id]) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class='btn btn-danger'>Delete</button>
-                                        </form>
-                                    </div>
+                                    <a href="/mahasiswa/{{$data->id_mhs}}/edit"><button class="btn btn-warning">Edit</button></a>
+                                    <a href="/mahasiswa/{{$data->id_mhs}}/delete"><button class="btn btn-danger">Delete</button></a>
                                 </td>
                             </tr>
                             @endforeach
-                            @forelse($dosens as $dosen)
-                            @empty
-                            <tr>
-                                <td colspan="6">Tidak ada data</td>
-                            </tr>
-                            @endforelse
+
                         </table>
                     </div>
-                    {{$dosens->links()}}
                 </div>
             </div>
         </div> <!-- end col -->

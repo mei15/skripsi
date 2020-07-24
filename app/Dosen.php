@@ -18,4 +18,9 @@ class Dosen extends Model
     {
         return $this->hasMany('App\Konsultasi');
     }
+
+    public function user()
+    {
+        return $this->hasOne('App\User');
+    }
 }

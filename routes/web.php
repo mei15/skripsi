@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,15 +31,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('mahasiswa', 'MahasiswaController');
 
-    Route::middleware(['user.dosen', 'user.admin', 'user.mahasiswa'])->group(function () {
-        Route::prefix('laporan')->group(function () {
-            Route::get('/', 'LaporanController@index')->name('laporan.index');
-        });
-    });
+    Route::resource('konsultasi', 'KonsultasiController');
 
-    Route::middleware(['user.mahasiswa', 'user.dosen'])->group(function () {
-        Route::prefix('konsultasi')->group(function () {
-            Route::resource('konsultasi', 'KonsultasiController');
-        });
-    });
+    Route::get('/', 'LaporanController@index')->name('laporan.index');
 });

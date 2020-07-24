@@ -5,59 +5,55 @@ namespace App\Http\Controllers;
 use App\Mahasiswa;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class MahasiswaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $mhs = \App\Mahasiswa::all();
-        return view('mahasiswa.index', ['mhs' => $mhs]);
+        $mhs = Mahasiswa::all();
+        return view('mahasiswa.index', compact('mhs'));
+    }
+
+    public function create()
+    {
+        return view('mahasiswa.add');
     }
 
     public function edit($id_mhs)
     {
-        $mhs = \App\Mahasiswa::find($id_mhs);
-        return view('mahasiswa.edit', ['mhs' => $mhs]);
+        $mahasiswa = Mahasiswa::findOrFail($id_mhs);
+
+        return view('mahasiswa.edit', compact('mahasiswa'));
     }
 
-    public function update(Request $request, $id_mhs)
+    public function update(Request $request, $id)
     {
-        $mhs = \App\Mahasiswa::find($id_mhs);
-        $usr = \App\User::find($mhs->user_id);
-        $usr->name = $request->nama;
-        $usr->email = $request->email;
-        if ($request->password != $mhs->password) {
-            $usr->password = bcrypt($request->password);
-            $request->merge(['password' => $usr->password]);
-        }
-        $usr->save();
-        $mhs->update($request->all());
-
-        return redirect('/mahasiswa')->with('sukses', 'Data Mahasiswa Berhasil Diupdated');
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
-        $user = new \App\User();
-        $user->role = 'Mahasiswa';
-        $user->name = $request->nama;
+        $user = new \App\User;
+        $user->username = $request->username;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->nim = $request->nim;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->remember_token = str_random(60);
+        $user->prodi = $request->prodi;
+        $user->password = $request->password;
+        $user->id_mhs = $request->userable_id;
+        $user->remember_token = str::random(60);
         $user->save();
 
-        $request->request->add(['user_id' => $user->id]);
-        $request->merge(['password' => $user->password]);
-        \App\Mahasiswa::create($request->all());
-        return redirect('/mahasiswa')->with('sukses', 'Data Mahasiswa Berhasil Diinput');
+        $request->request->add(['id' => $user->id]);
+        \App\Mahasiswa::store($request->all());
+        return redirect('mahasiswa.index')->with('sukses', 'Data Mahasiswa Berhasil Diinput');
     }
 
-    public function delete($id_mhs)
+    public function delete($id)
     {
-        $mhs = \App\Mahasiswa::find($id_mhs);
-        $usr = \App\User::find($mhs->user_id);
-        $mhs->delete();
-        $usr->delete();
-        return redirect('/mahasiswa')->with('sukses', 'Data Mahasiswa Berhasil Dihapus !');
+        $mahasiswa = \App\Mahasiswa::find($id);
+        $mahasiswa->delete();
+        return redirect('mahasiswa.index')->with('sukses', 'Data Mahasiswa Berhasil Dihapus !');
     }
 }
