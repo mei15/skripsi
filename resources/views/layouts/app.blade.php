@@ -94,7 +94,7 @@
                                     <span>Home</span>
                                 </a>
                             </li>
-                            @if(Auth::user()->level_id == 1)
+                            @if(Auth::user()->userable_type == 'App\Admin')
                             <li class="has-submenu">
                                 <a href="{{ route('pengguna.index') }}"><i class="ti-user"></i>Pengguna</a>
                             </li>
@@ -102,16 +102,14 @@
                                 <a href="{{ route('dosen.index') }}"><i class="ti-user"></i>Dosen</a>
                             </li>
                             @endif
-                            @if(Auth::user()->level_id == 2 || Auth::user()->level_id == 3)
+                            @if(Auth::user()->userable_type == 'App\Dosen' || Auth::user()->userable_type == 'App\Mahasiswa')
                             <li class="has-submenu">
                                 <a href="{{ route('konsultasi.index') }}"><i class="ti-pencil-alt"></i>Konsultasi</a>
                             </li>
                             @endif
-                            @if(Auth::user()->level_id == 2 || Auth::user()->level_id == 3 || Auth::user()->level_id == 1)
                             <li class="has-submenu">
                                 <a href="{{ route('laporan.index') }}"><i class="ti-save"></i>Laporan</a>
                             </li>
-                            @endif
                         </ul>
                         <!-- End navigation menu -->
                     </div> <!-- end navigation -->
