@@ -94,24 +94,28 @@
                                     <span>Home</span>
                                 </a>
                             </li>
-                            @if(Auth::user()->role = 'admin')
-                            <li class="has-submenu">
-                                <a href="{{ route('pengguna.index') }}"><i class="ti-user"></i>Pengguna</a>
-                            </li>
-                            <li class="has-submenu">
-                                <a href="{{ route('dosen.index') }}"><i class="ti-user"></i>Dosen</a>
-                            </li>
-                            @endif
-                            @if(Auth::user()->role == 'mahasiswa' || Auth::user()->role == 'dosen')
-                            <li class="has-submenu">
-                                <a href="{{ route('konsultasi.index') }}"><i class="ti-pencil-alt"></i>Konsultasi</a>
-                            </li>
-                            @endif
-                            @if(Auth::user()->role == 'dosen' || Auth::user()->role == 'mahasiswa' || Auth::user()->role == 'admin')
-                            <li class="has-submenu">
-                                <a href="{{ route('laporan.index') }}"><i class="ti-save"></i>Laporan</a>
-                            </li>
-                            @endif
+                            <<<<<<< HEAD @if(Auth::user()->role = 'admin')
+                                =======
+                                @if(Auth::user()->userable_type == 'App\Admin')
+                                >>>>>>> f5c8e9269d70394b1674f5f045f3bbf173e2c176
+                                <li class="has-submenu">
+                                    <a href="{{ route('pengguna.index') }}"><i class="ti-user"></i>Pengguna</a>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="{{ route('dosen.index') }}"><i class="ti-user"></i>Dosen</a>
+                                </li>
+                                @endif
+                                @if(Auth::user()->userable_type == 'App\Dosen' || Auth::user()->userable_type == 'App\Mahasiswa')
+                                <li class="has-submenu">
+                                    <a href="{{ route('konsultasi.index') }}"><i class="ti-pencil-alt"></i>Konsultasi</a>
+                                </li>
+                                @endif
+                                <<<<<<< HEAD @if(Auth::user()->role == 'dosen' || Auth::user()->role == 'mahasiswa' || Auth::user()->role == 'admin')
+                                    =======
+                                    >>>>>>> f5c8e9269d70394b1674f5f045f3bbf173e2c176
+                                    <li class="has-submenu">
+                                        <a href="{{ route('laporan.index') }}"><i class="ti-save"></i>Laporan</a>
+                                    </li>
                         </ul>
                         <!-- End navigation menu -->
                     </div> <!-- end navigation -->
