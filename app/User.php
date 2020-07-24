@@ -6,7 +6,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-
 class User extends Authenticatable
 {
     use Notifiable;
@@ -19,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'password',
     ];
 
     /**
@@ -40,13 +39,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function mahasiswa()
+    public function userable()
     {
-        return $this->hasOne(Mahasiswa::class, 'user_id');
+        return $this->morphTo();
     }
 
-    public function dosen()
+    public function getFullNameAttribute()
     {
-        return $this->hasOne(Dosen::class, 'user_id');
+        return $this->userable->first_name . ' ' . $this->userable->last_name;
     }
 }
