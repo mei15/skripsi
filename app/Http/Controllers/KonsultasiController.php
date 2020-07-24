@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Dosen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use App\Dosen;
 use App\Konsultasi;
 use App\User;
-use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\Do_;
 
 class KonsultasiController extends Controller
 {
@@ -18,18 +18,10 @@ class KonsultasiController extends Controller
      */
     public function index(Request $request)
     {
-        if (auth()->user()->level_id == 1) {
-            $konsultasis = \App\Konsultasi::all();
-        } elseif (auth()->user()->level_id == 3) {
-            $konsultasis = \App\Konsultasi::where('id_user', auth()->user()->dosen->id_dsn)->get();
-        } else {
-            //dd(auth()->user()->mahasiswa->id_mhs);
-            $konsultasis = \App\Konsultasi::where('id_user', auth()->user()->mahasiswa->id_mhs)->get();
-        }
+        $user = Auth::user();
+        $konsultasis = Konsultasi::user($user)->paginate(10);
 
-        $dosen = \App\Dosen::all();
-
-        return view('konsultasi.index', ['konsultasis' => $konsultasis, 'dosen' => $dosen]);
+        return view('konsultasi.index', compact('konsultasis'));
     }
 
     /**

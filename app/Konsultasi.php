@@ -4,25 +4,34 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
 class Konsultasi extends Model
 {
-    public function user()
+    protected $table = 'konsultasi';
+
+    public function getTanggalAttribute($value)
     {
-        return $this->belongsTo('App\User', 'id_user');
+        return Carbon::parse($value);
     }
 
     public function dosen()
     {
-        return $this->belongsTo('App\Dosen', 'id_dsn');
+        return $this->belongsTo('App\Dosen');
     }
 
-    public function Konsultasi()
+    public function mahasiswa()
     {
-        return $this->belongsTo('App\Dosen', 'id_dsn');
+        return $this->belongsTo('App\Mahasiswa');
     }
 
-    public function scopeUser($query, $userId)
+    public function scopeUser($query, $user)
     {
-        return $query->where('id_user', $userId);
+        if ($user->userable_type == 'App\Dosen') {
+            return $query->where('dosen_id', $user->userable_id);
+        }
+        else if ($user->userable_type == 'App\Mahasiswa') {
+            return $query->where('mahasiswa_id', $user->userable_id);
+        }
     }
 }
