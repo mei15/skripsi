@@ -27,12 +27,13 @@
                 <div class="card-body">
 
                     <h4 class="mt-0 header-title">Konsultasi</h4>
-                    <p class="text-muted m-b-30 font-14">Berikut adalah data seluruh konsultasi</p>
+                    <p class="text-muted m-b-30 font-14">Berikut adalah data seluruh konsultasi Anda</p>
                     @if(session('success'))
                     <div class="alert alert-success">
                         {{session('success')}}
                     </div>
                     @endif
+                    @if( Auth::user()->userable_type == 'App\Mahasiswa' )
                     <div class="card-actions ">
                         <a class='btn btn-primary float-left' href="{{ route('konsultasi.create') }}"><i class='ti ti-plus'></i> Tambah Konsultasi</a>
                         <form action="" method="get" class='form-inline float-right mb-3'>
@@ -40,25 +41,29 @@
                             <button type="submit" class='btn btn-primary ml-2'>Cari</button>
                         </form>
                     </div>
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <tr>
-                                <th>ID</th>
+                                <th>#</th>
                                 <th>Nama Mahasiswa</th>
                                 <th>Judul</th>
                                 <th>Tanggal</th>
                                 <th>Keterangan</th>
                                 <th>Nama Dosen Pembimbing</th>
+                                @if( Auth::user()->userable_type == 'App\Mahasiswa' )
                                 <th>Aksi</th>
+                                @endif
                             </tr>
                             @foreach($konsultasis as $konsultasi)
                             <tr>
-                                <td>{{ $konsultasi->id }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $konsultasi->mahasiswa->full_name }}</td>
                                 <td>{{ $konsultasi->judul }}</td>
                                 <td>{{ $konsultasi->tanggal->format('d-M-Y | H:i') }}</td>
                                 <td>{{ $konsultasi->keterangan }}</td>
                                 <td>{{ $konsultasi->dosen->full_name }}</td>
+                                @if( Auth::user()->userable_type == 'App\Mahasiswa' )
                                 <td>
                                     <div class="d-inline-flex">
                                         <a href="{{ route('konsultasi.edit', ['konsultasi' => $konsultasi->id]) }}" class='btn btn-warning mr-2'>Edit</a>
@@ -69,6 +74,7 @@
                                         </form>
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
                         </table>
