@@ -31,7 +31,7 @@ class KonsultasiController extends Controller
      */
     public function create()
     {
-        $user = auth()->user();
+        $user = Auth::user();
         $dosens = Dosen::all();
 
         return view('konsultasi.add', compact('user', 'dosens'));
@@ -45,21 +45,21 @@ class KonsultasiController extends Controller
      */
     public function store(Request $request)
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         $request->validate([
-            'judul' => 'required',
-            'tgl' => 'required',
-            'ket' => 'required',
-            'dosen' => 'required',
+            'judul'         => 'required',
+            'keterangan'    => 'required',
+            'tanggal'       => 'required',
+            'dosen'         => 'required',
         ]);
 
         $konsultasi = new Konsultasi;
         $konsultasi->judul = $request->judul;
-        $konsultasi->tgl = $request->tgl;
-        $konsultasi->ket = $request->ket;
-        $konsultasi->id_dsn = $request->dosen;
-        $konsultasi->id_user = $user->id;
+        $konsultasi->keterangan = $request->keterangan;
+        $konsultasi->tanggal = $request->tanggal;
+        $konsultasi->mahasiswa_id = $user->userable->id;
+        $konsultasi->dosen_id = $request->dosen;
         $konsultasi->save();
 
         session()->flash('success', 'Sukses Tambah Data Konsultasi ' . $konsultasi->judul);
