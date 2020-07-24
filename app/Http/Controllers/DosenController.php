@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 use App\User;
 use App\Dosen;
-
 
 class DosenController extends Controller
 {
@@ -35,8 +37,8 @@ class DosenController extends Controller
             'nip'           => 'required',
             'prodi'         => 'required',
         ]);
+
         $dosen = Dosen::find($id);
-        $dosen = new Dosen;
         $dosen->first_name = $request->first_name;
         $dosen->last_name = $request->last_name;
         $dosen->nip = $request->nip;
@@ -54,23 +56,51 @@ class DosenController extends Controller
             'last_name'     => 'required',
             'nip'           => 'required',
             'prodi'         => 'required',
+            'username'      => 'required',
+            'password'      => 'required',
+            'email'         => 'required',
         ]);
 
-        $dosen = new Dosen;
-        $dosen->first_name = $request->first_name;
-        $dosen->last_name = $request->last_name;
-        $dosen->nip = $request->nip;
-        $dosen->prodi = $request->prodi;
-        $dosen->save();
+        // Make transaction, biar pasti keinsert dua2 nya query
+        DB::beginTransaction();
 
+        try {
+            $dosen = new Dosen;
+            $dosen->first_name = $request->first_name;
+            $dosen->last_name = $request->last_name;
+            $dosen->nip = $request->nip;
+            $dosen->prodi = $request->prodi;
+            $dosen->save();
+
+            $user = new User;
+            $user->username = $request->username;
+            $user->password = $request->password;
+            $user->email = $request->email;
+            $user->userable_type = Dosen::class;
+            $user->userable_id = $dosen->id;
+            $user->email_verified_at = Carbon::now();
+            $user->save();
+
+            // commit biar perubahan di DB nya kesave
+            DB::commit();
+        }
+        catch (\Exception $err) {
+            // rollback DB nya, datanya gajadi diinput
+            DB::rollBack();
+
+            session()->flash('error', 'Terjadi kesalahan!');
+            return redirect()->route('dosen.index');
+        }
+        
         session()->flash('success', 'Sukses Tambah Data Dosen ' . $dosen->first_name);
         return redirect()->route('dosen.index');
     }
 
     public function destroy($id)
     {
-        $dosen = \App\Dosen::find($id);
+        $dosen = Dosen::find($id);
         $dosen->delete();
+        
         return redirect('/dosen')->with('sukses', 'Data Dosen Berhasil Dihapus !');
     }
 }
