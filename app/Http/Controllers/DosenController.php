@@ -26,7 +26,11 @@ class DosenController extends Controller
     public function edit($id)
     {
         $dosen = Dosen::findOrFail($id);
-        $user = User::find($id);
+        $user = User::where([
+            'userable_type' => Dosen::class,
+            'userable_id' => $dosen->id
+        ])->first();
+
         return view('dosen.edit', compact('dosen', 'user'));
     }
 
@@ -53,13 +57,14 @@ class DosenController extends Controller
             $dosen->prodi = $request->prodi;
             $dosen->save();
 
-            $user = User::find($id);
+            $user = User::where([
+                'userable_type' => Dosen::class,
+                'userable_id' => $dosen->id
+            ])->first();
+            
             $user->username = $request->username;
             $user->password = Hash::make($request->password);
             $user->email = $request->email;
-            $user->userable_type = Dosen::class;
-            $user->userable_id = $dosen->id;
-            $user->email_verified_at = Carbon::now();
             $user->save();
 
             // commit biar perubahan di DB nya kesave

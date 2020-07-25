@@ -26,7 +26,10 @@ class MahasiswaController extends Controller
     public function edit($id)
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
-        $user = User::all();
+        $user = User::where([
+            'userable_type' => Mahasiswa::class,
+            'userable_id' => $mahasiswa->id
+        ])->first();
 
         return view('mahasiswa.edit', compact('mahasiswa', 'user'));
     }
@@ -54,14 +57,14 @@ class MahasiswaController extends Controller
             $mhs->prodi = $request->prodi;
             $mhs->save();
 
-            $user = User::find($id);
+            $user = User::where([
+                'userable_type' => Mahasiswa::class,
+                'userable_id' => $mhs->id
+            ])->first();
+
             $user->username = $request->username;
             $user->password = Hash::make($request->password);
             $user->email = $request->email;
-            $user->userable_type = Mahasiswa::class;
-            $user->userable_id = $mhs->id;
-            $user->remember_token = Str::random(40);
-            $user->email_verified_at = Carbon::now();
             $user->save();
 
             // commit biar perubahan di DB nya kesave

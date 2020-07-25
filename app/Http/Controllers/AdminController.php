@@ -26,7 +26,10 @@ class AdminController extends Controller
     public function edit($id)
     {
         $admin = Admin::findOrFail($id);
-        $user = User::find($id);
+        $user = User::where([
+            'userable_type' => Admin::class,
+            'userable_id' => $admin->id
+        ])->first();
 
         return view('admin.edit', compact('admin', 'user'));
     }
@@ -50,13 +53,14 @@ class AdminController extends Controller
             $admin->last_name = $request->last_name;
             $admin->save();
 
-            $user = User::all();
+            $user = User::where([
+                'userable_type' => Admin::class,
+                'userable_id' => $admin->id
+            ])->first();
+
             $user->username = $request->username;
             $user->password = Hash::make($request->password);
             $user->email = $request->email;
-            $user->userable_type = Admin::class;
-            $user->userable_id = $admin->id;
-            $user->email_verified_at = Carbon::now();
             $user->save();
 
             // commit biar perubahan di DB nya kesave
