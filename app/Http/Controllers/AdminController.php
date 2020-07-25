@@ -2,33 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Mahasiswa;
-use App\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Admin;
+use App\User;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-class MahasiswaController extends Controller
+class AdminController extends Controller
 {
     public function index(Request $request)
     {
-        $mhs = Mahasiswa::all();
-        return view('mahasiswa.index', compact('mhs'));
+        $admins = Admin::all();
+        return view('admin.index', compact('admins'));
     }
 
     public function create()
     {
-        return view('mahasiswa.add');
+        return view('admin.add');
     }
 
     public function edit($id)
     {
-        $mahasiswa = Mahasiswa::findOrFail($id);
-        $user = User::all();
+        $admin = Admin::findOrFail($id);
+        $user = User::find($id);
 
-        return view('mahasiswa.edit', compact('mahasiswa', 'user'));
+        return view('admin.edit', compact('admin', 'user'));
     }
 
     public function update(Request $request, $id)
@@ -36,8 +36,6 @@ class MahasiswaController extends Controller
         $request->validate([
             'first_name'    => 'required',
             'last_name'     => 'required',
-            'nim'           => 'required',
-            'prodi'         => 'required',
             'username'      => 'required',
             'password'      => 'required',
             'email'         => 'required',
@@ -47,20 +45,17 @@ class MahasiswaController extends Controller
         DB::beginTransaction();
 
         try {
-            $mhs = Mahasiswa::find($id);
-            $mhs->first_name = $request->first_name;
-            $mhs->last_name = $request->last_name;
-            $mhs->nip = $request->nip;
-            $mhs->prodi = $request->prodi;
-            $mhs->save();
+            $admin = Admin::find($id);
+            $admin->first_name = $request->first_name;
+            $admin->last_name = $request->last_name;
+            $admin->save();
 
-            $user = User::find($id);
+            $user = User::all();
             $user->username = $request->username;
             $user->password = Hash::make($request->password);
             $user->email = $request->email;
-            $user->userable_type = Mahasiswa::class;
-            $user->userable_id = $mhs->id;
-            $user->remember_token = Str::random(40);
+            $user->userable_type = Admin::class;
+            $user->userable_id = $admin->id;
             $user->email_verified_at = Carbon::now();
             $user->save();
 
@@ -71,11 +66,11 @@ class MahasiswaController extends Controller
             DB::rollBack();
 
             session()->flash('error', 'Terjadi kesalahan!');
-            return redirect()->route('mahasiswa.index');
+            return redirect()->route('admin.index');
         }
 
-        session()->flash('success', 'Sukses Ubah Data Mahasiswa ' . $mhs->first_name);
-        return redirect()->route('mahasiswa.index');
+        session()->flash('success', 'Sukses Ubah Data Admin ' . $admin->first_name);
+        return redirect()->route('admin.index');
     }
 
     public function store(Request $request)
@@ -83,8 +78,6 @@ class MahasiswaController extends Controller
         $request->validate([
             'first_name'    => 'required',
             'last_name'     => 'required',
-            'nim'           => 'required',
-            'prodi'         => 'required',
             'username'      => 'required',
             'password'      => 'required',
             'email'         => 'required',
@@ -94,21 +87,19 @@ class MahasiswaController extends Controller
         DB::beginTransaction();
 
         try {
-            $mhs = new Mahasiswa;
-            $mhs->first_name = $request->first_name;
-            $mhs->last_name = $request->last_name;
-            $mhs->nip = $request->nip;
-            $mhs->prodi = $request->prodi;
-            $mhs->save();
+            $admin = new Admin;
+            $admin->first_name = $request->first_name;
+            $admin->last_name = $request->last_name;
+            $admin->save();
 
             $user = new User;
             $user->username = $request->username;
             $user->password = Hash::make($request->password);
             $user->email = $request->email;
-            $user->userable_type = Mahasiswa::class;
-            $user->userable_id = $mhs->id;
-            $user->email_verified_at = Carbon::now();
+            $user->userable_type = Admin::class;
+            $user->userable_id = $admin->id;
             $user->remember_token = Str::random(40);
+            $user->email_verified_at = Carbon::now();
             $user->save();
 
             // commit biar perubahan di DB nya kesave
@@ -118,17 +109,17 @@ class MahasiswaController extends Controller
             DB::rollBack();
 
             session()->flash('error', 'Terjadi kesalahan!');
-            return redirect()->route('mahasiswa.index');
+            return redirect()->route('admin.index');
         }
 
-        session()->flash('success', 'Sukses Tambah Data Mahasiswa ' . $mhs->first_name);
-        return redirect()->route('mahasiswa.index');
+        session()->flash('success', 'Sukses Tambah Data Admin ' . $admin->first_name);
+        return redirect()->route('admin.index');
     }
 
     public function destroy($id)
     {
-        $mhs = Mahasiswa::find($id);
-        $mhs->delete();
-        return redirect()->route('mahasiswa.index')->compact('mhs', 'user')->with('sukses', 'Data Mahasiwa Berhasil Dihapus !');
+        $admin = Admin::find($id);
+        $admin->delete();
+        return redirect('admin.index')->compact('admin')->with('sukses', 'Data Admin Berhasil Dihapus !');
     }
 }

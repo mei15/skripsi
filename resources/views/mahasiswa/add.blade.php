@@ -44,7 +44,7 @@
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">NIM</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="NIP" name='nim' id="example-text-input">
+                                <input class="form-control" type="text" placeholder="NIM" name='nim' id="example-text-input">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -58,6 +58,25 @@
                                     <option value="TE">Teknik Elektro</option>
                                     <option value="TG">Teknik Geologi</option>
                                 </select>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Username</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" placeholder="Username" name='username'>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="password" placeholder="password" name='password'>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" placeholder="Email" name='email'>
                             </div>
                         </div>
                         <button type="submit" class='btn btn-primary float-right'>Submit</button>

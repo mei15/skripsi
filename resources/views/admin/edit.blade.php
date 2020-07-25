@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section("head_title", "Daftar Dosen")
+@section("head_title", "Daftar Admin")
 @section("title")
 <div class="container-fluid">
     <!-- Page-Title -->
     <div class="row">
         <div class="col-sm-12">
             <div class="page-title-box" id="breadcrumb">
-                <h4 class="page-title">Dosen</h4>
+                <h4 class="page-title">Admin</h4>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        Menampilkan seluruh data Dosen
+                        Menampilkan seluruh data Admin
                     </li>
                 </ol>
 
@@ -26,39 +26,20 @@
             <div class="card m-b-20">
                 <div class="card-body">
 
-                    <h4 class="mt-0 mb-4 header-title">Ubah Dosen</h4>
-                    <form action="{{ route('dosen.update', ['dosen' => $dosen->id]) }}" method="post">
+                    <h4 class="mt-0 mb-4 header-title">Ubah Admin</h4>
+                    <form action="{{ route('admin.update', ['admin' => $admin->id]) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Depan</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Masukkan nama" name='first_name' value="{{ $dosen->first_name }}">
+                                <input class="form-control" type="text" placeholder="Masukkan nama" name='first_name' value="{{ $admin->first_name }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Belakang</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Masukkan nama" name='last_name' value="{{ $dosen->last_name }}">
-                            </div>
-                        </div>
-                        <div class=" form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">NIP</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="NIP" name='nip' value="{{ $dosen->nip }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Pilih Program Studi</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" name="prodi" required="" value="{{ $dosen->prodi }}">
-                                    <option value=" null" disabled selected>- Pilih -</option>
-                                    <option value="TIF">Teknik Informatika</option>
-                                    <option value="TI">Teknik Industri</option>
-                                    <option value="TS">Teknik Sipil</option>
-                                    <option value="TE">Teknik Elektro</option>
-                                    <option value="TG">Teknik Geologi</option>
-                                </select>
+                                <input class="form-control" type="text" placeholder="Masukkan nama" name='last_name' value="{{ $admin->last_name }}">
                             </div>
                         </div>
                         <hr />

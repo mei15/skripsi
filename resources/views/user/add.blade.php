@@ -41,6 +41,15 @@
                                 <input class="form-control" type="text" placeholder="Username" name='username' id="example-text-input">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="Penulis">Nama</label>
+                            <select name="userable_id" id="userable_id" class="form-control">
+                                @foreach ($mhs as $a)
+                                <option value="{{ $a->id }}">{{ $a->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">

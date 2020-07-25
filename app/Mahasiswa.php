@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mahasiswa extends Model
 {
     protected $table = 'mahasiswa';
-    protected $primaryKey = 'id_mhs';
+    protected $primaryKey = 'id';
     protected $fillable = ['userable_id', 'nim', 'first_name', 'last_name', 'email', 'prodi'];
 
     public function getFullNameAttribute()

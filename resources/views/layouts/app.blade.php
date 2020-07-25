@@ -100,6 +100,9 @@
                                 <a href="{{ route('pengguna.index') }}"><i class="ti-user"></i>Pengguna</a>
                             </li>
                             <li class="has-submenu">
+                                <a href="{{ route('admin.index') }}"><i class="ti-user"></i>Admin</a>
+                            </li>
+                            <li class="has-submenu">
                                 <a href="{{ route('dosen.index') }}"><i class="ti-user"></i>Dosen</a>
                             </li>
                             <li class="has-submenu">
@@ -111,8 +114,7 @@
                                 <a href="{{ route('konsultasi.index') }}"><i class="ti-pencil-alt"></i>Konsultasi</a>
                             </li>
                             @endif
-                            @if(Auth::user()->role == 'dosen' || Auth::user()->role == 'mahasiswa' || Auth::user()->role == 'admin')
-
+                            @if(Auth::user()->userable_type == 'App\Dosen' || Auth::user()->userable_type == 'App\Mahasiswa' || Auth::user()->userable_type == 'App\Admin')
                             <li class="has-submenu">
                                 <a href="{{ route('laporan.index') }}"><i class="ti-save"></i>Laporan</a>
                             </li>

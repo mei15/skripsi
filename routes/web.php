@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('dosen', 'DosenController');
 
+    Route::resource('admin', 'AdminController');
+
     Route::resource('mahasiswa', 'MahasiswaController');
 
     Route::resource('konsultasi', 'KonsultasiController');

@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section("head_title", "Daftar Dosen")
+@section("head_title", "Daftar Admin")
 @section("title")
 <div class="container-fluid">
     <!-- Page-Title -->
     <div class="row">
         <div class="col-sm-12">
             <div class="page-title-box" id="breadcrumb">
-                <h4 class="page-title">Dosen</h4>
+                <h4 class="page-title">Admin</h4>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        Menampilkan seluruh data dosen
+                        Menampilkan seluruh data Admin
                     </li>
                 </ol>
 
@@ -26,8 +26,8 @@
             <div class="card m-b-20">
                 <div class="card-body">
 
-                    <h4 class="mt-0 mb-4 header-title">Tambah Dosen</h4>
-                    <form action="{{ route('dosen.store') }}" method="post">
+                    <h4 class="mt-0 mb-4 header-title">Tambah Admin</h4>
+                    <form action="{{ route('admin.store') }}" method="post">
                         @csrf
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Depan</label>
@@ -39,25 +39,6 @@
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Belakang</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" placeholder="Masukkan nama" name='last_name'>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">NIP</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="NIP" name='nip'>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Pilih Program Studi</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" name="prodi" required="">
-                                    <option value="null" disabled selected>- Pilih -</option>
-                                    <option value="TIF">Teknik Informatika</option>
-                                    <option value="TI">Teknik Industri</option>
-                                    <option value="TS">Teknik Sipil</option>
-                                    <option value="TE">Teknik Elektro</option>
-                                    <option value="TG">Teknik Geologi</option>
-                                </select>
                             </div>
                         </div>
                         <hr />

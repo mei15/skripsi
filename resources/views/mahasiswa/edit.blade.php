@@ -61,6 +61,25 @@
                                 </select>
                             </div>
                         </div>
+                        <hr />
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Username</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" placeholder="Username" name='username' value="{{ $user->username }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="password" placeholder="password" name='password' value="{{ $user->password }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" placeholder="Email" name='email' value="{{ $user->email }}">
+                            </div>
+                        </div>
                         <button type="submit" class='btn btn-primary float-right'>Submit</button>
                     </form>
                 </div>
