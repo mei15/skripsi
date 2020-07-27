@@ -9,7 +9,7 @@
         </h3>
 
         <div class="p-3">
-            <h4 class="text-muted font-18 m-b-5 text-center">Selamat Datang !</h4>
+            <h4 class="text-muted font-18 m-b-5 text-center">Selamat Datang di SIKAP!</h4>
             <p class="text-muted text-center">Silahkan masuk untuk melanjutkan.</p>
 
             <form class="form-horizontal m-t-30" action="" method="POST">

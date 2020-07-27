@@ -7,81 +7,66 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Konsultasi;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 class KonsultasiApiController extends Controller
 {
     public function index(Request $request)
     {
-        // dapetin siapa user yg loginnya dulu, make authnya laravel
-        $user = auth()->user();
-        // dd($user);
-
-        $search = $request->get('search');
-        $konsultasis = Konsultasi::with(['user', 'dosen'])->where('judul', 'LIKE', "%$search%")->orderBy('id', 'asc')->user($user->id)->paginate(10);
+        $user = Auth::user();
+        $konsultasis = Konsultasi::user($user)->paginate(10);
 
         return response()->json($konsultasis, 200);
     }
 
     public function store(Request $request)
     {
-        $validation = Validator::make($request->toArray(), [
-            'judul' => 'required',
-            'tgl' => 'required',
-            'ket' => 'required',
-            'dosen' => 'required',
-            'user' => 'required'
+        $user = Auth::user();
+
+        $request->validate([
+            'judul'         => 'required',
+            'keterangan'    => 'required',
+            'tanggal'       => 'required',
+            'dosen'         => 'required',
         ]);
 
-        // kalo error, ikutan ini aja
-        if ($validation->fails()) {
-            return response()->json($validation->messages(), 400);
-        } else {
-            // kalo berhasil baru insert
-            $konsultasi = new Konsultasi;
-            $konsultasi->judul = $request->judul;
-            $konsultasi->tgl = $request->tgl;
-            $konsultasi->ket = $request->ket;
-            $konsultasi->id_dsn = $request->dosen;
-            $konsultasi->id_user = $request->user;
-            $konsultasi->save();
+        $konsultasi = new Konsultasi;
+        $konsultasi->judul = $request->judul;
+        $konsultasi->keterangan = $request->keterangan;
+        $konsultasi->tanggal = $request->tanggal;
+        $konsultasi->mahasiswa_id = $user->userable->id;
+        $konsultasi->dosen_id = $request->dosen;
+        $konsultasi->save();
 
-            return response()->json('success', 201);
-        }
+
+        return response()->json('success', 201);
     }
 
     public function update(Request $request, $id)
     {
-        $validation = Validator::make($request->toArray(), [
+        $request->validate([
             'judul' => 'required',
-            'tgl' => 'required',
-            'ket' => 'required',
+            'tanggal' => 'required',
+            'keterangan' => 'required',
             'dosen' => 'required',
-            'user' => 'required'
         ]);
 
-        // kalo error, ikutan ini aja
-        if ($validation->fails()) {
-            return response()->json($validation->messages(), 400);
-        } else {
-            // kalo berhasil baru insert
-            $konsultasi = Konsultasi::findOrFail($id);
-            $konsultasi = new Konsultasi;
-            $konsultasi->judul = $request->judul;
-            $konsultasi->tgl = $request->tgl;
-            $konsultasi->ket = $request->ket;
-            $konsultasi->id_dsn = $request->dosen;
-            $konsultasi->id_user = $request->user;
-            $konsultasi->save();
+        $konsultasi = Konsultasi::findOrFail($id);
+        $konsultasi->judul = $request->judul;
+        $konsultasi->tanggal = $request->tanggal;
+        $konsultasi->keterangan = $request->keterangan;
+        $konsultasi->dosen_id = $request->dosen;
+        $konsultasi->save();
 
-            return response()->json('success', 201);
-        }
+        return response()->json('success', 201);
     }
 
     public function destroy($id)
     {
-        $konsultasi = Konsultasi::find($id);
+        $konsultasi = Konsultasi::findOrFail($id);
         $konsultasi->delete();
+
         return response()->json('delete success');
     }
 }

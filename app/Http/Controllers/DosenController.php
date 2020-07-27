@@ -61,7 +61,7 @@ class DosenController extends Controller
                 'userable_type' => Dosen::class,
                 'userable_id' => $dosen->id
             ])->first();
-            
+
             $user->username = $request->username;
             $user->password = Hash::make($request->password);
             $user->email = $request->email;
