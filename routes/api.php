@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/', 'APILoginController@login');
+Route::post('/', 'LoginApiController@login');
 
 
 Route::middleware('jwt.verify')->get('/users', function (Request $request) {
