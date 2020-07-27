@@ -26,7 +26,7 @@
             <div class="card m-b-20">
                 <div class="card-body">
 
-                    <h4 class="mt-0 header-title">Data Laporan Konsultasi</h4>
+                    <h4 class="mt-0 header-title">Data Laporan </h4>
                     <p class="text-muted m-b-30 font-14">Berikut adalah rekap seluruh data</p>
                     @if(session('success'))
                     <div class="alert alert-success">

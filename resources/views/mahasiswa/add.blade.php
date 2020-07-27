@@ -10,7 +10,7 @@
                 <h4 class="page-title">Mahasiswa</h4>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        Menampilkan seluruh data mahasisw
+                        Menampilkan seluruh data mahasiswa
                     </li>
                 </ol>
 
