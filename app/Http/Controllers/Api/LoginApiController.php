@@ -15,10 +15,10 @@ class LoginApiController extends Controller
 
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 400);
+                return response()->json(['error' => 'Email atau password salah!'], 400);
             }
         } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            return response()->json(['error' => 'Tidak dapat mengambil token!'], 500);
         }
 
         return $this->respondWithToken($token);
@@ -43,7 +43,7 @@ class LoginApiController extends Controller
     {
         Auth::logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Sukses keluar!']);
     }
 
     /**
