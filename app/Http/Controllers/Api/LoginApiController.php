@@ -15,10 +15,10 @@ class LoginApiController extends Controller
 
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'Email atau password salah!'], 400);
+                return response()->json(['message' => 'Email atau password salah!'], 400);
             }
         } catch (JWTException $e) {
-            return response()->json(['error' => 'Tidak dapat mengambil token!'], 500);
+            return response()->json(['message' => 'Tidak dapat mengambil token!'], 500);
         }
 
         return $this->respondWithToken($token);
