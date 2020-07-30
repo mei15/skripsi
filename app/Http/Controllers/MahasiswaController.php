@@ -53,7 +53,7 @@ class MahasiswaController extends Controller
             $mhs = Mahasiswa::find($id);
             $mhs->first_name = $request->first_name;
             $mhs->last_name = $request->last_name;
-            $mhs->nip = $request->nip;
+            $mhs->nim = $request->nim;
             $mhs->prodi = $request->prodi;
             $mhs->save();
 
@@ -100,7 +100,7 @@ class MahasiswaController extends Controller
             $mhs = new Mahasiswa;
             $mhs->first_name = $request->first_name;
             $mhs->last_name = $request->last_name;
-            $mhs->nip = $request->nip;
+            $mhs->nim = $request->nim;
             $mhs->prodi = $request->prodi;
             $mhs->save();
 
@@ -131,7 +131,13 @@ class MahasiswaController extends Controller
     public function destroy($id)
     {
         $mhs = Mahasiswa::find($id);
+        $user = User::where([
+            'userable_type' => Mahasiswa::class,
+            'userable_id' => $mhs->id
+        ])->first();
+
         $mhs->delete();
-        return redirect()->route('mahasiswa.index')->compact('mhs', 'user')->with('sukses', 'Data Mahasiwa Berhasil Dihapus !');
+        $user->delete();
+        return redirect()->route('mahasiswa.index')->with('success', 'Data Mahasiswa Berhasil Dihapus !');
     }
 }

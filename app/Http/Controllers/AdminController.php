@@ -123,7 +123,12 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $admin = Admin::find($id);
+        $user = User::where([
+            'userable_type' => Admin::class,
+            'userable_id' => $admin->id
+        ])->first();
         $admin->delete();
-        return redirect('admin.index')->compact('admin')->with('sukses', 'Data Admin Berhasil Dihapus !');
+        $user->delete();
+        return redirect('admin.index')->with('success', 'Data Admin Berhasil Dihapus !');
     }
 }
