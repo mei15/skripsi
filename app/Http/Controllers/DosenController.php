@@ -131,7 +131,12 @@ class DosenController extends Controller
     public function destroy($id)
     {
         $dosen = Dosen::find($id);
+        $user = User::where([
+            'userable_type' => Dosen::class,
+            'userable_id' => $dosen->id
+        ])->first();
         $dosen->delete();
-        return redirect('dosen.index')->compact('user', 'dosen')->with('sukses', 'Data Dosen Berhasil Dihapus !');
+        $user->delete();
+        return redirect('dosen.index')->with('success', 'Data Dosen Berhasil Dihapus !');
     }
 }
