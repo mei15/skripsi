@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Dosen;
+use App\Konsultasi;
+use App\Admin;
+use App\Mahasiswa;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -29,27 +32,38 @@ class HomeController extends Controller
     {
         if (Auth::User()->userable_type == 'App\Admin') {
             return $this->adminDashboard();
-        }
-        else if (Auth::user()->userable_type == 'App\Dosen') {
+        } else if (Auth::user()->userable_type == 'App\Dosen') {
             return $this->dosenDashboard();
-        }
-        else {
+        } else {
             return $this->mahasiswaDashboard();
         }
     }
 
     protected function adminDashboard()
     {
-        return view('dashboard.admin');
+        $user = Auth::user();
+        $data['totalUser'] = User::count();
+        $data['totalAdmin'] = Admin::count();
+        $data['totalMahasiswa'] = Mahasiswa::count();
+        $data['totalDosen'] = Dosen::count();
+        $data['totalKonsultasi'] = Konsultasi::count();
+        $data['totalKonsultasiToday'] = Konsultasi::where('created_at', 'LIKE', '%' . date('Y-m-d') . '%')->count();
+        return view('dashboard.admin', compact('data', 'user'));
     }
 
     protected function dosenDashboard()
     {
-        return view('dashboard.dosen');
+        $user = Auth::user();
+        $konsultasis = Konsultasi::user($user)->paginate(10);
+        $data['totalKonsultasiToday'] = Konsultasi::where('created_at', 'LIKE', '%' . date('Y-m-d') . '%')->count();
+        return view('dashboard.dosen', compact('data', 'konsultasis', 'user'));
     }
 
     protected function mahasiswaDashboard()
     {
-        return view('dashboard.mahasiswa');
+        $user = Auth::user();
+        $konsultasis = Konsultasi::user($user)->paginate(10);
+        $data['totalKonsultasiToday'] = Konsultasi::where('created_at', 'LIKE', '%' . date('Y-m-d') . '%')->count();
+        return view('dashboard.mahasiswa', compact('data', 'konsultasis', 'user'));
     }
 }

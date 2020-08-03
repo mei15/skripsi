@@ -10,7 +10,7 @@
                 <h4 class="page-title">Laporan</h4>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        Data Laporan
+                        Data Master
                     </li>
                 </ol>
 
@@ -26,7 +26,7 @@
             <div class="card m-b-20">
                 <div class="card-body">
 
-                    <h4 class="mt-0 header-title">Data Laporan </h4>
+                    <h4 class="mt-0 header-title">Laporan Admin</h4>
                     <p class="text-muted m-b-30 font-14">Berikut adalah rekap seluruh data</p>
                     @if(session('success'))
                     <div class="alert alert-success">
@@ -37,41 +37,24 @@
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <tr>
-                                <td>Total Pengguna</td>
-                                <td>
-                                    <ul>
-                                        <li>
-                                            {{$data['totalUser']}} Pengguna:
-                                            <ul>
-                                                <li>{{ $data['totalAdmin'] }} Admin</li>
-                                                <li>{{ $data['totalMahasiswa'] }} Mahasiswa</li>
-                                                <li>{{ $data['totalDosen'] }} Dosen</li>
-                                            </ul>
-                                        </li>
-
-                                    </ul>
-                                </td>
-                                <td><a href='{{ route("pengguna.index") }}'><i class='ti ti-eye'></i> Lihat</a></td>
-                            </tr>
-                            <tr>
                                 <td>Total Konsultasi</td>
-                                <td>
-                                    <ul>
-                                        <li>{{ $data['totalKonsultasi'] }} Konsultasi:
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td><a href='{{ route("konsultasi.index") }}'><i class='ti ti-eye'></i> Lihat</a></td>
+                                <td><a href=''><i class='ti ti-import'></i> Cetak</a></td>
                             </tr>
                             <tr>
                                 <td>Total Dosen</td>
-                                <td>{{ $data['totalDosen'] }} Dosen</td>
-                                <td><a href='{{ route("dosen.index") }}'><i class='ti ti-eye'></i> Lihat</a></td>
+                                <td><a href=''><i class='ti ti-import'></i> Cetak</a></td>
+                            </tr>
+                            <tr>
+                                <td>Total Mahasiswa</td>
+                                <td><a href=''><i class='ti ti-import'></i> Cetak</a></td>
+                            </tr>
+                            <tr>
+                                <td>Total Admin</td>
+                                <td><a href=''><i class='ti ti-import'></i> Cetak</a></td>
                             </tr>
                             <tr>
                                 <td>Total Konsultasi Hari Ini</td>
-                                <td>{{ $data['totalKonsultasiToday'] }} Konsultasi Hari Ini</td>
-                                <td><a href='{{ route("konsultasi.index") }}'><i class='ti ti-eye'></i> Lihat</a></td>
+                                <td><a href=''><i class='ti ti-import'></i> Cetak</a></td>
                             </tr>
                         </table>
                     </div>
