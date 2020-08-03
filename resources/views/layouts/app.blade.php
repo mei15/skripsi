@@ -53,6 +53,11 @@
                                         <form method="POST" action="{{route('logout')}}">
                                             @csrf
                                             <button type="submit" class="d-none" id='logout'></button>
+                                            <a class="dropdown-item" onclick="$('#logout').click()"><i class="mdi mdi-account-settings-variant"></i> Ubah Password</a>
+                                        </form>
+                                        <form method="POST" action="{{route('logout')}}">
+                                            @csrf
+                                            <button type="submit" class="d-none" id='logout'></button>
                                             <a class="dropdown-item text-danger" onclick="$('#logout').click()"><i class="mdi mdi-power text-danger"></i> Logout</a>
                                         </form>
                                     </div>
@@ -116,7 +121,7 @@
                             @endif
                             @if(Auth::user()->userable_type == 'App\Dosen' || Auth::user()->userable_type == 'App\Mahasiswa' || Auth::user()->userable_type == 'App\Admin')
                             <li class="has-submenu">
-                                <a href="{{ route('laporan.index') }}"><i class="ti-save"></i>Laporan</a>
+                                <a href="{{ route('/laporan') }}"><i class="ti-save"></i>Laporan</a>
                             </li>
                             @endif
                         </ul>

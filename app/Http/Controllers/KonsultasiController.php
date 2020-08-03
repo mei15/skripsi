@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use PDF;
 use App\Dosen;
 use App\Konsultasi;
 use App\User;
@@ -130,5 +131,14 @@ class KonsultasiController extends Controller
 
         session()->flash('success', 'Sukses Hapus Konsultasi!');
         return redirect()->route('konsultasi.index');
+    }
+
+    public function cetak_pdf()
+    {
+        $user = Auth::user();
+        $konsultasi = Konsultasi::all();
+
+        $pdf = PDF::loadview('konsultasi_pdf', ['konsultasi' => $konsultasi]);
+        return $pdf->download('laporan-konsultasi-pdf');
     }
 }

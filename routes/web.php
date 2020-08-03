@@ -35,5 +35,5 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('konsultasi', 'KonsultasiController');
 
-    Route::get('/', 'LaporanController@index')->name('laporan.index');
+    Route::get('/laporan', 'LaporanController@index');
 });

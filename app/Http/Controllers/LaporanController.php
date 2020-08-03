@@ -9,17 +9,12 @@ use App\User;
 use App\Dosen;
 use App\Konsultasi;
 use App\Mahasiswa;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $data['totalUser'] = User::count();
-        $data['totalAdmin'] = Admin::count();
-        $data['totalMahasiswa'] = Mahasiswa::count();
-        $data['totalDosen'] = Dosen::count();
-        $data['totalKonsultasi'] = Konsultasi::count();
-        $data['totalKonsultasiToday'] = Konsultasi::where('created_at', 'LIKE', '%' . date('Y-m-d') . '%')->count();
-        return view('laporan.index', compact('data'));
+        return view('laporan.index');
     }
 }
