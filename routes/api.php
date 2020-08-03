@@ -18,13 +18,17 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/', 'LoginApiController@login');
-
-
-Route::middleware('jwt.verify')->get('/users', function (Request $request) {
-    return auth()->user();
+Route::get('/', function () {
+    return response()->json([
+        'hello' => 'world!',
+    ], 200);
 });
 
+Route::prefix('auth')->group(function() {
+    Route::post('/login', 'Api\LoginApiController@login');
+    Route::get('/logout', 'Api\LoginApiController@logout')->middleware('jwt.verify');
+    Route::get('/me', 'Api\LoginApiController@me')->middleware('jwt.verify');
+});
 
 Route::middleware('jwt.verify')->group(function () {
     Route::resource('/konsultasi', 'Api\KonsultasiApiController');
