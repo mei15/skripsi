@@ -17,7 +17,7 @@ jobs:
           script: |
             cd ~/public_html/sikapnew
             git pull
-            composer dump-autoload
+            composer install
             php artisan cache:clear
             php artisan route:clear
             php artisan config:clear
