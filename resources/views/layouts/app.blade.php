@@ -114,14 +114,9 @@
                                 <a href="{{ route('mahasiswa.index') }}"><i class="ti-user"></i>Mahasiswa</a>
                             </li>
                             @endif
-                            @if(Auth::user()->userable_type == 'App\Dosen' || Auth::user()->userable_type == 'App\Mahasiswa')
-                            <li class="has-submenu">
-                                <a href="{{ route('konsultasi.index') }}"><i class="ti-pencil-alt"></i>Konsultasi</a>
-                            </li>
-                            @endif
                             @if(Auth::user()->userable_type == 'App\Dosen' || Auth::user()->userable_type == 'App\Mahasiswa' || Auth::user()->userable_type == 'App\Admin')
                             <li class="has-submenu">
-                                <a href="{{ route('/laporan') }}"><i class="ti-save"></i>Laporan</a>
+                                <a href="{{ route('konsultasi.index') }}"><i class="ti-pencil-alt"></i>Konsultasi</a>
                             </li>
                             @endif
                         </ul>

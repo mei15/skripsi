@@ -34,6 +34,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('mahasiswa', 'MahasiswaController');
 
     Route::resource('konsultasi', 'KonsultasiController');
-
-    Route::get('/laporan', 'LaporanController@index');
+    Route::get('/konsultasi/cetak_pdf', 'KonsultasiController@cetak_pdf');
 });

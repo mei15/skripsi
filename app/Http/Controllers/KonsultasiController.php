@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use PDF;
+use Barryvdh\DomPDF\PDF;
 use App\Dosen;
 use App\Konsultasi;
 use App\User;
@@ -139,6 +139,6 @@ class KonsultasiController extends Controller
         $konsultasi = Konsultasi::all();
 
         $pdf = PDF::loadview('konsultasi_pdf', ['konsultasi' => $konsultasi]);
-        return $pdf->download('laporan-konsultasi-pdf');
+        return $pdf->download('laporan-konsultasi-pdf', compact('konsultasi'));
     }
 }
