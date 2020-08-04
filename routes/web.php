@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('mahasiswa', 'MahasiswaController');
 
-    Route::resource('konsultasi', 'KonsultasiController');
-    Route::get('/konsultasi/cetak_pdf', 'KonsultasiController@cetak_pdf');
+    Route::group(['prefix' => 'konsultasi'], function () {
+        Route::resource('/konsultasi', 'KonsultasiController');
+        Route::get('/cetak_pdf', ['uses' => 'KonsultasiController@cetak_pdf', 'as' => 'konsultasi.cetak_pdf']);
+    });
 });

@@ -135,10 +135,9 @@ class KonsultasiController extends Controller
 
     public function cetak_pdf()
     {
-        $user = Auth::user();
         $konsultasi = Konsultasi::all();
 
-        $pdf = PDF::loadview('konsultasi_pdf', ['konsultasi' => $konsultasi]);
-        return $pdf->download('laporan-konsultasi-pdf', compact('konsultasi'));
+        $pdf = PDF::loadview('konsultasi.konsultasi_pdf', ['konsultasi' => $konsultasi]);
+        return $pdf->download('laporan-konsultasi-pdf.pdf');
     }
 }

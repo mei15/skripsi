@@ -29,7 +29,7 @@
                     <h4 class="mt-0 header-title">Konsultasi</h4>
                     <p class="text-muted m-b-30 font-14">Berikut adalah data seluruh konsultasi Anda</p>
                     <br>
-                    <a href="/konsultasi/cetak_pdf" class="btn btn-primary" target="_blank">CETAK PDF</a>
+                    <a class="btn btn-success float-left" href="{{ route('konsultasi.cetak_pdf') }}" class="btn btn-primary" target="_blank">Cetak PDF</a>
                     <br><br>
 
                     @if(session('success'))
