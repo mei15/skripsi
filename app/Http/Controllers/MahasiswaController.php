@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,6 +15,7 @@ class MahasiswaController extends Controller
 {
     public function index(Request $request)
     {
+        $user = Auth::user();
         $mhs = Mahasiswa::all();
         return view('mahasiswa.index', compact('mhs'));
     }
@@ -25,6 +27,7 @@ class MahasiswaController extends Controller
 
     public function edit($id)
     {
+        $user = Auth::user();
         $mahasiswa = Mahasiswa::findOrFail($id);
         $user = User::where([
             'userable_type' => Mahasiswa::class,
@@ -36,6 +39,7 @@ class MahasiswaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $user = Auth::user();
         $request->validate([
             'first_name'    => 'required',
             'last_name'     => 'required',
@@ -83,6 +87,7 @@ class MahasiswaController extends Controller
 
     public function store(Request $request)
     {
+        $user = Auth::user();
         $request->validate([
             'first_name'    => 'required',
             'last_name'     => 'required',

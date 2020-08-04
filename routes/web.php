@@ -26,6 +26,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('pengguna', 'UserController');
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('profile', 'ProfileController@edit')->name('profile.edit');
+        Route::patch('profile', 'ProfileController@update')->name('profile.update');
+    });
 
     Route::resource('dosen', 'DosenController');
 

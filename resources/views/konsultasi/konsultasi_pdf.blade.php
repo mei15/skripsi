@@ -16,9 +16,6 @@
             font-size: 9pt;
         }
     </style>
-    <center>
-        <h5>LAPORAN KONSULTASI</h5>
-    </center>
 
     <table class='table table-bordered'>
         <thead>
