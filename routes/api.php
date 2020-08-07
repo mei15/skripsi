@@ -26,11 +26,11 @@ Route::get('/', function () {
 
 Route::post('/loginAndroid', 'APIcontroller@loginAndroid');
 
-// Route::prefix('auth')->group(function() {
-//     Route::post('/login', 'Api\LoginApiController@login');
-//     Route::get('/logout', 'Api\LoginApiController@logout')->middleware('jwt.verify');
-//     Route::get('/me', 'Api\LoginApiController@me')->middleware('jwt.verify');
-// });
+Route::prefix('auth')->group(function() {
+    Route::post('/login', 'Api\LoginApiController@login');
+    Route::get('/logout', 'Api\LoginApiController@logout')->middleware('jwt.verify');
+    Route::get('/me', 'Api\LoginApiController@me')->middleware('jwt.verify');
+});
 
 // Route::middleware('jwt.verify')->group(function () {
 //     Route::resource('/konsultasi', 'Api\KonsultasiApiController');
@@ -51,3 +51,10 @@ Route::post('/loginAndroid', 'APIcontroller@loginAndroid');
 // Route::get('/kuser', 'Api\ApiController@getDataKonsul');
 
 // Route::get('/kusen', 'Api\ApiController@getDataKonsulDosen');
+
+// Untuk pesan error, kalo route diatas gk ada yg sama A.K.A. Error Handling
+Route::fallback(function() {
+    return response()->json([
+        "message" => "This API is not found!",
+    ], 404);
+});
