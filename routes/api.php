@@ -58,3 +58,10 @@ Route::middleware('jwt.verify')->group(function () {
 // Route::get('/kuser', 'Api\ApiController@getDataKonsul');
 
 // Route::get('/kusen', 'Api\ApiController@getDataKonsulDosen');
+
+// Untuk pesan error, kalo route diatas gk ada yg sama A.K.A. Error Handling
+Route::fallback(function () {
+    return response()->json([
+        "message" => "This API is not found!",
+    ], 404);
+});
