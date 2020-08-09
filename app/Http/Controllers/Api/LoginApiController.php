@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class LoginApiController extends Controller
 {
     public function login(Request $request)
     {
+        $user = User::all();
         $credentials = $request->only('email', 'password');
 
         try {
@@ -21,9 +23,7 @@ class LoginApiController extends Controller
         } catch (JWTException $e) {
             return response()->json(['message' => 'Tidak dapat mengambil token!'], 500);
         }
-
-        return $this->respondWithToken($token);
-    }
+}
 
     /**
      * Get the authenticated User.
