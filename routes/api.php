@@ -32,7 +32,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware('jwt.verify')->group(function () {
-    Route::get('/semuadosen', 'Api\DosenApiController');
+    Route::get('/semuadosen', 'Api\DosenApiController@index');
 });
 
 Route::middleware('jwt.verify')->group(function () {
