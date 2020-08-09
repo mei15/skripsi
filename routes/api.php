@@ -32,11 +32,11 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware('jwt.verify')->group(function () {
-    Route::get('/semuadosen', 'Api\DosenApiController');
+    Route::get('/semuadosen', 'Api\DosenApiController@index');
 });
 
 Route::middleware('jwt.verify')->group(function () {
-    Route::resource('/semuamahasiswa', 'Api\MahasiswaApiController');
+    Route::get('/semuamahasiswa', 'Api\MahasiswaApiController@index');
 });
 
 Route::middleware('jwt.verify')->group(function () {
