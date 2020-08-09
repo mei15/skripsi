@@ -24,17 +24,24 @@ Route::get('/', function () {
     ], 200);
 });
 
-Route::post('/loginAndroid', 'APIcontroller@loginAndroid');
 
-// Route::prefix('auth')->group(function() {
-//     Route::post('/login', 'Api\LoginApiController@login');
-//     Route::get('/logout', 'Api\LoginApiController@logout')->middleware('jwt.verify');
-//     Route::get('/me', 'Api\LoginApiController@me')->middleware('jwt.verify');
-// });
+Route::prefix('auth')->group(function () {
+    Route::post('/login', 'Api\LoginApiController@login');
+    Route::get('/logout', 'Api\LoginApiController@logout')->middleware('jwt.verify');
+    Route::get('/me', 'Api\LoginApiController@me')->middleware('jwt.verify');
+});
 
-// Route::middleware('jwt.verify')->group(function () {
-//     Route::resource('/konsultasi', 'Api\KonsultasiApiController');
-// });
+Route::middleware('jwt.verify')->group(function () {
+    Route::get('/semuadosen', 'Api\DosenApiController');
+});
+
+Route::middleware('jwt.verify')->group(function () {
+    Route::resource('/semuamahasiswa', 'Api\MahasiswaApiController');
+});
+
+Route::middleware('jwt.verify')->group(function () {
+    Route::resource('/konsultasi', 'Api\KonsultasiApiController');
+});
 
 
 // Route::resource('/dosen', 'Api\DosenApiController');

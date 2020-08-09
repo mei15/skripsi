@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
+use App\Mahasiswa;
 use App\User;
-use App\Dosen;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
-class DosenApiController extends Controller
+class MahasiswaApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,8 +21,8 @@ class DosenApiController extends Controller
      */
     public function index(Request $request)
     {
-        $dosens = Dosen::all();
-        return response()->json($dosens, 200);
+        $mahasiswas = Mahasiswa::all();
+        return response()->json($mahasiswas, 200);
     }
 
     /**
@@ -58,19 +56,19 @@ class DosenApiController extends Controller
         DB::beginTransaction();
 
         try {
-            $dosen = new Dosen;
-            $dosen->first_name = $request->first_name;
-            $dosen->last_name = $request->last_name;
-            $dosen->nip = $request->nip;
-            $dosen->prodi = $request->prodi;
-            $dosen->save();
+            $mahasiswa = new Mahasiswa;
+            $mahasiswa->first_name = $request->first_name;
+            $mahasiswa->last_name = $request->last_name;
+            $mahasiswa->nim = $request->nim;
+            $mahasiswa->prodi = $request->prodi;
+            $mahasiswa->save();
 
             $user = new User;
             $user->username = $request->username;
             $user->password = Hash::make($request->password);
             $user->email = $request->email;
-            $user->userable_type = Dosen::class;
-            $user->userable_id = $dosen->id;
+            $user->userable_type = Mahasiswa::class;
+            $user->userable_id = $mahasiswa->id;
             $user->remember_token = Str::random(40);
             $user->email_verified_at = Carbon::now();
             $user->save();
@@ -129,16 +127,16 @@ class DosenApiController extends Controller
         DB::beginTransaction();
 
         try {
-            $dosen = Dosen::find($id);
-            $dosen->first_name = $request->first_name;
-            $dosen->last_name = $request->last_name;
-            $dosen->nip = $request->nip;
-            $dosen->prodi = $request->prodi;
-            $dosen->save();
+            $mahasiswa = Mahasiswa::find($id);
+            $mahasiswa->first_name = $request->first_name;
+            $mahasiswa->last_name = $request->last_name;
+            $mahasiswa->nim = $request->nim;
+            $mahasiswa->prodi = $request->prodi;
+            $mahasiswa->save();
 
             $user = User::where([
-                'userable_type' => Dosen::class,
-                'userable_id' => $dosen->id
+                'userable_type' => Mahasiswa::class,
+                'userable_id' => $mahasiswa->id
             ])->first();
 
             $user->username = $request->username;
@@ -165,12 +163,12 @@ class DosenApiController extends Controller
      */
     public function destroy($id)
     {
-        $dosen = Dosen::find($id);
+        $mahasiswa = Mahasiswa::find($id);
         $user = User::where([
-            'userable_type' => Dosen::class,
-            'userable_id' => $dosen->id
+            'userable_type' => Mahasiswa::class,
+            'userable_id' => $mahasiswa->id
         ])->first();
-        $dosen->delete();
+        $mahasiswa->delete();
         $user->delete();
         return response()->json('delete success');
     }
