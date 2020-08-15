@@ -11,7 +11,7 @@ use App\User;
 
 class LoginApiController extends Controller
 {
-    public function login(Request $request)
+    public function login(Request $request, JWTAuth $jWTAuth)
     {
         $user = User::all();
         $credentials = $request->only('email', 'password');
@@ -23,7 +23,7 @@ class LoginApiController extends Controller
         } catch (JWTException $e) {
             return response()->json(['message' => 'Tidak dapat mengambil token!'], 500);
         }
-}
+    }
 
     /**
      * Get the authenticated User.

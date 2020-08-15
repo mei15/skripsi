@@ -43,22 +43,6 @@ Route::middleware('jwt.verify')->group(function () {
     Route::resource('/konsultasi', 'Api\KonsultasiApiController');
 });
 
-
-// Route::resource('/dosen', 'Api\DosenApiController');
-// Route::resource('/user', 'Api\UserApiController');
-
-// Route::resource('/konsultasi', 'Api\KonsultasiApiController');
-
-// Route::get('/laporan', 'Api\LaporanApiController@index'); // ditambah nama methodnya
-
-// Route::get('/data', 'Api\ApiController@getDataByUser');
-
-// Route::get('/konsul', 'Api\ApiController@getDataByDosen');
-
-// Route::get('/kuser', 'Api\ApiController@getDataKonsul');
-
-// Route::get('/kusen', 'Api\ApiController@getDataKonsulDosen');
-
 // Untuk pesan error, kalo route diatas gk ada yg sama A.K.A. Error Handling
 Route::fallback(function () {
     return response()->json([
