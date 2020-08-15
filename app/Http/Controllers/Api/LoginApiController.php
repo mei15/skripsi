@@ -23,6 +23,12 @@ class LoginApiController extends Controller
         } catch (JWTException $e) {
             return response()->json(['message' => 'Tidak dapat mengambil token!'], 500);
         }
+
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => JWTAuth::factory()->getTTL() * 60
+        ]);
     }
 
     /**
@@ -45,21 +51,5 @@ class LoginApiController extends Controller
         Auth::logout();
 
         return response()->json(['message' => 'Sukses keluar!']);
-    }
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => JWTAuth::factory()->getTTL() * 60
-        ]);
     }
 }
