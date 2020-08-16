@@ -27,8 +27,7 @@ class LoginApiController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => JWTAuth::guard()->factory()->getTTL() * 60,
-            'user' => Auth::guard()->user()
+            'expires_in' => JWTAuth::guard()->factory()->getTTL() * 60
         ]);
     }
 
@@ -39,7 +38,7 @@ class LoginApiController extends Controller
      */
     public function me()
     {
-        return response()->json(JWTAuth::guard()->user());
+        return response()->json(JWTAuth::user());
     }
 
     /**
