@@ -38,10 +38,7 @@ class LoginApiController extends Controller
      */
     public function me()
     {
-        return response()->json([
-            JWTAuth::user(),
-            'token_type' => 'bearer'
-        ]);
+        return response()->json(JWTAuth::user());
     }
 
     /**
