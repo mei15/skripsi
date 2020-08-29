@@ -13,7 +13,6 @@ class LoginApiController extends Controller
 {
     public function login(Request $request, JWTAuth $jWTAuth)
     {
-        $user = User::all();
         $credentials = $request->only('email', 'password');
 
         try {
@@ -27,8 +26,7 @@ class LoginApiController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => JWTAuth::factory()->getTTL() * 60,
-            'user' => $user
+            'expires_in' => JWTAuth::factory()->getTTL() * 60
         ]);
     }
 
@@ -39,7 +37,12 @@ class LoginApiController extends Controller
      */
     public function me()
     {
-        return response()->json(JWTAuth::user());
+        $user = JWTAuth::user();
+        if (count((array)$user) > 0) {
+            return response()->json(['status' => 'success', 'user' => $user]);
+        } else {
+            return response()->json(['status' => 'fail'], 401);
+        }
     }
 
     /**
