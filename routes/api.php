@@ -24,7 +24,7 @@ Route::get('/', function () {
     ], 200);
 });
 
-Route::post('/login', 'LoginApiController@login');
+Route::post('/login', 'Api/LoginApiController@login');
 
 
 Route::middleware('jwt.auth')->get('/users', function (Request $request) {
