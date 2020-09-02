@@ -24,34 +24,28 @@ Route::get('/', function () {
     ], 200);
 });
 
-Route::post('/login', 'Api/LoginApiController@login');
-
-
-Route::middleware('jwt.auth')->get('/users', function (Request $request) {
-    return auth()->user();
+Route::prefix('auth')->group(function () {
+    Route::post('/login', 'Api\LoginApiController@login');
+    Route::get('/logout', 'Api\LoginApiController@logout')->middleware('jwt.verify');
+    Route::get('/me', 'Api\LoginApiController@me')->middleware('jwt.verify');
 });
 
-// Route::prefix('auth')->group(function () {
-//     Route::post('/login', 'Api\LoginApiController@login');
-//     Route::get('/logout', 'Api\LoginApiController@logout')->middleware('jwt.verify');
-//     Route::get('/me', 'Api\LoginApiController@me')->middleware('jwt.verify');
-// });
+Route::middleware('jwt.verify')->group(function () {
+    Route::get('/semuadosen', 'Api\DosenApiController@index');
+});
 
-// Route::middleware('jwt.verify')->group(function () {
-//     Route::get('/semuadosen', 'Api\DosenApiController@index');
-// });
+Route::middleware('jwt.verify')->group(function () {
+    Route::get('/semuamahasiswa', 'Api\MahasiswaApiController@index');
+});
 
-// Route::middleware('jwt.verify')->group(function () {
-//     Route::get('/semuamahasiswa', 'Api\MahasiswaApiController@index');
-// });
+Route::middleware('jwt.verify')->group(function () {
+    Route::resource('/konsultasi', 'Api\KonsultasiApiController');
+});
 
-// Route::middleware('jwt.verify')->group(function () {
-//     Route::resource('/konsultasi', 'Api\KonsultasiApiController');
-// });
+//Untuk pesan error, kalo route diatas gk ada yg sama A.K.A. Error Handling
 
-// Untuk pesan error, kalo route diatas gk ada yg sama A.K.A. Error Handling
-// Route::fallback(function () {
-//     return response()->json([
-//         "message" => "This API is not found!",
-//     ], 404);
-// });
+Route::fallback(function () {
+    return response()->json([
+        "message" => "This API is not found!",
+    ], 404);
+});

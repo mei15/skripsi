@@ -14,46 +14,23 @@ class LoginApiController extends Controller
 {
     public function login(Request $request, JWTAuth $jWTAuth)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email|max:255',
-            'password' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            # code...
-            return response()->json($validator->errors());
-        }
 
         $credentials = $request->only('email', 'password');
+
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
-                # code...
-                return response()->json(['error' => 'invalid username and password'], 401);
+                return response()->json(['message' => 'Email atau password salah!'], 400);
             }
         } catch (JWTException $e) {
-
-            return response()->json(['error' => 'could not create token'], 500);
+            return response()->json(['message' => 'Tidak dapat mengambil token!'], 500);
         }
 
-
-        return response()->json(compact('token'));
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => JWTAuth::factory()->getTTL() * 60
+        ]);
     }
-
-    // $credentials = $request->only('email', 'password');
-
-    // try {
-    //     if (!$token = JWTAuth::attempt($credentials)) {
-    //         return response()->json(['message' => 'Email atau password salah!'], 400);
-    //     }
-    // } catch (JWTException $e) {
-    //     return response()->json(['message' => 'Tidak dapat mengambil token!'], 500);
-    // }
-
-    // return response()->json([
-    //     'access_token' => $token,
-    //     'token_type' => 'bearer',
-    //     'expires_in' => JWTAuth::factory()->getTTL() * 60
-    // ]);
 
 
     /**
