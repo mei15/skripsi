@@ -24,9 +24,10 @@ Route::get('/', function () {
     ], 200);
 });
 
-Route::post('login', 'Api\LoginApiController@login');
-Route::post('recover', 'Api\LoginApiController@recover');
-
+Route::prefix('auth')->group(function () {
+    Route::post('login', 'Api\LoginApiController@login');
+    Route::post('recover', 'Api\LoginApiController@recover');
+});
 
 Route::group(['middleware' => ['jwt.auth']], function () {
     Route::get('logout', 'Api\LoginApiController@logout');
