@@ -24,12 +24,12 @@ Route::get('/', function () {
     ], 200);
 });
 
-Route::post('login', 'LoginApiController@login');
-Route::post('recover', 'LoginApiController@recover');
+Route::post('login', 'Api\LoginApiController@login');
+Route::post('recover', 'Api\LoginApiController@recover');
 
 
 Route::group(['middleware' => ['jwt.auth']], function () {
-    Route::get('logout', 'LoginApiController@logout');
+    Route::get('logout', 'Api\LoginApiController@logout');
 
     Route::get('test', function () {
         return response()->json(['foo' => 'bar']);
