@@ -18,6 +18,7 @@ jobs:
             cd ~/public_html/sikapnew
             git pull
             composer install
+            hp artisan migrate --force
             php artisan cache:clear
             php artisan route:clear
             php artisan config:clear
