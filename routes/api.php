@@ -24,17 +24,12 @@ Route::get('/', function () {
     ], 200);
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login', 'API\UserController@login');
+Route::post('register', 'API\UserController@register');
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::post('details', 'API\UserController@details');
 });
-
-
-Route::post('login', 'LoginApiController@login');
-
-Route::middleware('auth:api')->group(function () {
-    Route::get('user', 'LoginApiController@me');
-});
-
 
 // Route::prefix('auth')->group(function () {
 //     Route::post('/login', 'Api\LoginApiController@login');

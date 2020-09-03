@@ -12,11 +12,12 @@
         "barryvdh/laravel-dompdf": "^0.8.6",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/guzzle": "^7.0",
         "laravel/framework": "^7.0",
+        "laravel/passport": "^9.3",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
-        "tymon/jwt-auth": "dev-develop"
+        "symfony/psr-http-message-bridge": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
