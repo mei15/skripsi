@@ -18,18 +18,13 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/', function () {
-    return response()->json([
-        'hello' => 'world!',
-    ], 200);
-});
 
 Route::post('login', 'API\UserController@login');
-Route::post('register', 'API\UserController@register');
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('details', 'API\UserController@details');
-});
+    Route::get('user/detail', 'Api\UserController@details');
+    Route::post('logout', 'Api\UserController@logout');
+});;
 
 // Route::prefix('auth')->group(function () {
 //     Route::post('/login', 'Api\LoginApiController@login');

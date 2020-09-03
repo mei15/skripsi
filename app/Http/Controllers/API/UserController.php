@@ -7,24 +7,32 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
 
     public $successStatus = 200;
 
-    public function login(Request $request)
+    public function login()
     {
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
-            $authenticated_user = Auth::user();
-            $user = User::find($authenticated_user->id);
-            dd($user->createToken('myApp')->accessToken);
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('nApp')->accessToken;
+            return response()->json(['success' => $success], $this->successStatus);
+        } else {
+            return response()->json(['error' => 'Unauthorised'], 401);
         }
-
-        dd('here');
     }
 
+    public function logout(Request $request)
+    {
+        $logout = $request->user()->token()->revoke();
+        if ($logout) {
+            return response()->json([
+                'message' => 'Successfully logged out'
+            ]);
+        }
+    }
 
     public function details()
     {
