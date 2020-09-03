@@ -24,17 +24,15 @@ Route::get('/', function () {
     ], 200);
 });
 
-Route::prefix('auth')->group(function () {
-    Route::post('login', 'Api\LoginApiController@login');
-    Route::post('recover', 'Api\LoginApiController@recover');
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
 });
 
-Route::group(['middleware' => ['jwt.auth']], function () {
-    Route::get('logout', 'Api\LoginApiController@logout');
 
-    Route::get('test', function () {
-        return response()->json(['foo' => 'bar']);
-    });
+Route::post('login', 'LoginApiController@login');
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('user', 'LoginApiController@me');
 });
 
 

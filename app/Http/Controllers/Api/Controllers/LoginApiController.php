@@ -16,19 +16,22 @@ class LoginApiController extends Controller
     public function login(Request $request, JWTAuth $jWTAuth)
     {
 
-        $input = $request->only('email', 'password');
-        $jwt_token = null;
-        if (!$jwt_token = JWTAuth::attempt($input)) {
-            return  response()->json([
-                'status' => 'invalid_credentials',
-                'message' => 'Tidak ada data.',
-            ], 401);
-        }
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
 
-        return  response()->json([
-            'status' => 'ok',
-            'token' => $jwt_token,
-        ]);
+        if (auth()->JWTAuth::attempt($credentials)) {
+            $token = auth()->user()->JWTAuth::createToken('MySecret')->accessToken;
+            return response()->json(['token' => $token], 200);
+        } else {
+            return response()->json(['error' => 'UnAuthorised'], 401);
+        }
+    }
+
+    public function me()
+    {
+        return response()->json(['user' => auth()->user()], 200);
     }
     // $credentials = $request->only('email', 'password');
 
@@ -74,43 +77,4 @@ class LoginApiController extends Controller
 
     //     return response()->json(['message' => 'Sukses keluar!']);
     // }
-    public  function  logout(Request  $request)
-    {
-        $this->validate($request, [
-            'token' => 'required'
-        ]);
-
-        try {
-            JWTAuth::invalidate($request->token);
-            return  response()->json([
-                'status' => 'ok',
-                'message' => 'Cierre de sesión exitoso.'
-            ]);
-        } catch (JWTException  $exception) {
-            return  response()->json([
-                'status' => 'unknown_error',
-                'message' => 'Al usuario no se le pudo cerrar la sesión.'
-            ], 500);
-        }
-    }
-
-    public  function  getAuthUser(Request  $request)
-    {
-        $this->validate($request, [
-            'token' => 'required'
-        ]);
-
-        $user = JWTAuth::authenticate($request->token);
-        return  response()->json(['user' => $user]);
-    }
-
-    protected function jsonResponse($data, $code = 200)
-    {
-        return response()->json(
-            $data,
-            $code,
-            ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
-            JSON_UNESCAPED_UNICODE
-        );
-    }
 }
