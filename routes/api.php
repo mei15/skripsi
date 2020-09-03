@@ -17,13 +17,15 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::post('login', 'API\UserController@login');
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::get('user/detail', 'Api\UserController@details');
-    Route::post('logout', 'Api\UserController@logout');
+    Route::get('user', 'API\UserController@details');
+    Route::post('logout', 'API\UserController@logout');
 });;
 
 // Route::prefix('auth')->group(function () {
@@ -46,8 +48,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 //Untuk pesan error, kalo route diatas gk ada yg sama A.K.A. Error Handling
 
-Route::fallback(function () {
-    return response()->json([
-        "message" => "This API is not found!",
-    ], 404);
-});
+// Route::fallback(function () {
+//     return response()->json([
+//         "message" => "This API is not found!",
+//     ], 404);
+// });
