@@ -29,7 +29,7 @@ Route::post('recover', 'LoginApiController@recover');
 
 
 Route::group(['middleware' => ['jwt.auth']], function () {
-    Route::get('logout', 'AuthController@logout');
+    Route::get('logout', 'LoginApiController@logout');
 
     Route::get('test', function () {
         return response()->json(['foo' => 'bar']);
