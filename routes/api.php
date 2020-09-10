@@ -21,13 +21,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', 'API\UserController@login');
 
-Route::group(['middleware' => 'auth:api'], function () {
-    // Route::get('/user', 'API\UserController@details');
-    Route::post('/logout', 'API\UserController@logout');
-});;
-
+Route::post('login', 'API\UserController@login');
+ 
+Route::middleware('auth:api')->group(function () {
+    Route::get('user', 'UserController@details');
+ 
+    Route::resource('konsultasi', 'KonsultasiApiController');
+});
 // Route::prefix('auth')->group(function () {
 //     Route::post('/login', 'Api\LoginApiController@login');
 //     Route::get('/logout', 'Api\LoginApiController@logout')->middleware('jwt.verify');

@@ -11,25 +11,24 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
 
-    public $successStatus = 200;
-
-    public function login()
+    /**
+     * Handles Login Request
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function login(Request $request)
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
-            $user = Auth::user();
-            $success['token'] = $user->createToken('Sikap')->accessToken;
-            //After successfull authentication, notice how I return json parameters
-            return response()->json([
-                'success' => true,
-                'token' => $success,
-                'user' => $user
-            ]);
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+ 
+        if (auth()->attempt($credentials)) {
+            $token = auth()->user()->createToken('MySecret')->accessToken;
+            return response()->json(['token' => $token], 200);
         } else {
-            //if authentication is unsuccessfull, notice how I return json parameters
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid Email or Password',
-            ], 401);
+            return response()->json(['error' => 'UnAuthorised'], 401);
         }
     }
 
@@ -53,7 +52,6 @@ class UserController extends Controller
 
     public function details()
     {
-        $user = Auth::user();
-        return response()->json(['success' => $user], $this->successStatus);
+        return response()->json(['user' => auth()->user()], 200);
     }
 }
