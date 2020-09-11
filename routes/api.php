@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::post('login', 'API/UserController@login');
-Route::get('logout', 'API/UserController@logout')->middleware('auth:api');
+Route::post('/login', 'API/UserController@login');
+Route::get('/logout', 'API/UserController@logout')->middleware('auth:api');
 
  
 // Route::post('/login', 'API\UserController@login');
