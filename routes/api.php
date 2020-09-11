@@ -23,10 +23,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post('login', 'API\UserController@login');
- 
-Route::middleware('auth:api')->group(function () {
-    Route::get('logout', 'Api\UsersController@logout')->middleware('auth:api');
- 
+Route::get('logout', 'Api\UsersController@logout')->middleware('auth:api');
+
     // Route::resource('konsultasi', 'KonsultasiApiController');
 });
 // Route::prefix('auth')->group(function () {
