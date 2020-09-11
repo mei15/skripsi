@@ -55,9 +55,4 @@ class UserController extends Controller
           }
     }
     
-
-    public function details()
-    {
-        return response()->json(['user' => auth()->user()], 200);
-    }
 }
