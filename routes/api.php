@@ -23,7 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post('login', 'API\UserController@login');
-Route::get('logout', 'Api\UsersController@logout')->middleware('auth:api');
+Route::get('logout', 'API\UsersController@logout')->middleware('auth:api');
 
     // Route::resource('konsultasi', 'KonsultasiApiController');
 
