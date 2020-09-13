@@ -13,6 +13,17 @@ class KonsultasiApiController extends Controller
  
         return response()->json(  $konsultasi );
     }
+
+    public function show($id)
+    {
+        $konsultasi = auth()->user()->konsultasi()->find($id);
+ 
+        if (!$konsultasi) {
+            return response()->json('sorry', 400);
+        }
+ 
+        return response()->json( [$konsultasi->toArray()] , 200);
+    }
  
     public function store(Request $request)
     {
