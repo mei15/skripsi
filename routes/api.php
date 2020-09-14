@@ -18,16 +18,13 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 
 Route::post('/login', 'API\UserController@login');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/user', 'API\UserController@details');
- 
+    Route::get('/logout', 'API\UserController@logout');
+
     Route::resource('/konsultasi', 'API\KonsultasiApiController');
 });
 
