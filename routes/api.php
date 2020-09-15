@@ -19,13 +19,18 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::post('/login', 'API\UserController@login');
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
+
+Route::post('login', 'API\UserController@login');
+Route::post('register1', 'PassportController@register');
+ 
 Route::middleware('auth:api')->group(function () {
-    Route::get('/user', 'API\UserController@details');
-    Route::get('/logout', 'API\UserController@logout');
-
-    Route::resource('/konsultasi', 'API\KonsultasiApiController');
+    Route::get('user', 'API\UserController@details');
+ 
+    Route::resource('konsultasi', 'API\KonsultasiController');
 });
 
 // Route::post('/login', 'API\UserController@login');
