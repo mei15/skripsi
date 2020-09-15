@@ -18,25 +18,27 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     
-    public function login()
-        {
-            if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
-                $user = Auth::user();
-                $success['token'] = $user->createToken('appToken')->accessToken;
-               //After successfull authentication, notice how I return json parameters
-                return response()->json([
-                  'success' => true,
-                  'token' => $success,
-                  'user' => $user
-              ]);
-            } else {
-           //if authentication is unsuccessfull, notice how I return json parameters
-              return response()->json([
-                'success' => false,
-                'message' => 'Invalid Email or Password',
-            ], 401);
-            }
-        }
+    public function login(Request $request){
+      $request->validate([
+          'email' => 'required',
+          'password' => 'required',
+      ]);
+
+      $userName = $request->input('email');
+
+      $credentials = $request->only('email' , 'password');
+      if(Auth::attempt($credentials)){
+          $user = User::where('email' , $userName)->first();
+          return new UserApiResource($user);
+      }
+      $message = [
+          'error' => true,
+          'message' => 'User Login attempt Failed' ,
+      ];
+
+      return response($message,401);
+     
+  }
  
     /**
      * Returns Authenticated User Details
