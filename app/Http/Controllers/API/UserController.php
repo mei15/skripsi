@@ -22,17 +22,14 @@ class UserController extends APIBaseController
     
     public function login(Request $request)
     {
-        $credentials = [
-            'email' => $request->email,
-            'password' => $request->password
-        ];
- 
-        if (auth()->attempt($credentials)) {
-            $token = auth()->user()->createToken('MySecret')->accessToken;
-            return response()->json(['token' => $token], 200);
+        
+        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+            $user = Auth::user();
+            return $this->sendSuccess($user, 'User login successfully.');
         } else {
-            return response()->json(['error' => 'UnAuthorised'], 401);
+            return $this->sendError('Login Fail!.');
         }
+
     }
  
     /**
