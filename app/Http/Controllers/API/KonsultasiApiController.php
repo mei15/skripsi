@@ -4,10 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\APIBaseController;
 
 
-class KonsultasiApiController extends APIBaseController
+class KonsultasiApiController extends Controller
 {
     public function index()
     {

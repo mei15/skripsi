@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
-class UserController extends APIBaseController
+class UserController extends Controller
 {
 
     /**
