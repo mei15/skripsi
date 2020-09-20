@@ -10,7 +10,7 @@ class KonsultasiApiController extends Controller
 {
     public function index()
     {
-        $konsultasi = Konsultasi::all();
+        $konsultasi = auth()->user()->Konsultasi;
         return json_encode($konsultasi);
     }
 

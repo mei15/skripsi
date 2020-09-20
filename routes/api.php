@@ -18,12 +18,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-// Route::post('/login', 'API\UserController@login');
-// Route::get('/logout', 'API\UserController@logout')->middleware('auth:api');
-Route::prefix('auth')->group(function () {
-    Route::post('/login', 'API\UserController@login');
-    Route::get('/logout', 'API\UserController@logout')->middleware('auth:api');
-});
+Route::post('/login', 'API\UserController@login');
+Route::get('/logout', 'API\UserController@logout')->middleware('auth:api');
+
 // Route::prefix('auth')->group(function () {
 //     Route::post('/login', 'Api\LoginApiController@login');
 //     Route::get('/logout', 'Api\LoginApiController@logout')->middleware('jwt.verify');

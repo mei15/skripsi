@@ -18,45 +18,21 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    
-    public function login()
+    public function login(Request $request)
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
-            $user = Auth::user();
-            $success['token'] = $user->createToken('appToken')->accessToken;
-           //After successfull authentication, notice how I return json parameters
-            return response()->json([
-              'success' => true,
-              'token' => $success,
-              'user' => $user
-          ]);
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+ 
+        if (auth()->attempt($credentials)) {
+            $token = auth()->user()->createToken('TOKEN')->accessToken;
+            return response()->json(['token' => $token], 200);
         } else {
-       //if authentication is unsuccessfull, notice how I return json parameters
-          return response()->json([
-            'success' => false,
-            'message' => 'Invalid Email or Password',
-        ], 401);
+            return response()->json(['error' => 'UnAuthorised'], 401);
         }
     }
  
-    public function logout(Request $res)
-    {
-      if (Auth::user()) {
-        $user = Auth::user()->token();
-        $user->revoke();
-
-        return response()->json([
-          'success' => true,
-          'message' => 'Logout successfully'
-      ]);
-      }else {
-        return response()->json([
-          'success' => false,
-          'message' => 'Unable to Logout'
-        ]);
-      }
-     }
-     
     /**
      * Returns Authenticated User Details
      *
@@ -66,6 +42,4 @@ class UserController extends Controller
     {
         return response()->json(['user' => auth()->user()], 200);
     }
-
-    
 }
