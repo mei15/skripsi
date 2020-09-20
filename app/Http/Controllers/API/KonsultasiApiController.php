@@ -11,9 +11,8 @@ class KonsultasiApiController extends APIBaseController
 {
     public function index()
     {
-        $konsultasi = auth()->user()->konsultasi;
- 
-        return response()->json(  $konsultasi );
+        $konsultasi = Konsultasi::all();
+        return json_encode($konsultasi);
     }
 
     public function show($id)
