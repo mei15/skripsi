@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::post('login', 'API\UserController@login');
+Route::post('/login', 'API\UserController@login');
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('user/detail', 'API\UserController@details');
-    Route::post('logout', 'API\UserController@logout');
+    Route::post('/logout', 'API\UserController@logout');
     Route::resource('konsultasi', 'API\KonsultasiApiController');
 }); 
 // Route::prefix('auth')->group(function () {
