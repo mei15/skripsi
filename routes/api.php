@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+Route::post('login', 'API\UserController@login');
 
-Route::post('/login', 'API\UserController@login');
-Route::get('/logout', 'API\UserController@logout')->middleware('auth:api');
-
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::get('user/detail', 'API\UserController@details');
+    Route::post('logout', 'API\UserController@logout');
+}); 
 // Route::prefix('auth')->group(function () {
 //     Route::post('/login', 'Api\LoginApiController@login');
 //     Route::get('/logout', 'Api\LoginApiController@logout')->middleware('jwt.verify');

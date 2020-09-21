@@ -21,5 +21,5 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-   
+    
 }

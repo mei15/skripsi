@@ -18,28 +18,32 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
-    {
-        $credentials = [
-            'email' => $request->email,
-            'password' => $request->password
-        ];
- 
-        if (auth()->attempt($credentials)) {
-            $token = auth()->user()->createToken('TOKEN')->accessToken;
-            return response()->json(['token' => $token], 200);
-        } else {
-            return response()->json(['error' => 'UnAuthorised'], 401);
+    public $successStatus = 200;
+
+    public function login(){
+        if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('nApp')->accessToken;
+            return response()->json(['success' => $success], $this->successStatus);
+        }
+        else{
+            return response()->json(['error'=>'Unauthorised'], 401);
         }
     }
- 
-    /**
-     * Returns Authenticated User Details
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    
+    public function logout(Request $request)
+    {
+        $logout = $request->user()->token()->revoke();
+        if($logout){
+            return response()->json([
+                'message' => 'Successfully logged out'
+            ]);
+        }
+    }
+
     public function details()
     {
-        return response()->json(['user' => auth()->user()], 200);
+        $user = Auth::user();
+        return response()->json(['success' => $user], $this->successStatus);
     }
 }
