@@ -8,7 +8,6 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use DB;
-use App\Http\Controllers\API\BaseController as BaseController;
 
 class UserController extends Controller
 {
@@ -24,11 +23,13 @@ class UserController extends Controller
             if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
                 $user = Auth::user();
                 $success['token'] = $user->createToken('appToken')->accessToken;
+
                //After successfull authentication, notice how I return json parameters
                 return response()->json([
                   'success' => true,
                   'token' => $success,
-                  'user' => $user
+                  'user' => $user,
+                  
               ]);
             } else {
            //if authentication is unsuccessfull, notice how I return json parameters
@@ -38,6 +39,10 @@ class UserController extends Controller
             ], 401);
             }
         }
+
+    public function detail(){
+      return response()->json(['user' => auth()->user()->userable], 200);
+    }
 
          /**
      * Logout api.

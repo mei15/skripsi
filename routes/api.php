@@ -21,6 +21,8 @@ Route::post('/login', 'API\UserController@login');
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/logout', 'API\UserController@logout');
+    Route::get('/details', 'API\UserController@detail');
+    Route::resource('/konsultasi', 'API\KonsultasiApiController');
 }); 
 // Route::prefix('auth')->group(function () {
 //     Route::post('/login', 'Api\LoginApiController@login');

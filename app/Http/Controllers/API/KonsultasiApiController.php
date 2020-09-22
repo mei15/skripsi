@@ -10,13 +10,13 @@ class KonsultasiApiController extends Controller
 {
     public function index()
     {
-        $konsultasi = auth()->user()->Konsultasi;
+        $konsultasi = auth()->user()->userable->Konsultasi;
         return json_encode($konsultasi);
     }
 
     public function show($id)
     {
-        $konsultasi = auth()->user()->konsultasi()->find($id);
+        $konsultasi = auth()->user()->userable->konsultasi()->find($id);
  
         if (!$konsultasi) {
             return response()->json('sorry', 400);
@@ -53,54 +53,48 @@ class KonsultasiApiController extends Controller
  
     public function update(Request $request, $id)
     {
-        $konsultasi = auth()->user()->products()->find($id);
- 
-        if (!$konsultasi) {
-            return response()->json('sorry', 400);
-        }
+        $request->validate([
+            'judul' => 'required',
+            'tanggal' => 'required',
+            'keterangan' => 'required',
+            'dosen' => 'required',
+        ]);
+
+        $konsultasi = Konsultasi::findOrFail($id);
+        $konsultasi->judul = $request->judul;
+        $konsultasi->tanggal = $request->tanggal;
+        $konsultasi->keterangan = $request->keterangan;
+        $konsultasi->dosen_id = $request->dosen;
  
         $updated = $konsultasi->fill($request->all())->save();
  
         if ($updated)
             return response()->json('done'
-            //     [
-            //     'success' => true
-            // ]
+            
         );
         else
             return response()->json('sorry'
-            //     [
-            //     'success' => false,
-            //     'message' => 'Product could not be updated'
-            // ]
+           
             , 500);
     }
  
     public function destroy($id)
     {
-        $konsultasi = auth()->user()->konsultasi()->find($id);
+        $konsultasi = auth()->user()->userable->konsultasi()->find($id);
  
         if (!$konsultasi) {
             return response()->json('sorry'
-            //     [
-            //     'success' => false,
-            //     'message' => 'Product with id ' . $id . ' not found'
-            // ]
+
             , 400);
         }
  
         if ($konsultasi->delete()) {
             return response()->json('done'
-            //     [
-            //     'success' => true
-            // ]
+           
         );
         } else {
             return response()->json('sorry'
-            //     [
-            //     'success' => false,
-            //     'message' => 'Product could not be deleted'
-            // ]
+           
             , 500);
         }
     }
