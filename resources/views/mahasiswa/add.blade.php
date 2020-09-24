@@ -10,7 +10,7 @@
                 <h4 class="page-title">Mahasiswa</h4>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        Menampilkan seluruh data mahasiswa
+                        Menampilkan seluruh data Mahasiswa
                     </li>
                 </ol>
 
@@ -32,26 +32,26 @@
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Depan</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Masukkan nama" name='first_name' id="example-text-input">
+                                <input class="form-control" type="text" placeholder="Masukkan nama" name='first_name'>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Belakang</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Masukkan nama" name='last_name' id="example-text-input">
+                                <input class="form-control" type="text" placeholder="Masukkan nama" name='last_name'>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">NIM</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="NIM" name='nim' id="example-text-input">
+                                <input class="form-control" type="text" placeholder="NIM" name='nim'>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Pilih Program Studi</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="prodi" required="">
-                                    <option value=""></option>
+                                    <option value="null" disabled selected>- Pilih -</option>
                                     <option value="TIF">Teknik Informatika</option>
                                     <option value="TI">Teknik Industri</option>
                                     <option value="TS">Teknik Sipil</option>

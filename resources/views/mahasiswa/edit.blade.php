@@ -33,26 +33,26 @@
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Depan</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Masukkan nama" name='nama' id="example-text-input" value="{{ $mahasiswa->first_name }}">
+                                <input class="form-control" type="text" placeholder="Masukkan nama" name='first_name' value="{{ $mahasiswa->first_name }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Belakang</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Masukkan nama" name='nama' id="example-text-input" value="{{ $mahasiswa->last_name }}">
+                                <input class="form-control" type="text" placeholder="Masukkan nama" name='last_name' value="{{ $mahasiswa->last_name }}">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class=" form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">NIM</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="NIM" name='nim' id="example-text-input" value="{{ $mahasiswa->nim }}">
+                                <input class="form-control" type="text" placeholder="NIM" name='nim' value="{{ $mahasiswa->nim }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Pilih Program Studi</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="prodi" required="" value="{{ $mahasiswa->prodi }}">
-                                    <option value=""></option>
+                                    <option value=" null" disabled selected>- Pilih -</option>
                                     <option value="TIF">Teknik Informatika</option>
                                     <option value="TI">Teknik Industri</option>
                                     <option value="TS">Teknik Sipil</option>

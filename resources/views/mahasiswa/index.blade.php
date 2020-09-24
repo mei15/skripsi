@@ -10,7 +10,7 @@
                 <h4 class="page-title">Mahasiswa</h4>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        Menampilkan seluruh data mahasiswa
+                        Menampilkan seluruh data Mahasiswa
                     </li>
                 </ol>
 
@@ -43,20 +43,22 @@
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <tr>
-                                <th>NIM</th>
+                                <th>ID</th>
                                 <th>Nama</th>
-                                <th>Program Studi</th>
-                                <th>Action</th>
+                                <th>NIM</th>
+                                <th>Prodi</th>
+                                <th>Aksi</th>
                             </tr>
-                            @foreach($mhs as $mhs)
+                            @foreach($mahasiswas as $mahasiswa)
                             <tr>
-                                <td>{{$mhs->nim}}</td>
-                                <td>{{$mhs->first_name}} {{ $mhs->last_name }}</td>
-                                <td>{{$mhs->prodi}}</td>
+                                <td>{{ $mahasiswa->id }}</td>
+                                <td>{{ $mahasiswa->first_name }} {{ $mahasiswa->last_name }}</td>
+                                <td>{{ $mahasiswa->nim }}</td>
+                                <td>{{ $mahasiswa->prodi }}</td>
                                 <td>
                                     <div class="d-inline-flex">
-                                        <a href="{{ route('mahasiswa.edit', ['mahasiswa' => $mhs->id]) }}" class='btn btn-warning mr-2'>Edit</a>
-                                        <form action="{{ route('mahasiswa.destroy', ['mahasiswa' => $mhs->id]) }}" method="post">
+                                        <a href="{{ route('mahasiswa.edit', ['mahasiswa' => $mahasiswa->id]) }}" class='btn btn-warning mr-2'>Edit</a>
+                                        <form action="{{ route('mahasiswa.destroy', ['mahasiswa' => $mahasiswa->id]) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class='btn btn-danger'>Delete</button>
@@ -65,9 +67,15 @@
                                 </td>
                             </tr>
                             @endforeach
-
+                            @forelse($mahasiswas as $mahasiswa)
+                            @empty
+                            <tr>
+                                <td colspan="6">Tidak ada data</td>
+                            </tr>
+                            @endforelse
                         </table>
                     </div>
+
                 </div>
             </div>
         </div> <!-- end col -->
