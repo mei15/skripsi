@@ -40,7 +40,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'first_name'    => 'required',
             'last_name'     => 'required',
-            'nip'           => 'required',
+            'nim'           => 'required',
             'prodi'         => 'required',
             'username'      => 'required',
             'password'      => 'required',
@@ -87,7 +87,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'first_name'    => 'required',
             'last_name'     => 'required',
-            'nip'           => 'required',
+            'nim'           => 'required',
             'prodi'         => 'required',
             'username'      => 'required',
             'password'      => 'required',
@@ -125,6 +125,7 @@ class MahasiswaController extends Controller
             return redirect()->route('mahasiswa.index');
         }
 
+        return true;
         session()->flash('success', 'Sukses Tambah Data Mahasiswa ' . $mahasiswa->first_name);
         return redirect()->route('mahasiswa.index');
     }
