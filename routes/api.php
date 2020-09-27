@@ -21,7 +21,7 @@ Route::post('/login', 'API\UserController@login');
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/logout', 'API\UserController@logout');
-    Route::get('/details', 'API\UserController@detail');
+    Route::get('/detail', 'API\UserController@detail');
     Route::resource('/konsultasi', 'API\KonsultasiApiController');
 
     
@@ -29,7 +29,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 Route::get('/dosen','API\ApiController@dsn');
 Route::get('/mahasiswa','API\ApiController@mhs');
-Route::get('/judul', 'API\ApiController@judul');
 
 // Route::fallback(function () {
 //     return response()->json([

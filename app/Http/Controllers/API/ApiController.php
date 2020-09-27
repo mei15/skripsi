@@ -24,9 +24,4 @@ class ApiController extends Controller
         return response()->json( [$mahasiswa->toArray()] , 200);
     }
 
-    public function judul()
-    {
-        $konsultasi = Konsultasi::all()->judul;
-        return response()->json( [$konsultasi->toArray()] , 200);
-    }
 }
