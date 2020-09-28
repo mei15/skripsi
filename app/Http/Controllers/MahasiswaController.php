@@ -124,8 +124,7 @@ class MahasiswaController extends Controller
             session()->flash('error', 'Terjadi kesalahan!');
             return redirect()->route('mahasiswa.index');
         }
-
-        return true;
+        
         session()->flash('success', 'Sukses Tambah Data Mahasiswa ' . $mahasiswa->first_name);
         return redirect()->route('mahasiswa.index');
     }
