@@ -10,6 +10,12 @@ class KonsultasiApiController extends Controller
 {
     public function index()
     {
+        $konsultasi = auth()->user()->userable->konsultasi();
+        return response()->json( [$konsultasi->toArray()] , 200);
+    }
+
+    public function show()
+    {
         $konsultasi = auth()->user()->userable->konsultasi()->find($id);
  
         if (!$konsultasi) {
