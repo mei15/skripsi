@@ -24,11 +24,12 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/detail', 'API\UserController@detail');
     Route::resource('/konsultasi', 'API\KonsultasiApiController');
 
+    Route::get('/dosen','API\ApiController@dsn');
+    Route::get('/mahasiswa','API\ApiController@mhs');
     
 }); 
 
-Route::get('/dosen','API\ApiController@dsn');
-Route::get('/mahasiswa','API\ApiController@mhs');
+
 
 // Route::fallback(function () {
 //     return response()->json([
