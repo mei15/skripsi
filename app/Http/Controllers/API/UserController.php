@@ -47,11 +47,11 @@ class UserController extends Controller
             'password' => $request->password
         ];
  
-        if (auth()->attempt($credentials)) {
-            $token = auth()->user()->createToken('MySecret')->accessToken;
+        if (Auth::attempt($credentials)) {
+            $success = auth()->user()->createToken('MySecret')->accessToken;
             $user = Auth::user();
             return response()->json([
-              'token' => $token,
+              'token' => $success,
               'user' => $user,
               
           ]);
