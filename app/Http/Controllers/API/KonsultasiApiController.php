@@ -10,16 +10,16 @@ class KonsultasiApiController extends Controller
 {
     public function index()
     {
+        $user = auth()->user()->userable;
         $konsultasi = auth()->user()->userable->Konsultasi;
         return response()->json([
-            'konsultasi' => $konsultasi,
-            
-            
+            'user' => $user,
         ]);
     }
 
     public function show()
     {
+        
         $konsultasi = auth()->user()->userable->konsultasi()->find($id);
  
         if (!$konsultasi) {
