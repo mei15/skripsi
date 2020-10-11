@@ -18,33 +18,58 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
-        {
-            if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
-                $user = Auth::user();
-                $success['token'] = $user->createToken('appToken')->accessToken;
-
-               //After successfull authentication, notice how I return json parameters
-                return response()->json([
-                  'success' => true,
-                  'token' => $success,
-                  'user' => $user,
-                  
-              ]);
-            } else {
-           //if authentication is unsuccessfull, notice how I return json parameters
-              return response()->json([
-                'success' => false,
-                'message' => 'Invalid Email or Password',
-            ], 401);
-            }
-        }    
-
-    public function detail(){
-      return response()->json([
-        'user' => auth()->user()->userable
-        ]);
+    public function login(Request $request)
+    {
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+ 
+        if (auth()->attempt($credentials)) {
+            $token = auth()->user()->createToken('MySecret')->accessToken;
+            $user = Auth::user();
+            return response()->json([
+              'token' => $token, 
+              'user' => $user,
+            ], 200);
+        } else {
+            return response()->json(['error' => 'UnAuthorised'], 401);
+        }
     }
+    // public function login()
+    //     {
+    //         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+    //             $user = Auth::user();
+    //             $success['token'] = $user->createToken('appToken')->accessToken;
+
+    //            //After successfull authentication, notice how I return json parameters
+    //             return response()->json([
+    //               'success' => true,
+    //               'token' => $success,
+    //               'user' => $user,
+                  
+    //           ]);
+    //         } else {
+    //        //if authentication is unsuccessfull, notice how I return json parameters
+    //           return response()->json([
+    //             'success' => false,
+    //             'message' => 'Invalid Email or Password',
+    //         ], 401);
+    //         }
+    //     }  
+    
+    public function details()
+    {
+        return response()->json(['user' => auth()->user()->userable], 200);
+    }
+
+
+
+    // public function detail(){
+    //   return response()->json([
+    //     'user' => auth()->user()->userable
+    //     ]);
+    // }
 
          /**
      * Logout api.
