@@ -16,17 +16,17 @@ class KonsultasiApiController extends Controller
         ]);
     }
 
-    public function show()
-    {
+    // public function show()
+    // {
         
-        $konsultasi = auth()->user()->userable->konsultasi()->find($id);
+    //     $konsultasi = auth()->user()->userable->konsultasi()->find($id);
  
-        if (!$konsultasi) {
-            return response()->json('sorry', 400);
-        }
+    //     if (!$konsultasi) {
+    //         return response()->json('sorry', 400);
+    //     }
  
-        return response()->json( [$konsultasi->toArray()] , 200);
-    }
+    //     return response()->json( [$konsultasi->toArray()] , 200);
+    // }
  
     public function store(Request $request)
     {
@@ -58,7 +58,7 @@ class KonsultasiApiController extends Controller
  
     public function update(Request $request, $id)
     {
-        $konsultasi = auth()->user()->konsultasi()->find($id);
+        $konsultasi = auth()->user()->userable->konsultasi()->find($id);
  
         if (!$konsultasi) {
             return response()->json( [
