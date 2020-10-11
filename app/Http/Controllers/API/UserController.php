@@ -58,18 +58,14 @@ class UserController extends Controller
             }
         }  
     
-    public function details()
-    {
-        return response()->json(['user' => auth()->user()->userable], 200);
+
+
+
+    public function detail(){
+      return response()->json([
+        'user' => auth()->user()->userable
+        ]);
     }
-
-
-
-    // public function detail(){
-    //   return response()->json([
-    //     'user' => auth()->user()->userable
-    //     ]);
-    // }
 
          /**
      * Logout api.
