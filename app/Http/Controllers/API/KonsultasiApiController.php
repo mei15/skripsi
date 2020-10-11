@@ -58,7 +58,7 @@ class KonsultasiApiController extends Controller
  
     public function update(Request $request, $id)
     {
-        $konsultasi = auth()->user()->userable->konsultasi()->find($id);
+        $konsultasi = auth()->user()->konsultasi()->find($id);
  
         if (!$konsultasi) {
             return response()->json( [
