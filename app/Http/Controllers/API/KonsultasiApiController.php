@@ -44,9 +44,8 @@ class KonsultasiApiController extends Controller
         $konsultasi->tanggal = $request->tanggal;
         $konsultasi->mahasiswa_id = $user->userable->id;
         $konsultasi->dosen_id = $request->dosen;
-        $konsultasi->save();
 
-        if (auth()->user()->konsultasi()->save($konsultasi))
+        if (auth()->user()->userable->konsultasi()->save($konsultasi))
             return response()->json( 'berhasil!'
         );
         else
@@ -56,28 +55,26 @@ class KonsultasiApiController extends Controller
  
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'judul' => 'required',
-            'tanggal' => 'required',
-            'keterangan' => 'required',
-            'dosen' => 'required',
-        ]);
-
-        $konsultasi = Konsultasi::findOrFail($id);
-        $konsultasi->judul = $request->judul;
-        $konsultasi->tanggal = $request->tanggal;
-        $konsultasi->keterangan = $request->keterangan;
-        $konsultasi->dosen_id = $request->dosen;
+        $konsultasi = auth()->user()->userable->konsultasi()->find($id);
+ 
+        if (!$konsultasi) {
+            return response()->json('sorry', 400);
+        }
  
         $updated = $konsultasi->fill($request->all())->save();
  
         if ($updated)
             return response()->json('done'
-            
+            //     [
+            //     'success' => true
+            // ]
         );
         else
             return response()->json('sorry'
-           
+            //     [
+            //     'success' => false,
+            //     'message' => 'Product could not be updated'
+            // ]
             , 500);
     }
  
