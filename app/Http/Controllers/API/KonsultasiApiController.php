@@ -46,11 +46,14 @@ class KonsultasiApiController extends Controller
         $konsultasi->dosen_id = $request->dosen;
 
         if (auth()->user()->userable->konsultasi()->save($konsultasi))
-            return response()->json( 'berhasil!'
-        );
+            return response()->json([ 
+                'success' => true,
+            ]);
         else
-            return response()->json('tidak dapat menambah konsultasi'
-            , 500);
+            return response()->json([
+                'success' => false,
+                'message' => 'tidak dapat menambah konsultasi'
+            ], 500);
     }
  
     public function update(Request $request, $id)
@@ -58,23 +61,26 @@ class KonsultasiApiController extends Controller
         $konsultasi = auth()->user()->userable->konsultasi()->find($id);
  
         if (!$konsultasi) {
-            return response()->json('sorry', 400);
+            return response()->json( [
+                'success' => false,
+                'message' => 'tidak ada konsultasi'
+            ], 400);
         }
  
         $updated = $konsultasi->fill($request->all())->save();
  
         if ($updated)
-            return response()->json('done'
-            //     [
-            //     'success' => true
-            // ]
+            return response()->json(
+                [
+                'success' => true
+            ]
         );
         else
-            return response()->json('sorry'
-            //     [
-            //     'success' => false,
-            //     'message' => 'Product could not be updated'
-            // ]
+            return response()->json(
+                [
+                'success' => false,
+                'message' => 'Konsultasi could not be updated'
+            ]
             , 500);
     }
  
