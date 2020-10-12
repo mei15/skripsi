@@ -63,7 +63,7 @@ class UserController extends Controller
 
     public function detail(){
       return response()->json([
-        'user' => auth()->user()->userable
+        'data' => auth()->user()->userable
         ]);
     }
 
