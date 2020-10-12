@@ -39,7 +39,7 @@ class UserController extends Controller
     public function login()
         {
             if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
-                $user = auth()->user()->userable;
+                $user = Auth::user();
                 $success['token'] = $user->createToken('appToken')->accessToken;
 
                //After successfull authentication, notice how I return json parameters
@@ -47,7 +47,7 @@ class UserController extends Controller
                   'success' => true,
                   'token' => $success,
                   'user' => $user,
-                  
+                  'data' => auth()->user()->userable,
                   
               ]);
             } else {
