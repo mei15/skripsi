@@ -11,10 +11,10 @@ class KonsultasiApiController extends Controller
     public function index()
     {
         $konsultasi = auth()->user()->userable->Konsultasi;
-        $user = auth()->user()->userable;
+        $data = auth()->user()->userable;
         return response()->json([
             'konsultasi' => $konsultasi,
-            'user' => $user,
+            'data' => $data,
         ]);
     }
 
