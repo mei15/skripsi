@@ -50,13 +50,7 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                         <!-- item-->
-                                        <form method="POST" action="{{route('profile.edit')}}">
-                                            @csrf
-                                            <button type="submit" class="d-none" id='edit'></button>
-                                            <a href="{{ route('profile.edit') }}" class="dropdown-item"><i class="mdi mdi-account-settings-variant"></i>
-                                                Ubah Profil
-                                            </a>
-                                        </form>
+                                       
                                         <form method="POST" action="{{route('logout')}}">
                                             @csrf
                                             <button type="submit" class="d-none" id='logout'></button>
