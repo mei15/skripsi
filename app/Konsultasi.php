@@ -10,9 +10,24 @@ class Konsultasi extends Model
 {
     protected $table = 'konsultasi';
 
+    protected $appends = [
+        'mahasiswa',
+        'dosen',
+    ];
+
     public function getTanggalAttribute($value)
     {
         return Carbon::parse($value);
+    }
+
+    public function getDosenAttribute()
+    {
+        return $this->dosen()->first();
+    }
+
+    public function getMahasiswaAttribute()
+    {
+        return $this->mahasiswa()->first();
     }
 
     public function dosen()

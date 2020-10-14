@@ -5,33 +5,31 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-
 class KonsultasiApiController extends Controller
 {
     public function index()
     {
         $user = auth()->user()->userable;
-        $konsultasiId = $user->Konsultasi->id;
-        $konsultasi = Konsultasi::with(['mahasiswa', 'dosen'])->find($konsultasiId);
+        $konsultasi = $user->Konsultasi;
 
         return response()->json([
-        'konsultasi' => $konsultasi,
-        'user' => $user,
-    ]);
+            'konsultasi' => $konsultasi,
+            'user' => $user,
+        ]);
     }
 
     // public function show()
     // {
-        
+
     //     $konsultasi = auth()->user()->userable->konsultasi()->find($id);
- 
+
     //     if (!$konsultasi) {
     //         return response()->json('sorry', 400);
     //     }
- 
+
     //     return response()->json( [$konsultasi->toArray()] , 200);
     // }
- 
+
     public function store(Request $request)
     {
 
@@ -50,7 +48,7 @@ class KonsultasiApiController extends Controller
         $konsultasi->dosen_id = $request->dosen;
 
         if (auth()->user()->userable->konsultasi()->save($konsultasi))
-            return response()->json([ 
+            return response()->json([
                 'success' => true,
             ]);
         else
@@ -59,20 +57,20 @@ class KonsultasiApiController extends Controller
                 'message' => 'tidak dapat menambah konsultasi'
             ], 500);
     }
- 
+
     public function update(Request $request, $id)
     {
         $konsultasi = auth()->user()->userable->konsultasi()->find($id);
- 
+
         if (!$konsultasi) {
             return response()->json( [
                 'success' => false,
                 'message' => 'tidak ada konsultasi'
             ], 400);
         }
- 
+
         $updated = $konsultasi->fill($request->all())->save();
- 
+
         if ($updated)
             return response()->json(
                 [
@@ -87,24 +85,24 @@ class KonsultasiApiController extends Controller
             ]
             , 500);
     }
- 
+
     public function destroy($id)
     {
         $konsultasi = auth()->user()->userable->konsultasi()->find($id);
- 
+
         if (!$konsultasi) {
             return response()->json('sorry'
 
             , 400);
         }
- 
+
         if ($konsultasi->delete()) {
             return response()->json('done'
-           
+
         );
         } else {
             return response()->json('sorry'
-           
+
             , 500);
         }
     }
