@@ -13,7 +13,7 @@ class KonsultasiApiController extends Controller
         $konsultasi = auth()->user()->userable->Konsultasi;
 
         return response()->json([
-            'konsultasi' => $konsultasi,
+            $konsultasi
             // 'user' => $user,
         ]);
     }
