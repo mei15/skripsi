@@ -22,12 +22,13 @@ Route::post('/login', 'API\UserController@login');
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/logout', 'API\UserController@logout');
     Route::get('/detail', 'API\UserController@detail');
+    Route::get('/dosen','API\ApiController@dsn');
+Route::get('/mahasiswa','API\ApiController@mhs');
     Route::resource('/konsultasi', 'API\KonsultasiApiController');
     
 }); 
 
-Route::get('/dosen','API\ApiController@dsn');
-Route::get('/mahasiswa','API\ApiController@mhs');
+
 
 
 
