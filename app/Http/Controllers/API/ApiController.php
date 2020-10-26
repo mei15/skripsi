@@ -15,19 +15,16 @@ class ApiController extends Controller
     public function dsn()
     {
         $dosens = Dosen::all();
-        return response()->json([
-            'dosen' => $dosens,
-            
-        ]);
+        return response()->json($dosens,
+            );
     }
 
     public function mhs()
     {
         $mahasiswa = Mahasiswa::all();
-        return response()->json([
-            'mahasiswa' => $mahasiswa,
-            
-        ]);
+        return response()->json(
+            $mahasiswa,200
+            );
     }
 
 }
