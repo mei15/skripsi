@@ -39,7 +39,7 @@ class KonsultasiApiController extends Controller
             'judul'         => 'required',
             'keterangan'    => 'required',
             'tanggal'       => 'required',
-            'dosen'         => 'required',
+            'dosen_id'         => 'required',
         ]);
 
         $konsultasi = new Konsultasi;
