@@ -59,8 +59,6 @@ class KonsultasiApiController extends Controller
         $konsultasi->dosen_id = $request->dosen;
         $konsultasi->save();
         
-
-        
             return response()->json(
                 $konsultasi
             ,200);
