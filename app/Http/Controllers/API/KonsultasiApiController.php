@@ -32,7 +32,7 @@ class KonsultasiApiController extends Controller
     }
 
     public function add(Request $request){
-        $dosens = dosen::all();
+        $dosens = Dosen::all();
        
         return response()->json(
             $dosens,
@@ -56,7 +56,7 @@ class KonsultasiApiController extends Controller
         $konsultasi->keterangan = $request->keterangan;
         $konsultasi->tanggal = $request->tanggal;
         $konsultasi->mahasiswa_id = $user->id;
-        $konsultasi->dosen_id = $request->dosen;
+        $konsultasi->dosen_id = $dosens->dosen;
         $konsultasi->save();
         
             return response()->json(
