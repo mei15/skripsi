@@ -42,6 +42,7 @@ class KonsultasiApiController extends Controller
     public function store(Request $request)
     {
         $user = auth()->user()->userable;
+        $dosens = Dosen::all();
         
        
 
@@ -57,7 +58,7 @@ class KonsultasiApiController extends Controller
         $konsultasi->keterangan = $request->keterangan;
         $konsultasi->tanggal = $request->tanggal;
         $konsultasi->mahasiswa_id = $user->id;
-        $konsultasi->dosen_id = $request->dosen;
+        $konsultasi->dosen_id = $request->dosen->$dosens;
         $konsultasi->save();
         
             return response()->json(
