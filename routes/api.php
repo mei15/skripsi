@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/dosen','API\ApiController@dsn');
     Route::get('/mahasiswa','API\ApiController@mhs');
     Route::resource('/konsultasi', 'API\KonsultasiApiController');
+    Route::get('konsultasi/dosen', 'API\KonsultasiApiController@dosen');
     
 }); 
 

@@ -30,7 +30,7 @@ class KonsultasiApiController extends Controller
         return response()->json( [$konsultasi->toArray()] , 200);
     }
 
-    public function getDosen(){
+    public function dosen(){
         $dosen = Dosen::all();
 
         return response()->json([
