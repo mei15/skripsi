@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/konsultasi/show/{id}', 'API\KonsultasiApiController@show');
     Route::post('/konsultasi/store', 'API\KonsultasiApiController@store');
     Route::put('/konsultasi/update/{id}', 'API\KonsultasiApiController@update');
-    Route::delete('/konsultasi/delete', 'API\KonsultasiApiController@destroy');
+    Route::delete('/konsultasi/delete/{id}', 'API\KonsultasiApiController@destroy');
     Route::get('/konsultasi/add', 'API\KonsultasiApiController@tambah');
     
 }); 
