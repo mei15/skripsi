@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Dosen;
 
 class KonsultasiApiController extends Controller
 {
@@ -30,7 +31,7 @@ class KonsultasiApiController extends Controller
         return response()->json( [$konsultasi->toArray()] , 200);
     }
 
-    public function dosen(){
+    public function dataDosen(){
         $user = auth()->user()->userable;
         $dosen = Dosen::all();
 
