@@ -32,11 +32,11 @@ class KonsultasiApiController extends Controller
     }
 
     public function add(){
-        $dosen = Dosen::all();
+        $dosen = dosen::all();
 
-        return response()->json([
-            'dosen' => $dosen,
-        ]);
+        return response()->json(
+            $dosen,
+        );
     }
 
     public function store(Request $request)
