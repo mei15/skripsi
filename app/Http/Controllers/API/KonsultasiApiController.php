@@ -31,12 +31,11 @@ class KonsultasiApiController extends Controller
     }
 
     public function dosen(){
+        $user = auth()->user()->userable;
         $dosen = Dosen::all();
 
-        return response()->json([
-           'dosen' => $dosen
-            // 'user' => $user,
-        ]);
+        return response()->json( $dosen,
+    );
     }
 
     public function store(Request $request)
