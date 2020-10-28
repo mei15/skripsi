@@ -57,20 +57,16 @@ class KonsultasiApiController extends Controller
         $konsultasi->tanggal = $request->tanggal;
         $konsultasi->mahasiswa_id = $user->id;
         $konsultasi->dosen_id = $request->dosen;
+        $konsultasi->save();
         
 
-        if (auth()->user()->userable->konsultasi()->save($konsultasi))
+        
             return response()->json([
-                
                 'success' => true,
                 'token' => $success,
                 'data' => $konsultasi->toArray()
             ],200);
-        else
-            return response()->json([
-                'success' => false,
-                'message' => 'tidak dapat menambah konsultasi'
-            ], 500);
+       
     }
 
     public function update(Request $request, $id)
