@@ -32,11 +32,12 @@ class KonsultasiApiController extends Controller
     }
 
     public function add(){
+        $user = auth()->user()->userable;
         $dosens = Dosen::all();
 
-        return response()->json(
-            $dosens,
-        );
+        return response()->json([
+            $user, $dosens,
+        ]);
     }
 
     public function store(Request $request)
@@ -57,6 +58,7 @@ class KonsultasiApiController extends Controller
         $konsultasi->tanggal = $request->tanggal;
         $konsultasi->mahasiswa_id = $user->id;
         $konsultasi->dosen_id = $request->dosen;
+        
 
         if (auth()->user()->userable->konsultasi()->save($konsultasi))
             return response()->json([
