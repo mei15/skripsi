@@ -25,8 +25,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/dosen','API\ApiController@dsn');
     Route::get('/mahasiswa','API\ApiController@mhs');
     Route::get('/konsultasi', 'API\KonsultasiApiController@index');
+    oute::get('/konsultasi/show/{id}', 'API\KonsultasiApiController@show');
     Route::post('/konsultasi/store', 'API\KonsultasiApiController@store');
-    Route::put('/konsultasi/update', 'API\KonsultasiApiController@update');
+    Route::put('/konsultasi/update/{id}', 'API\KonsultasiApiController@update');
     Route::delete('/konsultasi/delete', 'API\KonsultasiApiController@destroy');
     Route::get('/konsultasi/add', 'API\KonsultasiApiController@tambah');
     
