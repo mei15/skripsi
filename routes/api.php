@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/konsultasi/store', 'API\KonsultasiApiController@store');
     Route::put('/konsultasi/update', 'API\KonsultasiApiController@update');
     Route::delete('/konsultasi/delete', 'API\KonsultasiApiController@destroy');
-    Route::get('/konsultasi/add', 'API\KonsultasiApiController@addData');
+    Route::get('/konsultasi/add', 'API\KonsultasiApiController@tambah');
     
 }); 
 
