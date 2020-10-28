@@ -32,10 +32,10 @@ class KonsultasiApiController extends Controller
     }
 
     public function add(Request $request){
-        $dosen = $request->dosen;
-
+        $dosens = Dosen::all()->$request->dosen;
+       
         return response()->json(
-            $dosen,
+            $dosens,
         );
     }
 
