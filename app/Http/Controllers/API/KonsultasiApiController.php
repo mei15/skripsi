@@ -31,12 +31,14 @@ class KonsultasiApiController extends Controller
         return response()->json( [$konsultasi->toArray()] , 200);
     }
 
-    public function addData(){
-        
+    public function tambah(){
+        $user = auth()->user()->userable;
         $dosens = Dosen::all();
 
-        return response()->json( $dosens,
-    );
+        return response()->json([ 
+            'data' => $user,
+            'dosen' => $dosens,
+        ]);
     }
 
     public function store(Request $request)
