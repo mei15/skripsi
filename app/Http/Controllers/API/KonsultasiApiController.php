@@ -30,10 +30,19 @@ class KonsultasiApiController extends Controller
         return response()->json( [$konsultasi->toArray()] , 200);
     }
 
+    public function getDosen(){
+        $dosen = Dosen::all();
+
+        return response()->json([
+           'dosen' => $dosen
+            // 'user' => $user,
+        ]);
+    }
+
     public function store(Request $request)
     {
         $user = auth()->user()->userable;
-        
+       
 
         $request->validate([
             'judul'         => 'required',
