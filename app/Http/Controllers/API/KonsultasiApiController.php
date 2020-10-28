@@ -61,9 +61,9 @@ class KonsultasiApiController extends Controller
         
 
         
-            return response()->json([
-                $konsultasi->toArray()
-            ],200);
+            return response()->json(
+                $konsultasi
+            ,200);
        
     }
 
