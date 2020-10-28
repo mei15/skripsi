@@ -32,11 +32,9 @@ class KonsultasiApiController extends Controller
     }
 
     public function tambah(){
-        $user = auth()->user()->userable;
         $dosens = Dosen::all();
 
         return response()->json([ 
-            'data' => $user,
             'dosen' => $dosens,
         ]);
     }
