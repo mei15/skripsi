@@ -24,12 +24,13 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/detail', 'API\UserController@detail');
     Route::get('/dosen','API\ApiController@dsn');
     Route::get('/mahasiswa','API\ApiController@mhs');
-    Route::get('/konsultasi', 'API\KonsultasiApiController@index');
-    Route::get('/konsultasi/show/{id}', 'API\KonsultasiApiController@show');
-    Route::post('/konsultasi/store', 'API\KonsultasiApiController@store');
-    Route::put('/konsultasi/update/{id}', 'API\KonsultasiApiController@update');
-    Route::delete('/konsultasi/delete/{id}', 'API\KonsultasiApiController@destroy');
-    Route::get('/konsultasi/add', 'API\KonsultasiApiController@tambah');
+    Route::resource('/konsultasi', 'API\KonsultasiApiController');
+    // Route::get('/konsultasi', 'API\KonsultasiApiController@index');
+    // Route::get('/konsultasi/show/{id}', 'API\KonsultasiApiController@show');
+    // Route::post('/konsultasi/store', 'API\KonsultasiApiController@store');
+    // Route::put('/konsultasi/update/{id}', 'API\KonsultasiApiController@update');
+    // Route::delete('/konsultasi/delete/{id}', 'API\KonsultasiApiController@destroy');
+    // Route::get('/konsultasi/add', 'API\KonsultasiApiController@tambah');
     
 }); 
 
