@@ -36,8 +36,8 @@ class KonsultasiApiController extends Controller
         $dosens = Dosen::all();
        
         return response()->json([
-            "dosen" => $dosens->toArray()
-        ]);
+            "data" => $dosens->toArray()
+        ],200);
     }
 
     public function store(Request $request, $id)
