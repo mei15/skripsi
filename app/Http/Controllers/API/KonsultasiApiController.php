@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Dosen;
+use App\Konsultasi;
 
 class KonsultasiApiController extends Controller
 {
@@ -51,7 +52,7 @@ class KonsultasiApiController extends Controller
            
         ]);
 
-        $konsultasi = new Konsultasi;
+        $konsultasi = new Konsultasi();
         $konsultasi->judul = $request->judul;
         $konsultasi->keterangan = $request->keterangan;
         $konsultasi->tanggal = $request->tanggal;
