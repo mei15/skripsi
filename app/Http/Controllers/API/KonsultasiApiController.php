@@ -36,7 +36,7 @@ class KonsultasiApiController extends Controller
         $dosens = Dosen::all();
        
         return response()->json(
-            $dosens,
+            $dosens->toArray()
         );
     }
 
