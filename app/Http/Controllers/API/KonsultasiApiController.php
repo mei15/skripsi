@@ -43,7 +43,7 @@ class KonsultasiApiController extends Controller
     public function store(Request $request)
     {
         $user = auth()->user()->userable;
-        $dosen = Dosen::find($request->dosen_id);
+        $dosen = Dosen::all();
         
         $request->validate([
             'judul'         => 'required',
