@@ -36,7 +36,7 @@ class KonsultasiApiController extends Controller
         $dosen = Dosen::all();
        
         return response()->json(
-            $dosen->$request->dosen_id
+            $dosen
         ,200);
     }
 
