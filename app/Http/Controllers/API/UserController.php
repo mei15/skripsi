@@ -48,7 +48,7 @@ class UserController extends Controller
                   'success' => true,
                   'token' => $success,
                   'user' => $user,
-                  'konsultasi' => auth()->user()->userable->Konsultasi,
+                  'data' => auth()->user()->userable,
                   
               ]);
             } else {
