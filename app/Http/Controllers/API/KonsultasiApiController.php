@@ -52,7 +52,7 @@ class KonsultasiApiController extends Controller
             'dosen_id'      => 'required'
         ]);
 
-        $konsultasi = new Konsultasi();
+        $konsultasi = new Konsultasi;
         $konsultasi->judul = $request->judul;
         $konsultasi->keterangan = $request->keterangan;
         $konsultasi->tanggal = $request->tanggal;
@@ -69,7 +69,21 @@ class KonsultasiApiController extends Controller
 
     public function update(Request $request, $id)
     {
-        $konsultasi = auth()->user()->userable->konsultasi()->find($id);
+        $user = auth()->user()->userable;
+        
+        $request->validate([
+            'judul' => 'required',
+            'tanggal' => 'required',
+            'keterangan' => 'required',
+            'dosen' => 'required',
+        ]);
+
+        $konsultasi = Konsultasi::findOrFail($id);
+        $konsultasi->judul = $request->judul;
+        $konsultasi->tanggal = $request->tanggal;
+        $konsultasi->keterangan = $request->keterangan;
+        $konsultasi->dosen_id = $request->dosen;
+        $konsultasi->save();
 
         if (!$konsultasi) {
             return response()->json( [
