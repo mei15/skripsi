@@ -43,13 +43,12 @@ class KonsultasiApiController extends Controller
     public function store(Request $request)
     {
         $user = auth()->user()->userable;
-        $dosen = Dosen::find($request->dosen_id);
         
         $request->validate([
             'judul'         => 'required',
             'keterangan'    => 'required',
             'tanggal'       => 'required',
-            'dosen_id'      => 'required'
+            'dosen'         => 'required'
         ]);
 
         $konsultasi = new Konsultasi;
@@ -57,7 +56,7 @@ class KonsultasiApiController extends Controller
         $konsultasi->keterangan = $request->keterangan;
         $konsultasi->tanggal = $request->tanggal;
         $konsultasi->mahasiswa_id = $user->id;
-        $konsultasi->dosen_id = $dosen->id;
+        $konsultasi->dosen_id = $request->dosen;
         $konsultasi->save();
         
             return response()->json(
@@ -70,7 +69,7 @@ class KonsultasiApiController extends Controller
     public function update(Request $request, $id)
     {
         $user = auth()->user()->userable;
-        
+
         $request->validate([
             'judul' => 'required',
             'tanggal' => 'required',
