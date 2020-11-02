@@ -40,7 +40,7 @@ class KonsultasiApiController extends Controller
         ,200);
     }
 
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $user = auth()->user()->userable;
         $dosen = Dosen::find($request->dosen_id);
