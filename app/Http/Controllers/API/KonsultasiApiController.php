@@ -49,6 +49,7 @@ class KonsultasiApiController extends Controller
             'judul'         => 'required',
             'keterangan'    => 'required',
             'tanggal'       => 'required',
+            'dosen_id'      => 'required'
            
         ]);
 
@@ -57,7 +58,7 @@ class KonsultasiApiController extends Controller
         $konsultasi->keterangan = $request->keterangan;
         $konsultasi->tanggal = $request->tanggal;
         $konsultasi->mahasiswa_id = $user->id;
-        $konsultasi->dosen_id = $request->dosen_id;
+        $konsultasi->dosen_id = $dosen->id;
         $konsultasi->save();
         
             return response()->json(
