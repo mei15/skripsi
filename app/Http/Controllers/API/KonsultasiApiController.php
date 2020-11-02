@@ -49,7 +49,6 @@ class KonsultasiApiController extends Controller
             'judul'         => 'required',
             'keterangan'    => 'required',
             'tanggal'       => 'required',
-            'dosen_id'      => $dosen,
            
         ]);
 
