@@ -33,23 +33,23 @@ class KonsultasiApiController extends Controller
     }
 
     public function add(){
-        $dosen = Dosen::all();
+        $dosens = Dosen::all();
        
         return response()->json(
-            $dosen
+            $dosens
         ,200);
     }
 
     public function store(Request $request)
     {
         $user = auth()->user()->userable;
-        $dosen = Dosen::find($request->dosen_id);
+        $dosens = Dosen::find($request->dosen_id);
         
         $request->validate([
             'judul'         => 'required',
             'keterangan'    => 'required',
             'tanggal'       => 'required',
-            'dosen_id'      => $dosen->id
+            'dosen_id'      => $dosens->id
         ]);
 
         $konsultasi = new Konsultasi();
