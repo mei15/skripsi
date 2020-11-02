@@ -133,11 +133,5 @@ class KonsultasiController extends Controller
         return redirect()->route('konsultasi.index');
     }
 
-    public function cetak_pdf()
-    {
-        $user = Auth::user()->userable;
-        $konsultasi = Konsultasi::all();
-        $pdf = PDF::loadview('konsultasi.konsultasi_pdf', ['konsultasi' => $konsultasi]);
-        return $pdf->download('laporan-konsultasi-pdf.pdf');
-    }
+    
 }

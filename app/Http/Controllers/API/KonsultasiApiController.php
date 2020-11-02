@@ -33,10 +33,11 @@ class KonsultasiApiController extends Controller
     }
 
     public function add(){
-        $dosen = Dosen::all();
+        $user = auth()->user()->userable;
+        $dosen = Dosen::find($request->dosen_id);
        
         return response()->json(
-            $dosen
+            $dosen->id
         ,200);
     }
 
