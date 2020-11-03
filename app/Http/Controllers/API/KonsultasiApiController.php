@@ -76,38 +76,20 @@ class KonsultasiApiController extends Controller
             'judul' => 'required',
             'tanggal' => 'required',
             'keterangan' => 'required',
-            'dosen' => 'required',
+            'dosen_id'     => 'required'
         ]);
 
         $konsultasi = Konsultasi::findOrFail($id);
         $konsultasi->judul = $request->judul;
         $konsultasi->tanggal = $request->tanggal;
         $konsultasi->keterangan = $request->keterangan;
-        $konsultasi->dosen_id = $request->dosen;
+        $konsultasi->dosen_id = $request->dosen_id;
         $konsultasi->save();
 
-        if (!$konsultasi) {
-            return response()->json( [
-                'success' => false,
-                'message' => 'tidak ada konsultasi'
-            ], 400);
-        }
-
-        $updated = $konsultasi->fill($request->all())->save();
-
-        if ($updated)
-            return response()->json(
-                [
-                'success' => true
-            ]
-        );
-        else
-            return response()->json(
-                [
-                'success' => false,
-                'message' => 'Konsultasi could not be updated'
-            ]
-            , 500);
+        return response()->json(
+            $konsultasi->toArray()
+            
+        ,200);
     }
 
     public function destroy($id)
