@@ -57,6 +57,7 @@
                                 <input class="form-control" type="text" placeholder="Masukkan catatan" name='keterangan' value="{{ $konsultasi->keterangan }}">
                             </div>
                         </div>
+                        
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Dosen</label>
                             <div class="col-sm-10">
@@ -67,6 +68,7 @@
                                 </select>
                             </div>
                         </div>
+                        <button type="Kembali" class='btn btn-primary float-left'>Kembali</button>
                         <button type="submit" class='btn btn-primary float-right'>Submit</button>
                     </form>
                 </div>
