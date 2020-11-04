@@ -68,7 +68,7 @@
                                 </select>
                             </div>
                         </div>
-                        <button type="Kembali" class='btn btn-primary float-left'>Kembali</button>
+                        <button type="Kembali" class='btn btn-primary float-left' href="{{ route('konsultasi.index')}}">Kembali</button>
                         <button type="submit" class='btn btn-primary float-right'>Submit</button>
                     </form>
                 </div>
