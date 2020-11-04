@@ -38,23 +38,23 @@
                         <table class="table table-bordered">
                             <tr>
                                 <td>Total Konsultasi</td>
-                                <td><a href=''><i class='ti ti-import'></i> Cetak</a></td>
+                                <td><a href=''><i class='ti ti-import'></i> Lihat</a></td>
                             </tr>
                             <tr>
                                 <td>Total Dosen</td>
-                                <td><a href=''><i class='ti ti-import'></i> Cetak</a></td>
+                                <td><a href=''><i class='ti ti-import'></i> Lihat</a></td>
                             </tr>
                             <tr>
                                 <td>Total Mahasiswa</td>
-                                <td><a href=''><i class='ti ti-import'></i> Cetak</a></td>
+                                <td><a href=''><i class='ti ti-import'></i> Lihat</a></td>
                             </tr>
                             <tr>
                                 <td>Total Admin</td>
-                                <td><a href=''><i class='ti ti-import'></i> Cetak</a></td>
+                                <td><a href=''><i class='ti ti-import'></i> Lihat</a></td>
                             </tr>
                             <tr>
                                 <td>Total Konsultasi Hari Ini</td>
-                                <td><a href=''><i class='ti ti-import'></i> Cetak</a></td>
+                                <td><a href=''><i class='ti ti-import'></i> Lihat</a></td>
                             </tr>
                         </table>
                     </div>
