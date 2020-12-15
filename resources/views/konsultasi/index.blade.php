@@ -35,7 +35,7 @@
                         {{session('success')}}
                     </div>
                     @endif
-                    @if( Auth::user()->userable_type == 'App\Mahasiswa' )
+                    @if( Auth::user()->userable_type == 'App\Mahasiswa' || Auth::user()->userable_type == 'App\Admin')
                     <div class="card-actions ">
                         <a class='btn btn-primary float-left' href="{{ route('konsultasi.create') }}"><i class='ti ti-plus'></i> Tambah Konsultasi</a>
                         <form action="" method="get" class='form-inline float-right mb-3'>
@@ -66,11 +66,13 @@
                                 <td>
                                     <div class="d-inline-flex">
                                         <a href="{{ route('konsultasi.edit', ['konsultasi' => $konsultasi->id]) }}" class='btn btn-warning mr-2'>Edit</a>
+                                        @if( Auth::user()->userable_type == 'App\Mahasiswa')
                                         <form action="{{ route('konsultasi.destroy', ['konsultasi' => $konsultasi->id]) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class='btn btn-danger'>Delete</button>
                                         </form>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

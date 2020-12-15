@@ -33,9 +33,15 @@ class KonsultasiController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $dosens = Dosen::all();
-
-        return view('konsultasi.add', compact('user', 'dosens'));
+        $dosen = Dosen::all();
+        $konsultasi = Konsultasi::user($user)->first();
+        // if($konsultasi->judul != null){
+        //     $konsultasi = $konsultasi->First()->judul;
+        // }
+        
+           
+        return view('konsultasi.add', compact('user', 'dosen','konsultasi'));
+        
     }
 
     /**
@@ -57,10 +63,20 @@ class KonsultasiController extends Controller
 
         $konsultasi = new Konsultasi;
         $konsultasi->judul = $request->judul;
+        // if($konsultasi->judul == null){
+        //     $konsultasi->judul = $request->judul;
+        // }else {
+        //     $konsultasi->judul = $konsultasi->Konsultasi::user($user)->First()->judul;
+        // }
         $konsultasi->keterangan = $request->keterangan;
         $konsultasi->tanggal = $request->tanggal;
         $konsultasi->mahasiswa_id = $user->userable->id;
         $konsultasi->dosen_id = $request->dosen;
+        // if($konsultasi->dosen_id == null){
+        //     $konsultasi->dosen_id = $request->dosen;
+        // }else{
+        //     $konsultasi->dosen_id = $konsultasi->Konsultasi::user($user)->First()->dosen;
+        // }
         $konsultasi->save();
 
         session()->flash('success', 'Sukses Tambah Data Konsultasi ' . $konsultasi->judul);

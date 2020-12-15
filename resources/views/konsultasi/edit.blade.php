@@ -40,9 +40,17 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Dosen</label>
+                            <div class="col-sm-10">
+                            <input class="form-control" type="text" name='dosen' id="dosen" value="{{ $konsultasi->dosen_id }}" hidden>{{ $konsultasi->dosen->full_name }} || {{ $konsultasi->dosen->nip }}</input>
+                            <!-- <input class="form-control" type="text" name='dosen' id="dosen" value="{{ $konsultasi->dosen->dosen_id }}" hidden>
+                            <input class="form-control"  value="{{ $konsultasi->dosen->full_name }} || {{ $konsultasi->dosen->nip }}" readonly> -->
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Judul</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="Judul" name='judul' value="{{ $konsultasi->judul }}">
+                                <input class="form-control" type="text" placeholder="Judul" name='judul' value="{{ $konsultasi->judul }}" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -58,16 +66,7 @@
                             </div>
                         </div>
                         
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Nama Dosen</label>
-                            <div class="col-sm-10">
-                                <select name="dosen" id="dosen" class="form-control">
-                                    @foreach($dosens as $dosen)
-                                    <option value="{{ $dosen->id }}" {{ $konsultasi->dosen_id == $dosen->id ? 'selected' : ''}}>{{ $dosen->full_name }} || {{ $dosen->nip }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                       
                         <!-- <button type="Kembali" class='btn btn-primary float-left' href="{{ route('konsultasi.index')}}">Kembali</button> -->
                         <button type="submit" class='btn btn-primary float-right'>Submit</button>
                     </form>
