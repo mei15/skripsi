@@ -53,19 +53,16 @@
                                 <th>Tanggal</th>
                                 <th>Keterangan</th>
                                 <th>Nama Dosen Pembimbing</th>
-                                @if( Auth::user()->userable_type == 'App\Mahasiswa' )
                                 <th>Aksi</th>
-                                @endif
                             </tr>
                             @foreach($konsultasis as $konsultasi)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $konsultasi->mahasiswa->full_name }}</td>
                                 <td>{{ $konsultasi->judul }}</td>
-                                <td>{{ $konsultasi->tanggal->format('d-M-Y) }}</td>
+                                <td>{{ $konsultasi->tanggal->format('d-M-Y') }}</td>
                                 <td>{{ $konsultasi->keterangan }}</td>
                                 <td>{{ $konsultasi->dosen->full_name }}</td>
-                                @if( Auth::user()->userable_type == 'App\Mahasiswa' )
                                 <td>
                                     <div class="d-inline-flex">
                                         <a href="{{ route('konsultasi.edit', ['konsultasi' => $konsultasi->id]) }}" class='btn btn-warning mr-2'>Edit</a>
@@ -76,7 +73,6 @@
                                         </form>
                                     </div>
                                 </td>
-                                @endif
                             </tr>
                             @endforeach
                         </table>

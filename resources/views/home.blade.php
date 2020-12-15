@@ -10,7 +10,7 @@
                 <h4 class="page-title">Dashboard</h4>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        Selamat Datang, {{Auth::user()->name}}
+                        Selamat Datang, {{Auth::user()->full_name}}
                     </li>
                 </ol>
 

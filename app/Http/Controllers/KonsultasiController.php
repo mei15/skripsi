@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use Barryvdh\DomPDF\Facade as PDF;
+
 use App\Dosen;
 use App\Konsultasi;
 use App\User;
