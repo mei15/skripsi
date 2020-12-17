@@ -56,7 +56,7 @@
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Tanggal</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="date" placeholder="" name='tanggal' value="{{ $konsultasi->tanggal }}">
+                                <input class="form-control" type="date" placeholder="" name='tanggal' format='d-M-Y' value="{{ $konsultasi->tanggal }}">
                             </div>
                         </div>
                         <div class="form-group row">
