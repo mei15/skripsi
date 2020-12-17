@@ -41,7 +41,7 @@
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Mahasiswa</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" name='user' id="user" value="{{ $user->userable->full_name }} <br> {{ $user->userable->nim }}" disabled>
+                                <input class="form-control" type="text" name='user' id="user" value="{{ $user->userable->full_name }}" disabled>
                             </div>
                         </div>
                         @if($konsultasi)
