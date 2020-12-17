@@ -28,7 +28,7 @@
 
                     <h4 class="mt-0 mb-4 header-title">Ubah Konsultasi</h4>
                     <form action="{{ route('konsultasi.update', $konsultasi->id) }}" method="post">
-                        @if ($errors->any())
+                        <!-- @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
@@ -36,7 +36,7 @@
                                 @endforeach
                             </ul>
                         </div>
-                        @endif
+                        @endif -->
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
@@ -67,7 +67,7 @@
                         </div>
                         
                        
-                        <!-- <button type="Kembali" class='btn btn-primary float-left' href="{{ route('konsultasi.index')}}">Kembali</button> -->
+                        <button type="" class='btn btn-primary float-left' href="{{ route('konsultasi.index')}}">Kembali</button>
                         <button type="submit" class='btn btn-primary float-right'>Submit</button>
                     </form>
                 </div>

@@ -90,6 +90,7 @@
                                 <input class="form-control" type="text" placeholder="Masukkan catatan" name='keterangan'>
                             </div>
                         </div>
+                        <button type="" href= "{{ route('konsultasi.index')}}" class='btn btn-primary float-left'>Kembali</button>
                         <button type="submit" class='btn btn-primary float-right'>Submit</button>
                     </form>
                     
