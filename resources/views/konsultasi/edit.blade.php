@@ -42,9 +42,8 @@
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Nama Dosen</label>
                             <div class="col-sm-10">
-                            <input class="form-control" type="text" name='dosen' id="dosen" value="{{ $konsultasi->dosen_id }}" hidden>{{ $konsultasi->dosen->full_name }} <br> NIP :{{ $konsultasi->dosen->nip }}</input>
-                            <!-- <input class="form-control" type="text" name='dosen' id="dosen" value="{{ $konsultasi->dosen->dosen_id }}" hidden>
-                            <input class="form-control"  value="{{ $konsultasi->dosen->full_name }} || {{ $konsultasi->dosen->nip }}" readonly> -->
+                            <input class="form-control" type="text" name='dosen' id="dosen" value="{{ $konsultasi->dosen_id }}" hidden>{{ $konsultasi->dosen->full_name }} <br> NIP: {{ $konsultasi->dosen->nip }}</input>
+                      
                             </div>
                         </div>
                         <div class="form-group row">
