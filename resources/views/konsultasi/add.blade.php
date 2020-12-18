@@ -24,7 +24,6 @@
         <div class="col-12">
             <div class="card m-b-20">
                 <div class="card-body">
-
                     <h4 class="mt-0 mb-4 header-title">Tambah Konsultasi</h4>
                     @if ($errors->any())
                         <div class="alert alert-danger">

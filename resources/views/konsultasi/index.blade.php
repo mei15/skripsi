@@ -35,7 +35,7 @@
                         {{session('success')}}
                     </div>
                     @endif
-                    @if( Auth::user()->userable_type == 'App\Mahasiswa' || Auth::user()->userable_type == 'App\Admin')
+                    @if( Auth::user()->userable_type == 'App\Mahasiswa')
                     <div class="card-actions ">
                         <a class='btn btn-primary float-left' href="{{ route('konsultasi.create') }}"><i class='ti ti-plus'></i> Tambah Konsultasi</a>
                         <form action="" method="get" class='form-inline float-right mb-3'>
@@ -47,7 +47,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <tr>
-                                <th>#</th>
+                                <th>No</th>
                                 <th>Nama Mahasiswa</th>
                                 <th>Judul</th>
                                 <th>Tanggal</th>
@@ -63,6 +63,7 @@
                                 <td>{{ $konsultasi->tanggal->format('d-M-Y') }}</td>
                                 <td>{{ $konsultasi->keterangan }}</td>
                                 <td>{{ $konsultasi->dosen->full_name }}</td>
+                                @if(Auth::user()->userable_type == 'App\Mahasiswa')
                                 <td>
                                     <div class="d-inline-flex">
                                         <a href="{{ route('konsultasi.edit', ['konsultasi' => $konsultasi->id]) }}" class='btn btn-warning mr-2'>Edit</a>
@@ -75,6 +76,7 @@
                                         @endif
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
                         </table>
