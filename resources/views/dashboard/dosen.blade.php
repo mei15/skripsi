@@ -59,7 +59,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $konsultasi->mahasiswa->full_name }}</td>
                                 <td>{{ $konsultasi->judul }}</td>
-                                <td>{{ $konsultasi->tanggal->format('d-M-Y | H:i') }}</td>
+                                <td>{{ $konsultasi->tanggal->format('d-M-Y') }}</td>
                                 <td>{{ $konsultasi->keterangan }}</td>
                                 <td>{{ $konsultasi->dosen->full_name }}</td>
                                 @endforeach
