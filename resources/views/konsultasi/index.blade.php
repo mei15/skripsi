@@ -53,7 +53,9 @@
                                 <th>Tanggal</th>
                                 <th>Keterangan</th>
                                 <th>Nama Dosen Pembimbing</th>
+                                @if(Auth::user()->userable_type == 'App\Mahasiswa')
                                 <th>Aksi</th>
+                                @endif
                             </tr>
                             @foreach($konsultasis as $konsultasi)
                             <tr>

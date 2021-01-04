@@ -72,10 +72,10 @@ class KonsultasiApiController extends Controller
         $user = auth()->user()->userable;
 
         $request->validate([
-            'judul' => 'required',
-            'tanggal' => 'required',
-            'keterangan' => 'required',
-            'dosen_id'     => 'required'
+            'judul'         => 'required',
+            'tanggal'       => 'required',
+            'keterangan'    => 'required',
+            'dosen_id'      => 'required'
         ]);
 
         $konsultasi = Konsultasi::findOrFail($id);
