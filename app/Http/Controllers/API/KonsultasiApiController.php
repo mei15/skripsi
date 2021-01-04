@@ -15,7 +15,6 @@ class KonsultasiApiController extends Controller
         $konsultasi = auth()->user()->userable->Konsultasi;
 
         return response()->json(
-           
             $konsultasi
         ,200);
     }
@@ -36,9 +35,9 @@ class KonsultasiApiController extends Controller
     {
         $dosen = Dosen::all();
 
-        return response()->json([
+        return response()->json(
            $dosen
-        ],200);
+        ,200);
     }
 
     public function store(Request $request)
