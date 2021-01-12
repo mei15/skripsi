@@ -66,14 +66,13 @@
                                 <td>
                                     <div class="d-inline-flex">
                                         <a href="{{ route('konsultasi.edit', ['konsultasi' => $konsultasi->id]) }}" class='btn btn-warning mr-2'>Edit</a>
-                                        @if( Auth::user()->userable_type == 'App\Mahasiswa')
-                                        
+                                                                               
                                         <form action="{{ route('konsultasi.destroy', ['konsultasi' => $konsultasi->id]) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class='btn btn-danger'>Delete</button>
                                         </form>
-                                        @endif
+                                       
                                     </div>
                                 </td>
                                 @endif

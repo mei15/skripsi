@@ -45,7 +45,7 @@
                         <br><br>
                         <table class="table table-bordered">
                             <tr>
-                                <th>#</th>
+                                <th>No</th>
                                 <th>Nama Mahasiswa</th>
                                 <th>Judul</th>
                                 <th>Tanggal</th>
