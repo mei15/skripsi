@@ -34,7 +34,7 @@
                     </div>
                     @endif
                     <div class="card-actions ">
-                        <a class='btn btn-primary float-left' href="{{ route('dosen.create') }}"><i class='ti ti-plus'></i> Tambah Dosen</a>
+                        <a class='btn btn-primary float-left' href="{{ route('dosen.create') }}"><i class='ti ti-plus'></i> Tambah Dosen</a><br>
                         
                     </div>
                     <div class="table-responsive">

@@ -37,7 +37,7 @@
                     @endif
                     @if( Auth::user()->userable_type == 'App\Mahasiswa')
                     <div class="card-actions ">
-                        <a class='btn btn-primary float-left' href="{{ route('konsultasi.create') }}"><i class='ti ti-plus'></i> Tambah Konsultasi</a>
+                        <a class='btn btn-primary float-left' href="{{ route('konsultasi.create') }}"><i class='ti ti-plus'></i> Tambah Konsultasi</a><br>
                         
                     </div>
                     @endif
