@@ -70,7 +70,7 @@
                                         <form action="{{ route('konsultasi.destroy', ['konsultasi' => $konsultasi->id]) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class='btn btn-danger'>Delete</button>
+                                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus?')" class='btn btn-danger'>Delete</button>
                                         </form>
                                        
                                     </div>
