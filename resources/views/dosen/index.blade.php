@@ -35,10 +35,7 @@
                     @endif
                     <div class="card-actions ">
                         <a class='btn btn-primary float-left' href="{{ route('dosen.create') }}"><i class='ti ti-plus'></i> Tambah Dosen</a>
-                        <form action="" method="get" class='form-inline float-right mb-3'>
-                            <input type="text" class="form-control" placeholder='Cari nama..' name='search'>
-                            <button type="submit" class='btn btn-primary ml-2'>Cari</button>
-                        </form>
+                        
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped">

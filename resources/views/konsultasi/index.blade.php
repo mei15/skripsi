@@ -38,10 +38,7 @@
                     @if( Auth::user()->userable_type == 'App\Mahasiswa')
                     <div class="card-actions ">
                         <a class='btn btn-primary float-left' href="{{ route('konsultasi.create') }}"><i class='ti ti-plus'></i> Tambah Konsultasi</a>
-                        <form action="" method="get" class='form-inline float-right mb-3'>
-                            <input type="text" class="form-control" placeholder='Cari nama..' name='search'>
-                            <button type="submit" class='btn btn-primary ml-2'>Cari</button>
-                        </form>
+                        
                     </div>
                     @endif
                     <div class="table-responsive">
