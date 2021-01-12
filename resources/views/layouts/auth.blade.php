@@ -24,7 +24,7 @@
 
         <div class="m-t-40 text-center">
             <!-- <p>Don't have an account ? <a href="pages-register.html" class="font-500 font-14 text-primary font-secondary"> Signup Now </a> </p> -->
-            <p>© 2020 SIKAP. Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href='https://instagram.com/ameilia15'>Ameilia</a></p>
+            <p>© 2020 SIKAP. Crafted with Laravel</p>
         </div>
 
     </div>

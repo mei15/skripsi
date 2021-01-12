@@ -133,7 +133,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        © 2020 SIKAP<span class="d-none d-sm-inline-block"> - Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href='https://instagram.com/ameilia15'>Ameilia</a></span>.
+                        © 2020 SIKAP<span class="d-none d-sm-inline-block"> - Crafted with Laravel</span>.
                     </div>
                 </div>
             </div>
