@@ -129,6 +129,7 @@ class AdminController extends Controller
         ])->first();
         $admin->delete();
         $user->delete();
-        return redirect('admin.index')->with('success', 'Data Admin Berhasil Dihapus !');
+        session()->flash('success', 'Sukses Hapus Data Admin ' . $admin->first_name);
+        return redirect()->route('admin.index');
     }
 }

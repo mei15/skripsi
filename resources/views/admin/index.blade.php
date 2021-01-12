@@ -51,6 +51,7 @@
                                 <td>
                                     <div class="d-inline-flex">
                                         <a href="{{ route('admin.edit', ['admin' => $admin->id]) }}" class='btn btn-warning mr-2'>Edit</a>
+                                        
                                         <form action="{{ route('admin.destroy', ['admin' => $admin->id]) }}" method="post">
                                             @csrf
                                             @method('DELETE')

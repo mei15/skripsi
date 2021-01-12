@@ -55,6 +55,7 @@
                                 <td>
                                     <div class="d-inline-flex">
                                         <a href="{{ route('dosen.edit', ['dosen' => $dosen->id]) }}" class='btn btn-warning mr-2'>Edit</a>
+                                        
                                         <form action="{{ route('dosen.destroy', ['dosen' => $dosen->id]) }}" method="post">
                                             @csrf
                                             @method('DELETE')
@@ -76,8 +77,12 @@
                 </div>
             </div>
         </div> <!-- end col -->
-    </div> <!-- end row -->
+    </div>
+ 
+    
+ <!-- end row -->
 
 
 </div> <!-- end container-fluid -->
 @endsection
+

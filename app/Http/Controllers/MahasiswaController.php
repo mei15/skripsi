@@ -138,6 +138,7 @@ class MahasiswaController extends Controller
         ])->first();
         $mahasiswa->delete();
         $user->delete();
-        return redirect('mahasiswa.index')->with('success', 'Data Mahasiswa Berhasil Dihapus !');
+        session()->flash('success', 'Sukses Hapus Data Mahasiswa ' . $mahasiswa->first_name);
+        return redirect()->route('mahasiswa.index');
     }
 }

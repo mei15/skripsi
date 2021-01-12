@@ -137,6 +137,9 @@ class DosenController extends Controller
         ])->first();
         $dosen->delete();
         $user->delete();
-        return redirect('dosen.index')->with('success', 'Data Dosen Berhasil Dihapus !');
+        session()->flash('success', 'Sukses Hapus Data Dosen ' . $dosen->first_name);
+        return redirect()->route('dosen.index');
     }
+
+    
 }
